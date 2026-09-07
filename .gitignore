@@ -39,3 +39,7 @@ next-env.d.ts
 .amplify
 amplify_outputs*
 amplifyconfiguration*
+# lighthouse reports
+/lighthouse/
+/playwright-report/
+/test-results/

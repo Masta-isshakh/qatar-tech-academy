@@ -1,0 +1,581 @@
+{
+  "meta": {
+    "siteName": "Qatar Tech Education",
+    "tagline": "We teach technology by building it.",
+    "defaultDescription": "A practice-first technology academy in Doha. Robotics, drones, networking, cybersecurity, AI, marketing and software — on real equipment, with international certifications you sit on site."
+  },
+  "nav": {
+    "home": "Home",
+    "tracks": "Tracks",
+    "examCentre": "Exam centre",
+    "corporate": "Corporate",
+    "about": "About",
+    "news": "News",
+    "contact": "Contact",
+    "portal": "My portal",
+    "admin": "Admin",
+    "register": "Register now",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "switchLanguage": "العربية",
+    "switchLanguageLabel": "Switch to Arabic",
+    "toggleTheme": "Toggle theme",
+    "skipToContent": "Skip to content",
+    "whatsapp": "WhatsApp us"
+  },
+  "common": {
+    "learnMore": "Learn more",
+    "readMore": "Read more",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "submit": "Send",
+    "sending": "Sending…",
+    "cancel": "Cancel",
+    "save": "Save",
+    "saving": "Saving…",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close",
+    "search": "Search",
+    "loading": "Loading…",
+    "retry": "Try again",
+    "qar": "QAR",
+    "usd": "USD",
+    "weeks": "weeks",
+    "hours": "hours",
+    "seats": "seats",
+    "seatsLeft": "seats left",
+    "comingSoon": "Coming soon",
+    "price": "Price",
+    "duration": "Duration",
+    "included": "Included",
+    "yes": "Yes",
+    "no": "No",
+    "all": "All",
+    "error": "Something went wrong.",
+    "errorBody": "We could not load this right now. Please try again.",
+    "emptyTitle": "Nothing here yet",
+    "notFound": "Page not found",
+    "notFoundBody": "The page you are looking for does not exist or has moved.",
+    "backHome": "Back to home"
+  },
+  "home": {
+    "hero": {
+      "watchVideo": "Watch the video",
+      "registerNow": "Register now",
+      "pauseAutoplay": "Pause slideshow",
+      "playAutoplay": "Resume slideshow",
+      "goToSlide": "Go to slide {number}",
+      "videoUnavailable": "The video is not available yet.",
+      "slides": [
+        {
+          "title": "We teach technology by building it.",
+          "subtitle": "Robots, drones, networks, cybersecurity and AI — on real equipment, with international certifications you sit with us.",
+          "ctaPrimary": "Register now",
+          "ctaSecondary": "Watch the video"
+        },
+        {
+          "title": "From the first part to first flight.",
+          "subtitle": "You assemble the airframe, tune the flight controller and fly your own drone under QCAA permits.",
+          "ctaPrimary": "Robotics & Drones track",
+          "ctaSecondary": "See all tracks"
+        },
+        {
+          "title": "Attack and defend, legally, on a real range.",
+          "subtitle": "An isolated 20-seat cyber range with real servers, switches and firewalls — then CEH and Security+ in our own exam room.",
+          "ctaPrimary": "Cybersecurity track",
+          "ctaSecondary": "See all tracks"
+        }
+      ]
+    },
+    "tracks": {
+      "title": "What exactly do you want to learn about technology?",
+      "subtitle": "Five tracks, all practice-first. Pick the one that fits where you want to work.",
+      "nextCohort": "Next cohort",
+      "cohortTbc": "Dates announced soon",
+      "viewAll": "See all tracks"
+    },
+    "why": {
+      "title": "Why practice-first",
+      "subtitle": "Nobody learns to fly a drone from a slide deck.",
+      "pillars": [
+        {
+          "title": "Real equipment",
+          "body": "Industrial cobots, PX4 drones, five network racks, an isolated cyber range and GPU workstations. Every learner has hardware in front of them."
+        },
+        {
+          "title": "Expert trainers from around the world",
+          "body": "Manufacturer-certified engineers and certified freelance experts train our founding team, who then train the cohorts that follow."
+        },
+        {
+          "title": "A global certificate — and the exam here",
+          "body": "We are building a Pearson VUE and EC-Council test centre on site, so you train and certify in the same building."
+        }
+      ]
+    },
+    "stats": {
+      "title": "The academy in numbers",
+      "items": [
+        { "value": "5", "label": "practice-first tracks" },
+        { "value": "On site", "label": "accredited exam centre" },
+        { "value": "20", "label": "seats in every cohort" },
+        { "value": "Vendor", "label": "certificates from manufacturers" }
+      ]
+    },
+    "labs": {
+      "title": "Inside the labs",
+      "subtitle": "This is where you will spend most of your hours.",
+      "captions": [
+        "Robotics hall — cobots and mobile robots",
+        "The netted drone cage",
+        "Network racks: Cisco, Huawei, MikroTik, Fortinet",
+        "The cyber range, fully isolated",
+        "AI workstations and the GPU server",
+        "Health robotics corner",
+        "The exam room"
+      ]
+    },
+    "howItWorks": {
+      "title": "How it works",
+      "subtitle": "Six steps from the form to a certificate.",
+      "steps": [
+        { "title": "Register", "body": "On the website or in the app, in Arabic or English." },
+        { "title": "Entry test", "body": "A short aptitude test in our centre, on a slot you pick." },
+        { "title": "A cohort of 20", "body": "Small groups so everyone has their own equipment." },
+        { "title": "Hands-on training", "body": "Six to ten weeks of building, breaking and fixing." },
+        { "title": "Certification exam", "body": "You sit the international exam in our own test centre." },
+        { "title": "Certificate and next step", "body": "Employment support, or the advanced cohort." }
+      ]
+    },
+    "examCentre": {
+      "title": "Sit the exam where you trained",
+      "body": "A Pearson VUE Authorized Test Center and EC-Council exam room on site: CEH, Security+, CCNA, HCIA and more, without leaving the building.",
+      "cta": "About the exam centre"
+    },
+    "corporate": {
+      "title": "Train your team on real equipment — under a framework contract",
+      "body": "Government entities, banks and enterprises: closed cohorts, on our site or yours, with Qatarisation-ready reporting.",
+      "cta": "Corporate training"
+    },
+    "app": {
+      "title": "The same account on the website and the app",
+      "body": "Track your registration, book lab time, watch your lessons and download your certificate — from your phone.",
+      "comingSoonBadge": "Store links coming soon",
+      "qrCaption": "Scan to open the academy"
+    },
+    "testimonials": { "title": "What our learners say" },
+    "partners": {
+      "title": "Partners in discussion",
+      "note": "Talks are under way. Logos appear here once an agreement is signed."
+    },
+    "faq": {
+      "title": "Frequently asked questions",
+      "items": [
+        {
+          "q": "Who can join?",
+          "a": "University students, graduates, lecturers, and employees in government, banking or enterprise. Some tracks have a technical prerequisite, which we check in the entry test."
+        },
+        {
+          "q": "Is teaching in Arabic or English?",
+          "a": "Both. Explanation and support are in Arabic; technical terms, tools and exams are in English, because that is how the certifications are set."
+        },
+        {
+          "q": "Are the exams really sat here?",
+          "a": "That is the plan for the certifications listed on each track: a Pearson VUE and EC-Council room on site. Until accreditation is finalised we book you into a partner centre at no extra cost."
+        },
+        {
+          "q": "What is the price, and can I pay in instalments?",
+          "a": "Each track shows its price in QAR. Instalments are available for the longer tracks; ask us on WhatsApp and we will set them out for you."
+        },
+        {
+          "q": "Do you really fly drones?",
+          "a": "Yes — in a netted cage on site, and in permitted areas under QCAA permits. Everything is civilian and educational."
+        },
+        {
+          "q": "Do you train companies and government entities?",
+          "a": "Yes. Closed cohorts, at our site or yours, with framework contracts and reporting for Qatarisation programmes."
+        },
+        {
+          "q": "What certificate do I get?",
+          "a": "An academy certificate for the track, plus the international certification you pass — vendor certificates from the manufacturers, or CEH, Security+, CCNA, HCIA and similar."
+        },
+        {
+          "q": "Where are you?",
+          "a": "In Doha. The exact address and directions are on the contact page, and we will send you a map pin on WhatsApp."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Ready to build something real?",
+      "body": "Seats in each cohort are limited to twenty. Register and pick your entry-test slot.",
+      "primary": "Register now",
+      "secondary": "Talk to us on WhatsApp"
+    }
+  },
+  "tracks": {
+    "title": "Tracks",
+    "subtitle": "Five practice-first tracks, plus what is coming next.",
+    "filterAll": "All tracks",
+    "sortLabel": "Sort by",
+    "sortCohort": "Next cohort",
+    "sortPrice": "Price",
+    "sortOrder": "Recommended",
+    "empty": "No tracks match this filter."
+  },
+  "track": {
+    "whatYouBuild": "What you will build",
+    "lab": "Lab",
+    "certifications": "Certifications you can earn",
+    "examOnSite": "Exam sat in our test centre",
+    "examPrice": "Exam fee",
+    "trainers": "Your trainers",
+    "trainersEmpty": "Trainer profiles are published as each contract is signed.",
+    "cohorts": "Schedule and cohorts",
+    "cohortCode": "Cohort",
+    "startDate": "Starts",
+    "endDate": "Ends",
+    "schedule": "Schedule",
+    "status": "Status",
+    "noCohorts": "Dates for the next cohort are announced soon. Register and we will tell you first.",
+    "gallery": "The lab",
+    "faq": "Questions about this track",
+    "related": "Other tracks",
+    "voucherIncluded": "Exam voucher included",
+    "voucherNotIncluded": "Exam fee paid separately",
+    "registerCta": "Register now",
+    "whatsappCta": "Ask on WhatsApp",
+    "whatsappMessage": "Hello, I would like to register for the {track} track.",
+    "comingSoonTitle": "This track is coming soon",
+    "comingSoonBody": "Tell us what you want to learn next and we will put you at the front of the queue.",
+    "totalHours": "{hours} hours of hands-on work",
+    "cohortStatus": {
+      "DRAFT": "Draft",
+      "OPEN": "Open",
+      "FULL": "Full",
+      "RUNNING": "Running",
+      "DONE": "Finished"
+    }
+  },
+  "register": {
+    "title": "Register",
+    "subtitle": "Four steps. It takes about three minutes.",
+    "steps": ["Track", "Your details", "Test slot", "Review"],
+    "stepOf": "Step {current} of {total}",
+    "chooseTrack": "Which track?",
+    "chooseTrackHint": "You can change this later with us.",
+    "personal": "Your details",
+    "chooseSlot": "Pick your entry-test slot",
+    "chooseSlotHint": "A short aptitude test at our centre. Roughly 45 minutes.",
+    "noSlots": "No slots are open at the moment. Submit your registration and we will call you with a time.",
+    "skipSlot": "None of these suit me — call me",
+    "slotFull": "Full",
+    "review": "Review and confirm",
+    "consentLabel": "I agree that Qatar Tech Education may store and process my data to handle my registration, in line with Qatar's Personal Data Privacy Protection Law (Law No. 13 of 2016) and the privacy notice.",
+    "consentRequired": "Please accept the privacy notice to continue.",
+    "submit": "Submit registration",
+    "draftRestored": "We restored your unfinished registration.",
+    "successTitle": "Registration received",
+    "successBody": "We will confirm your appointment on WhatsApp.",
+    "successNoSlot": "We will call you to arrange your entry test.",
+    "yourSlot": "Your entry test",
+    "createAccount": "Create an account to track your status",
+    "startOver": "Register someone else",
+    "fields": {
+      "name": "Full name",
+      "phone": "Mobile / WhatsApp",
+      "email": "Email",
+      "qid": "Qatar ID (optional)",
+      "occupation": "You are a…",
+      "university": "University",
+      "degree": "Degree / major",
+      "employer": "Employer",
+      "notes": "Anything we should know? (optional)"
+    },
+    "occupations": {
+      "STUDENT": "University student",
+      "GRADUATE": "Graduate",
+      "LECTURER": "Lecturer / teacher",
+      "EMPLOYEE": "Employee"
+    }
+  },
+  "examCentre": {
+    "title": "Exam centre",
+    "subtitle": "Train here, certify here.",
+    "intro": "We are establishing a Pearson VUE Authorized Test Center and an EC-Council exam room inside the academy, so our learners — and anyone in Qatar — can sit international IT exams without travelling.",
+    "examsTitle": "Exams we will deliver",
+    "exams": [
+      { "name": "CEH v13", "body": "EC-Council" },
+      { "name": "CompTIA Security+", "body": "CompTIA" },
+      { "name": "CCNA 200-301", "body": "Cisco" },
+      { "name": "HCIA-Datacom / HCIA-AI", "body": "Huawei" },
+      { "name": "Meta Certified Digital Marketing Associate", "body": "Meta" }
+    ],
+    "rulesTitle": "Exam-day rules",
+    "rules": [
+      "Bring two valid IDs, one with a photograph and a signature.",
+      "Arrive 30 minutes before your start time.",
+      "No phones, watches, bags or notes in the exam room — lockers are provided.",
+      "The room is under camera supervision throughout, as the accreditation requires.",
+      "Rescheduling is free up to 48 hours before the appointment."
+    ],
+    "roomTitle": "The room",
+    "bookTitle": "Book a seat",
+    "bookBody": "Tell us which exam and when suits you, and we will confirm on WhatsApp.",
+    "statusNote": "Accreditation is in progress. Until it is finalised we book candidates into a partner centre at no extra cost."
+  },
+  "corporate": {
+    "title": "Corporate and government training",
+    "subtitle": "Closed cohorts on real equipment, with a framework contract.",
+    "valueTitle": "Why organisations pick us",
+    "values": [
+      {
+        "title": "Qatarisation-ready",
+        "body": "Structured cohorts for national talent, with attendance, assessment and certification reporting you can put in front of a board."
+      },
+      {
+        "title": "Real labs, not slideware",
+        "body": "Your team cables the racks, defends the range and flies the drones. Skills transfer the same week."
+      },
+      {
+        "title": "Here or at your site",
+        "body": "Run it in our labs in Doha, or we bring a mobile lab to your premises."
+      },
+      {
+        "title": "Cohort pricing",
+        "body": "Volume tiers from ten seats, with the exam fees bundled."
+      }
+    ],
+    "planTitle": "A sample 12-week plan",
+    "planBody": "Every track can be delivered as a 12-week programme: four weeks of foundations, six weeks of applied labs, one week of exam preparation and one week for the certification exam itself.",
+    "planWeeks": [
+      {
+        "weeks": "Weeks 1–4",
+        "title": "Foundations",
+        "body": "Core theory delivered as short briefings, then straight to the bench."
+      },
+      {
+        "weeks": "Weeks 5–10",
+        "title": "Applied labs",
+        "body": "Team projects on production-grade equipment, assessed weekly."
+      },
+      {
+        "weeks": "Week 11",
+        "title": "Exam preparation",
+        "body": "Mock exams under real conditions with an instructor debrief."
+      },
+      {
+        "weeks": "Week 12",
+        "title": "Certification",
+        "body": "The international exam, sat in our test centre."
+      }
+    ],
+    "calculator": {
+      "title": "Estimate your programme",
+      "seats": "Number of seats",
+      "track": "Track",
+      "listPrice": "List price per seat",
+      "discount": "Volume discount",
+      "perSeat": "Price per seat",
+      "total": "Estimated total",
+      "note": "An indicative estimate only, before exam fees and any on-site delivery costs. We will send you a formal quotation."
+    },
+    "formTitle": "Request a proposal",
+    "fields": {
+      "company": "Organisation",
+      "contactName": "Contact name",
+      "phone": "Mobile / WhatsApp",
+      "email": "Work email",
+      "headcount": "How many people?",
+      "tracks": "Tracks of interest",
+      "message": "What do you need? (optional)"
+    },
+    "success": "Thank you. Our team will come back to you within one working day."
+  },
+  "about": {
+    "title": "About the academy",
+    "subtitle": "A practice-first technology academy in Doha.",
+    "storyTitle": "Our story",
+    "story": "Qatar does not lack talented people or ambitious programmes. What it lacks is a place where somebody can put their hands on an industrial robot, a real network rack or a live cyber range, and be taught by the people who build those things for a living. Qatar Tech Education was founded to be that place — and to make the international certificate that follows a matter of walking into the next room, not flying abroad.",
+    "methodTitle": "The method: practice first",
+    "method": "Every module starts with something to build and ends with something that works. Theory is delivered in short briefings at the bench, never as a lecture series. Learners are assessed on what they produced, and every track finishes with an international certification exam.",
+    "cascadeTitle": "The cascade",
+    "cascade": "Manufacturers and certified freelance experts train a founding team of 20 to 30 selected graduates and lecturers for three months. That team becomes our permanent staff and trains the cohorts that follow — so the expertise stays in Qatar instead of leaving with a visiting consultant.",
+    "cascadeSteps": [
+      {
+        "title": "Manufacturers and certified experts",
+        "body": "Doosan, JAKA, Dobot, Terra Drone, Holybro, XAG and certified freelance instructors."
+      },
+      {
+        "title": "The founding team",
+        "body": "20–30 selected graduates and lecturers, trained intensively for three months."
+      },
+      {
+        "title": "Our permanent trainers",
+        "body": "That founding team becomes the academy's staff."
+      },
+      {
+        "title": "Qatar",
+        "body": "Every cohort that follows is trained by people who live and work here."
+      }
+    ],
+    "teamTitle": "The team",
+    "teamNote": "Trainer profiles are published as each contract is signed.",
+    "phasesTitle": "Where we are going",
+    "phases": [
+      {
+        "name": "Phase 1 — START",
+        "duration": "18 months",
+        "body": "The Doha campus: five labs, the exam centre, the founding team and the first cohorts."
+      },
+      {
+        "name": "Phase 2 — GROW",
+        "duration": "After Phase 1",
+        "body": "More tracks, a second site, corporate programmes at scale and regional partnerships."
+      }
+    ],
+    "licenceLabel": "Ministry of Education and Higher Education licence",
+    "licencePending": "Application in progress",
+    "partnersTitle": "Partners in discussion"
+  },
+  "investors": {
+    "title": "For investors and partners",
+    "subtitle": "Qatar Tech Education — practice-first technology training and an on-site certification centre in Doha.",
+    "pitchTitle": "The pitch",
+    "planTitle": "The plan",
+    "numbersTitle": "Key numbers",
+    "numbers": [
+      { "value": "USD 1.1M", "label": "Phase 1 (≈ QAR 4.0M)" },
+      { "value": "18 months", "label": "Phase 1 duration" },
+      { "value": "USD 5.5M", "label": "Phase 2" },
+      { "value": "5 / 20", "label": "tracks / seats per cohort" }
+    ],
+    "downloadTitle": "Executive summary",
+    "downloadBody": "The full executive summary and financial model are available on request.",
+    "download": "Request the executive summary",
+    "contactTitle": "Talk to us",
+    "contactBody": "Leave your details and we will arrange a call or a visit to the site."
+  },
+  "news": {
+    "title": "News",
+    "subtitle": "Announcements from the academy.",
+    "empty": "No announcements yet. Follow us for updates.",
+    "publishedOn": "Published {date}",
+    "backToNews": "All news"
+  },
+  "contact": {
+    "title": "Contact us",
+    "subtitle": "WhatsApp is the fastest way to reach us.",
+    "whatsappTitle": "WhatsApp",
+    "phoneTitle": "Phone",
+    "emailTitle": "Email",
+    "addressTitle": "Address",
+    "hoursTitle": "Opening hours",
+    "hours": "Sunday to Thursday, 09:00–21:00. Saturday by appointment.",
+    "mapTitle": "Find us",
+    "mapLabel": "Map showing the academy location in Doha",
+    "formTitle": "Send us a message",
+    "whatsappMessage": "Hello, I have a question about Qatar Tech Education."
+  },
+  "portal": {
+    "title": "My portal",
+    "welcome": "Welcome back",
+    "signOut": "Sign out",
+    "statusTitle": "My registration",
+    "statusEmpty": "We could not find a registration for this email. If you registered with a different address, contact us and we will link it.",
+    "statusSteps": {
+      "APPLIED": "Applied",
+      "TEST_SCHEDULED": "Test scheduled",
+      "TESTED": "Test taken",
+      "SELECTED": "Selected",
+      "ENROLLED": "Enrolled",
+      "WAITLIST": "Waiting list",
+      "REJECTED": "Not selected this time"
+    },
+    "appointmentTitle": "Next appointment",
+    "appointmentEmpty": "You have no appointment booked.",
+    "bookLab": "Book lab time",
+    "enrollmentsTitle": "My enrollments",
+    "enrollmentsEmpty": "You are not enrolled in a cohort yet.",
+    "browseTracks": "Browse the tracks",
+    "lessonsTitle": "Lessons",
+    "lessonsEmpty": "Lessons appear here once your cohort starts.",
+    "certificatesTitle": "Certificates",
+    "certificatesEmpty": "Your certificates will appear here after you pass an exam.",
+    "download": "Download",
+    "announcementsTitle": "Announcements",
+    "announcementsEmpty": "No announcements right now.",
+    "profileTitle": "Profile",
+    "progressSaved": "Progress saved",
+    "resume": "Resume",
+    "completed": "Completed"
+  },
+  "admin": {
+    "title": "Admin",
+    "deniedTitle": "You do not have access to this area",
+    "deniedBody": "This area is for academy administrators. If you believe this is a mistake, contact the team.",
+    "dashboard": "Dashboard",
+    "leads": "Leads",
+    "registrations": "Registrations",
+    "appointments": "Appointments",
+    "cohorts": "Cohorts",
+    "content": "Content",
+    "media": "Media",
+    "newLeadsToday": "New leads today",
+    "registrationsTotal": "Registrations",
+    "nextTestDay": "Next test day",
+    "occupancy": "Occupancy",
+    "exportCsv": "Export CSV",
+    "bulkStatus": "Change status",
+    "selected": "{count} selected",
+    "searchPlaceholder": "Search…",
+    "noRows": "No records.",
+    "uploadTitle": "Upload media",
+    "uploadHint": "Videos go to public/videos/, images to public/images/.",
+    "uploading": "Uploading… {percent}%",
+    "uploadDone": "Uploaded",
+    "dataExportNote": "Exports contain personal data. Handle them under Qatar's PDPPL and delete local copies when you are done."
+  },
+  "legal": {
+    "privacyTitle": "Privacy notice",
+    "termsTitle": "Terms of use",
+    "lastUpdated": "Last updated {date}",
+    "placeholderNote": "This is a working draft prepared for review by legal counsel before launch."
+  },
+  "forms": {
+    "required": "This field is required.",
+    "invalidEmail": "Enter a valid email address.",
+    "invalidPhone": "Enter a valid mobile number, for example +974 3312 3456.",
+    "tooShort": "This is too short.",
+    "selectOne": "Please choose an option.",
+    "success": "Thank you! We will contact you on WhatsApp within one working day.",
+    "error": "Something went wrong. Please try again, or send us a WhatsApp message.",
+    "namePlaceholder": "Your full name",
+    "leaveBlank": "Leave this field empty",
+    "privacyNote": "Your data is processed under Qatar's Personal Data Privacy Protection Law. See the privacy notice.",
+    "source": {
+      "contact": "Contact page",
+      "exam-centre": "Exam centre",
+      "investor": "Investors",
+      "track": "Track page"
+    }
+  },
+  "cookies": {
+    "title": "We use cookies",
+    "body": "We use analytics cookies to understand how the site is used. Nothing is loaded until you accept.",
+    "accept": "Accept",
+    "reject": "Reject",
+    "policy": "Privacy notice"
+  },
+  "footer": {
+    "about": "A practice-first technology academy in Doha. Build it, then certify it.",
+    "explore": "Explore",
+    "company": "The academy",
+    "legal": "Legal",
+    "contact": "Contact",
+    "rights": "© {year} Qatar Tech Education. All rights reserved.",
+    "licence": "MoEHE licence: {value}",
+    "social": "Follow us"
+  }
+}

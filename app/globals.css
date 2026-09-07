@@ -1,62 +1,209 @@
-:root {
-  --max-width: 1100px;
-  --border-radius: 12px;
-  --font-mono: ui-monospace, Menlo, Monaco, 'Cascadia Mono', 'Segoe UI Mono',
-    'Roboto Mono', 'Oxygen Mono', 'Ubuntu Monospace', 'Source Code Pro',
-    'Fira Mono', 'Droid Sans Mono', 'Courier New', monospace;
+@import 'tailwindcss';
 
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: #CBBEFF;
-  --background-end-rgb: 255, 255, 255;
+/* next-themes writes `class="dark"` on <html>. */
+@custom-variant dark (&:where(.dark, .dark *));
 
-  --callout-rgb: 238, 240, 241;
-  --callout-border-rgb: 172, 175, 176;
-  --card-rgb: #6649AE;
-  --card-border-rgb: 131, 134, 135;
+@theme {
+  /* ---- brand palette ---- */
+  --color-maroon: #8a1538;
+  --color-maroon-dark: #6e1029;
+  --color-maroon-soft: #f6ebef;
+  --color-sand: #e8dcc4;
+  --color-sand-light: #faf7f2;
+  --color-blue: #1fa2ff;
+  --color-charcoal: #222222;
+  --color-charcoal-soft: #2c2c2c;
+  --color-grey: #6b6b6b;
+
+  /* ---- semantic tokens (light) ---- */
+  --color-background: #ffffff;
+  --color-surface: var(--color-sand-light);
+  --color-foreground: var(--color-charcoal);
+  --color-muted: var(--color-grey);
+  --color-border-subtle: var(--color-sand);
+  --color-primary: var(--color-maroon);
+  --color-primary-foreground: #ffffff;
+
+  /* ---- type ---- */
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cairo), var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+
+  /* ---- shape ---- */
+  --radius-2xl: 1rem;
+  --radius-3xl: 1.5rem;
+
+  --shadow-soft: 0 1px 2px rgb(34 34 34 / 0.04), 0 8px 24px -12px rgb(34 34 34 / 0.12);
+  --shadow-lift: 0 2px 4px rgb(34 34 34 / 0.05), 0 18px 40px -18px rgb(34 34 34 / 0.22);
+
+  /* ---- layout ---- */
+  --container-site: 80rem; /* 1280px */
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
+/* Dark theme: charcoal ground, maroon accents. */
+.dark {
+  --color-background: #191919;
+  --color-surface: #202020;
+  --color-foreground: #f2efe9;
+  --color-muted: #a9a49b;
+  --color-border-subtle: #383431;
+  --color-primary: #c0294f;
+  --color-primary-foreground: #ffffff;
+  --color-maroon-soft: #2a1119;
+  color-scheme: dark;
+}
 
-    --callout-rgb: 20, 20, 20;
-    --callout-border-rgb: 108, 108, 108;
-    --card-rgb: 100, 100, 100;
-    --card-border-rgb: 200, 200, 200;
+@layer base {
+  * {
+    border-color: var(--color-border-subtle);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* Arabic sets the whole UI in Cairo, at a slightly larger optical size. */
+  html[lang='ar'] body {
+    font-family: var(--font-display);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.25;
+    text-wrap: balance;
+  }
+
+  html[lang='ar'] h1,
+  html[lang='ar'] h2,
+  html[lang='ar'] h3 {
+    line-height: 1.4;
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background: var(--color-maroon);
+    color: #fff;
+  }
+
+  /* Prices, dates and codes always read left-to-right, even inside Arabic text. */
+  .ltr-nums {
+    direction: ltr;
+    unicode-bidi: isolate;
+    font-feature-settings: 'tnum';
   }
 }
 
-* {
-  box-sizing: border-box;
-  padding: 0;
-  margin: 0;
+@layer components {
+  .container-site {
+    width: 100%;
+    max-width: var(--container-site);
+    margin-inline: auto;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 1024px) {
+    .container-site {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Reserved for CMS-authored markdown (news posts, legal pages). */
+  .prose-qte {
+    max-width: 68ch;
+  }
+  .prose-qte h2 {
+    font-size: 1.5rem;
+    margin-block: 2rem 0.75rem;
+  }
+  .prose-qte h3 {
+    font-size: 1.25rem;
+    margin-block: 1.5rem 0.5rem;
+  }
+  .prose-qte p {
+    margin-block: 0.85rem;
+  }
+  .prose-qte ul,
+  .prose-qte ol {
+    margin-block: 0.85rem;
+    padding-inline-start: 1.5rem;
+    list-style: disc;
+  }
+  .prose-qte ol {
+    list-style: decimal;
+  }
+  .prose-qte li {
+    margin-block: 0.35rem;
+  }
+  .prose-qte a {
+    color: var(--color-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-qte strong {
+    font-weight: 700;
+  }
 }
 
-html,
-body {
-  max-width: 100vw;
-  overflow-x: hidden;
+@layer utilities {
+  .marquee-track {
+    animation: qte-marquee 45s linear infinite;
+  }
+
+  @keyframes qte-marquee {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* RTL marquees travel the other way. */
+  [dir='rtl'] .marquee-track {
+    animation-name: qte-marquee-rtl;
+  }
+
+  @keyframes qte-marquee-rtl {
+    from {
+      transform: translateX(0);
+    }
+    to {
+      transform: translateX(50%);
+    }
+  }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
-}
-
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-@media (prefers-color-scheme: dark) {
+@media (prefers-reduced-motion: reduce) {
   html {
-    color-scheme: dark;
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
