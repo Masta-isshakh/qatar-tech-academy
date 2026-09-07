@@ -77,7 +77,7 @@ export default async function CorporatePage({ params }: { params: Promise<{ loca
           {weeks.map((w, i) => (
             <FadeUp as="li" key={w.weeks} delay={i * 0.05}>
               <div className="border-border-subtle bg-background flex h-full flex-col gap-2 rounded-2xl border p-6">
-                <span className="ltr-nums text-primary text-xs font-bold tracking-wider uppercase">
+                <span className="ltr-nums text-primary-ink text-xs font-bold tracking-wider uppercase">
                   {w.weeks}
                 </span>
                 <h3 className="text-lg">{w.title}</h3>

@@ -89,7 +89,7 @@ export function Field({
     <div className={cn('flex flex-col gap-1.5', className)}>
       <Label htmlFor={htmlFor}>
         {label}
-        {required ? <span className="text-primary"> *</span> : null}
+        {required ? <span className="text-primary-ink"> *</span> : null}
       </Label>
       {hint ? (
         <p id={hintId} className="text-muted text-xs">

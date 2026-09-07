@@ -54,14 +54,14 @@ export async function SiteFooter() {
           <h2 className="text-muted text-sm font-bold tracking-wider uppercase">{t('contact')}</h2>
           <a
             href={`tel:${site.phone.replace(/\s/g, '')}`}
-            className="hover:text-primary flex items-center gap-2 text-sm"
+            className="hover:text-primary-ink flex items-center gap-2 text-sm"
           >
             <Phone className="size-4 shrink-0" aria-hidden />
             <span className="ltr-nums">{site.phone}</span>
           </a>
           <a
             href={`mailto:${site.email}`}
-            className="hover:text-primary flex items-center gap-2 text-sm"
+            className="hover:text-primary-ink flex items-center gap-2 text-sm"
           >
             <Mail className="size-4 shrink-0" aria-hidden />
             <span className="ltr-nums">{site.email}</span>
@@ -73,7 +73,7 @@ export async function SiteFooter() {
           <ul className="mt-2 flex flex-col gap-2">
             {legal.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-muted hover:text-primary text-sm">
+                <Link href={l.href} className="text-muted hover:text-primary-ink text-sm">
                   {l.label}
                 </Link>
               </li>
@@ -109,7 +109,7 @@ function FooterColumn({
       <ul className="flex flex-col gap-2">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="hover:text-primary text-sm">
+            <Link href={l.href} className="hover:text-primary-ink text-sm">
               {l.label}
             </Link>
           </li>

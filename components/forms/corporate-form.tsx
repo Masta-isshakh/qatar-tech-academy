@@ -239,7 +239,7 @@ export function CorporateForm({
         />
         <div className="border-border-subtle border-t pt-3">
           <p className="text-muted text-sm">{t('calculator.total')}</p>
-          <p className="ltr-nums text-primary text-2xl font-extrabold">
+          <p className="ltr-nums text-primary-ink text-2xl font-extrabold">
             {formatPrice(quote.total)} <span className="text-base">{tc('qar')}</span>
           </p>
         </div>

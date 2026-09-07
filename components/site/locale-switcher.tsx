@@ -20,7 +20,8 @@ export function LocaleSwitcher({ className }: { className?: string }) {
     <button
       type="button"
       disabled={pending}
-      aria-label={t('switchLanguageLabel')}
+      // Contains the visible text, as WCAG 2.5.3 (label in name) requires.
+      aria-label={`${t('switchLanguage')} — ${t('switchLanguageLabel')}`}
       onClick={() =>
         startTransition(() => {
           // `pathname` is locale-stripped but keeps resolved params, so

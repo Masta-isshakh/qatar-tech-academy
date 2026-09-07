@@ -61,7 +61,7 @@ export function TrackCard({
 
         <div className="flex flex-1 flex-col gap-3 p-5">
           <div className="flex flex-col gap-1.5">
-            <h3 className="group-hover:text-primary text-xl">
+            <h3 className="group-hover:text-primary-ink text-xl">
               {pick(locale, track.titleEn, track.titleAr)}
             </h3>
             <p className="text-muted text-sm">{pick(locale, track.taglineEn, track.taglineAr)}</p>
@@ -80,7 +80,7 @@ export function TrackCard({
               </p>
             ) : null}
 
-            <span className="text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
+            <span className="text-primary-ink inline-flex items-center gap-1.5 text-sm font-semibold">
               {labels.learnMore}
               <Arrow
                 className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none rtl:group-hover:-translate-x-0.5"

@@ -10,7 +10,7 @@ import { MediaImage } from './media-image'
 export function StatTile({ value, label }: { value: string; label: string }) {
   return (
     <div className="border-border-subtle bg-background flex flex-col gap-1 rounded-2xl border p-6 text-center">
-      <span className="text-primary text-3xl font-extrabold md:text-4xl">{value}</span>
+      <span className="text-primary-ink text-3xl font-extrabold md:text-4xl">{value}</span>
       <span className="text-muted text-sm">{label}</span>
     </div>
   )
@@ -25,7 +25,7 @@ export function Timeline({ steps }: { steps: { title: string; body: string }[] }
         <FadeUp as="li" key={step.title} delay={i * 0.05}>
           <div className="border-border-subtle bg-background flex h-full flex-col gap-2 rounded-2xl border p-6">
             <span
-              className="ltr-nums bg-maroon-soft text-primary grid size-9 place-items-center rounded-full text-sm font-extrabold"
+              className="ltr-nums bg-maroon-soft text-primary-ink grid size-9 place-items-center rounded-full text-sm font-extrabold"
               aria-hidden
             >
               {i + 1}
@@ -45,7 +45,7 @@ export function PillarCard({ title, body, index }: { title: string; body: string
   return (
     <FadeUp delay={index * 0.06} className="h-full">
       <div className="border-border-subtle bg-background flex h-full flex-col gap-3 rounded-2xl border p-7">
-        <CheckCircle2 className="text-primary size-7" aria-hidden />
+        <CheckCircle2 className="text-primary-ink size-7" aria-hidden />
         <h3 className="text-xl">{title}</h3>
         <p className="text-muted">{body}</p>
       </div>
@@ -66,7 +66,7 @@ export function TestimonialCard({
 }) {
   return (
     <figure className="border-border-subtle bg-background flex h-full flex-col gap-4 rounded-2xl border p-7">
-      <Quote className="text-primary/40 size-7" aria-hidden />
+      <Quote className="text-primary-ink/40 size-7" aria-hidden />
       <blockquote className="flex-1 text-lg leading-relaxed">{quote}</blockquote>
       <figcaption className="text-sm">
         <span className="font-bold">{name}</span>
@@ -137,7 +137,7 @@ export function CertificationBadge({
           </span>
         ) : null}
         {examOnSite ? (
-          <span className="text-primary inline-flex items-center gap-1.5 font-semibold">
+          <span className="text-primary-ink inline-flex items-center gap-1.5 font-semibold">
             <MapPin className="size-4" aria-hidden />
             {onSiteLabel}
           </span>

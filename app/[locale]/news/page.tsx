@@ -61,7 +61,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
                       ? t('publishedOn', { date: formatDate(post.publishedAt, locale) })
                       : ''}
                   </p>
-                  <h2 className="group-hover:text-primary text-lg">
+                  <h2 className="group-hover:text-primary-ink text-lg">
                     {pick(locale, post.titleEn, post.titleAr)}
                   </h2>
                   <p className="text-muted text-sm">

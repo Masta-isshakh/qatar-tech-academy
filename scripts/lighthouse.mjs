@@ -57,10 +57,22 @@ try {
     const ok = CATEGORIES.every((c) => scores[c] >= THRESHOLD)
     if (!ok) failed = true
 
-    summary.push({ page: page.name, ...scores, lcpMs: Math.round(lcp), cls: Number(cls.toFixed(3)), pass: ok })
+    summary.push({
+      page: page.name,
+      ...scores,
+      lcpMs: Math.round(lcp),
+      cls: Number(cls.toFixed(3)),
+      pass: ok,
+    })
   }
 } finally {
-  await chrome.kill()
+  // On Windows Chrome can still hold its temp profile open, and chrome-launcher
+  // throws EPERM trying to remove it. That must not fail the run.
+  try {
+    await chrome.kill()
+  } catch (err) {
+    console.warn('[lighthouse] chrome cleanup:', err.message)
+  }
 }
 
 console.table(summary)

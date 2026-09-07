@@ -65,7 +65,7 @@ export default async function PostPage({
       <article className="mx-auto max-w-3xl">
         <Link
           href="/news"
-          className="text-muted hover:text-primary mb-6 inline-flex items-center gap-1.5 text-sm font-semibold"
+          className="text-muted hover:text-primary-ink mb-6 inline-flex items-center gap-1.5 text-sm font-semibold"
         >
           <Arrow className="size-4" aria-hidden />
           {t('backToNews')}

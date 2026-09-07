@@ -23,6 +23,9 @@
   --color-border-subtle: var(--color-sand);
   --color-primary: var(--color-maroon);
   --color-primary-foreground: #ffffff;
+  /* Maroon used as text. Split from --color-primary because a colour that is a
+     good button background on a dark ground is not readable as body text on it. */
+  --color-primary-ink: var(--color-maroon);
 
   /* ---- type ---- */
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
@@ -46,8 +49,9 @@
   --color-foreground: #f2efe9;
   --color-muted: #a9a49b;
   --color-border-subtle: #383431;
-  --color-primary: #c0294f;
+  --color-primary: #c0294f; /* white text on this: 5.7:1 */
   --color-primary-foreground: #ffffff;
+  --color-primary-ink: #e0788f; /* on #191919: 5.5:1 */
   --color-maroon-soft: #2a1119;
   color-scheme: dark;
 }
@@ -156,7 +160,7 @@
     margin-block: 0.35rem;
   }
   .prose-qte a {
-    color: var(--color-primary);
+    color: var(--color-primary-ink);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -166,6 +170,21 @@
 }
 
 @layer utilities {
+  /* Scroll reveal, applied by components/site/motion.tsx on the client only —
+     see the note there about keeping content painted for LCP. */
+  .qte-fade {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+
+  .qte-fade-in {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
   .marquee-track {
     animation: qte-marquee 45s linear infinite;
   }

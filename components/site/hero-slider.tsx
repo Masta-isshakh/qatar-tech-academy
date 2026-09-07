@@ -178,12 +178,19 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
                   onClick={() => goTo(i)}
                   aria-label={t('goToSlide', { number: i + 1 })}
                   aria-current={i === index}
-                  className={
-                    i === index
-                      ? 'h-2 w-8 rounded-full bg-white transition-all'
-                      : 'h-2 w-2 rounded-full bg-white/45 transition-all hover:bg-white/70'
-                  }
-                />
+                  // Grid + a fixed box gives every dot a 44px tap target while
+                  // the painted indicator stays small.
+                  className="grid size-11 place-items-center"
+                >
+                  <span
+                    aria-hidden
+                    className={
+                      i === index
+                        ? 'h-2 w-8 rounded-full bg-white transition-all'
+                        : 'h-2 w-2 rounded-full bg-white/45 transition-all hover:bg-white/70'
+                    }
+                  />
+                </button>
               ))}
             </div>
           </div>

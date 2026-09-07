@@ -439,7 +439,7 @@ function Tile({ label, value }: { label: string; value: string }) {
   return (
     <div className="border-border-subtle bg-background rounded-2xl border p-6">
       <p className="text-muted text-sm">{label}</p>
-      <p className="ltr-nums text-primary mt-1 text-3xl font-extrabold">{value}</p>
+      <p className="ltr-nums text-primary-ink mt-1 text-3xl font-extrabold">{value}</p>
     </div>
   )
 }

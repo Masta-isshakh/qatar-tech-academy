@@ -186,12 +186,12 @@ export function RegisterWizard({
             <div className="bg-surface rounded-2xl p-5 text-start">
               <p className="mb-2 text-sm font-bold">{t('yourSlot')}</p>
               <p className="flex items-center gap-2 text-sm">
-                <CalendarCheck className="text-primary size-4 shrink-0" aria-hidden />
+                <CalendarCheck className="text-primary-ink size-4 shrink-0" aria-hidden />
                 {formatDateTime(result.slotStart, locale)}
               </p>
               {result.room ? (
                 <p className="mt-1 flex items-center gap-2 text-sm">
-                  <MapPin className="text-primary size-4 shrink-0" aria-hidden />
+                  <MapPin className="text-primary-ink size-4 shrink-0" aria-hidden />
                   {result.room}
                 </p>
               ) : null}
@@ -236,7 +236,7 @@ export function RegisterWizard({
             <span
               className={cn(
                 'mt-2 block text-xs font-semibold',
-                i === step ? 'text-primary' : 'text-muted'
+                i === step ? 'text-primary-ink' : 'text-muted'
               )}
             >
               {label}
@@ -275,7 +275,7 @@ export function RegisterWizard({
                     <span className="text-muted text-sm">
                       {pick(locale, tr.taglineEn, tr.taglineAr)}
                     </span>
-                    <span className="ltr-nums text-primary mt-1 text-sm font-semibold">
+                    <span className="ltr-nums text-primary-ink mt-1 text-sm font-semibold">
                       {formatPrice(tr.priceQar)} {tc('qar')}
                     </span>
                   </label>
@@ -428,7 +428,7 @@ export function RegisterWizard({
               <button
                 type="button"
                 onClick={() => setValue('slotId', '')}
-                className="text-muted hover:text-primary self-start text-sm underline underline-offset-4"
+                className="text-muted hover:text-primary-ink self-start text-sm underline underline-offset-4"
               >
                 {t('skipSlot')}
               </button>
@@ -471,7 +471,7 @@ export function RegisterWizard({
             />
             <span>
               {t('consentLabel')}{' '}
-              <Link href="/privacy" className="hover:text-primary underline underline-offset-2">
+              <Link href="/privacy" className="hover:text-primary-ink underline underline-offset-2">
                 {tf('privacyNote')}
               </Link>
             </span>

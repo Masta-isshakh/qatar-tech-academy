@@ -197,7 +197,7 @@ export function PortalDashboard({ locale, email }: { locale: string; email?: str
             ) : data?.appointment?.slotStart ? (
               <div className="flex flex-col gap-2">
                 <p className="flex items-center gap-2">
-                  <CalendarCheck className="text-primary size-4 shrink-0" aria-hidden />
+                  <CalendarCheck className="text-primary-ink size-4 shrink-0" aria-hidden />
                   {formatDateTime(data.appointment.slotStart, locale)}
                 </p>
                 {data.appointment.room ? (
@@ -345,7 +345,7 @@ function CertificateList({
       {keys.map((key) => (
         <li key={key} className="flex items-center justify-between gap-3">
           <span className="flex items-center gap-2 text-sm">
-            <FileBadge className="text-primary size-4 shrink-0" aria-hidden />
+            <FileBadge className="text-primary-ink size-4 shrink-0" aria-hidden />
             <span className="ltr-nums truncate">{key.split('/').pop()}</span>
           </span>
           <Button asChild size="sm" variant="secondary" disabled={!urls[key]}>

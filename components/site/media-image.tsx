@@ -56,11 +56,39 @@ export function MediaImage({
 }: MediaImageProps) {
   const [failed, setFailed] = useState(false)
 
+  // With `fill`, the caller already provides a positioned box, so the
+  // placeholder can sit behind the image and be painted on the server. That
+  // gives the page a real LCP candidate on first paint instead of waiting for
+  // hydration to swap in a fallback, and removes the flash of empty box.
+  if (props.fill) {
+    return (
+      <>
+        <ImagePlaceholder
+          className={cn('absolute inset-0', wrapperClassName)}
+          label={placeholderLabel}
+          accent={accent}
+        />
+        <Image
+          alt={alt}
+          className={className}
+          // Direct DOM write rather than setState: the placeholder behind is
+          // already painted, so there is nothing to re-render.
+          onError={(e) => {
+            e.currentTarget.style.display = 'none'
+          }}
+          {...props}
+        />
+      </>
+    )
+  }
+
   if (failed) {
     return (
-      <div className={cn('relative h-full w-full', wrapperClassName)}>
-        <ImagePlaceholder className="absolute inset-0" label={placeholderLabel} accent={accent} />
-      </div>
+      <ImagePlaceholder
+        className={cn(wrapperClassName, className)}
+        label={placeholderLabel}
+        accent={accent}
+      />
     )
   }
 

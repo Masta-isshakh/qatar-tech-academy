@@ -131,7 +131,7 @@ export function DataTable<T extends { id: string }>({
                         <button
                           type="button"
                           onClick={header.column.getToggleSortingHandler()}
-                          className="hover:text-primary inline-flex items-center gap-1"
+                          className="hover:text-primary-ink inline-flex items-center gap-1"
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
                           {dir === 'asc' ? (

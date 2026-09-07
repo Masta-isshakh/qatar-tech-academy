@@ -7,7 +7,6 @@ import { Toaster } from 'sonner'
 
 import { routing, dirOf, type Locale } from '@/i18n/routing'
 import { site } from '@/lib/site'
-import { ConfigureAmplifyClientSide } from '@/components/providers/configure-amplify'
 import { ThemeProvider } from '@/components/providers/theme-provider'
 import { AnalyticsProvider } from '@/components/providers/analytics'
 import { SiteHeader } from '@/components/site/site-header'
@@ -20,8 +19,19 @@ import '../globals.css'
 const cairo = Cairo({
   subsets: ['arabic', 'latin'],
   variable: '--font-cairo',
-  display: 'swap',
-  weight: ['400', '600', '700', '800'],
+  // `optional`, not `swap`: Cairo has no size-adjusted Arabic fallback, so the
+  // swap reflowed every paragraph (measured CLS 0.184 on the track pages).
+  // With `optional` the browser keeps the system Arabic face on a cold, slow
+  // first load and uses Cairo from the cache on every visit after that.
+  display: 'optional',
+  // Two weights, not four: Cairo sits on the Arabic critical path and the extra
+  // faces were the measured cause of the layout shift on text-heavy pages.
+  weight: ['400', '700'],
+  fallback: ['Segoe UI', 'Tahoma', 'Arial', 'sans-serif'],
+  // Not preloaded: with `optional` the first, cold visit paints in the fallback
+  // regardless, so putting a 48 KB Arabic face on the critical path only
+  // delayed first contentful paint on exactly the pages that need it most.
+  preload: false,
 })
 
 const inter = Inter({
@@ -99,7 +109,6 @@ export default async function LocaleLayout({
         <NextIntlClientProvider messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             <AnalyticsProvider>
-              <ConfigureAmplifyClientSide />
               <a
                 href="#main"
                 className="bg-primary text-primary-foreground sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-100 focus:rounded-lg focus:px-4 focus:py-2"

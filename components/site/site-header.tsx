@@ -41,7 +41,8 @@ export function SiteHeader() {
       )}
     >
       <div className="container-site flex h-18 items-center justify-between gap-4">
-        <Link href="/" aria-label={t('home')} className="shrink-0">
+        {/* No aria-label: the wordmark inside is the accessible name. */}
+        <Link href="/" className="shrink-0">
           <Logo />
         </Link>
 
@@ -54,8 +55,8 @@ export function SiteHeader() {
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'hover:text-primary rounded-full px-3.5 py-2 text-[0.95rem] font-semibold transition-colors',
-                  active ? 'text-primary' : 'text-foreground'
+                  'hover:text-primary-ink rounded-full px-3.5 py-2 text-[0.95rem] font-semibold transition-colors',
+                  active ? 'text-primary-ink' : 'text-foreground'
                 )}
               >
                 {t(link.key)}

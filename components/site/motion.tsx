@@ -1,56 +1,76 @@
 'use client'
 
-import { motion, useReducedMotion } from 'framer-motion'
-import type { ReactNode } from 'react'
+import { useEffect, useRef, type ReactNode } from 'react'
+import { cn } from '@/lib/utils'
 
 /**
- * Fade-and-rise on first scroll into view, once. Respects the OS
- * "reduce motion" setting by rendering the final state immediately.
+ * Fade-and-rise on first scroll into view, once.
+ *
+ * The markup renders **visible**, and the hidden state is applied on the client
+ * only to elements that are still below the fold at mount. An entrance animation
+ * that starts from `opacity: 0` in the server HTML makes the browser's largest
+ * contentful paint wait for hydration — that cost us 1.26s of LCP — and hides
+ * content outright when JS is slow or blocked.
  */
 export function FadeUp({
   children,
   className,
   delay = 0,
-  as = 'div',
+  as: Tag = 'div',
 }: {
   children: ReactNode
   className?: string
   delay?: number
   as?: 'div' | 'li' | 'section'
 }) {
-  const reduced = useReducedMotion()
-  const Comp = motion[as]
+  const ref = useRef<HTMLElement>(null)
 
-  if (reduced) {
-    const Static = as
-    return <Static className={className}>{children}</Static>
-  }
+  useEffect(() => {
+    const el = ref.current
+    if (!el) return
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
 
+    // Already on screen: leave it painted, no animation, no LCP delay.
+    if (el.getBoundingClientRect().top < window.innerHeight) return
+
+    el.classList.add('qte-fade')
+    el.style.transitionDelay = `${delay}s`
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return
+        el.classList.add('qte-fade-in')
+        observer.disconnect()
+      },
+      { rootMargin: '0px 0px -80px 0px' }
+    )
+
+    observer.observe(el)
+    return () => observer.disconnect()
+  }, [delay])
+
+  // The union of tags is narrow and each accepts an element ref.
+  const Comp = Tag as 'div'
   return (
-    <Comp
-      className={className}
-      initial={{ opacity: 0, y: 18 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: '-80px' }}
-      transition={{ duration: 0.5, delay, ease: [0.22, 1, 0.36, 1] }}
-    >
+    <Comp ref={ref as React.Ref<HTMLDivElement>} className={className}>
       {children}
     </Comp>
   )
 }
 
-/** Subtle lift on hover for cards. No bounce, no scale on tap. */
+/**
+ * Subtle lift on hover for cards. CSS rather than a motion component: it costs
+ * no JavaScript, and the global reduced-motion rule already neutralises it.
+ */
 export function HoverLift({ children, className }: { children: ReactNode; className?: string }) {
-  const reduced = useReducedMotion()
-  if (reduced) return <div className={className}>{children}</div>
-
   return (
-    <motion.div
-      className={className}
-      whileHover={{ y: -4 }}
-      transition={{ type: 'tween', duration: 0.2, ease: 'easeOut' }}
+    <div
+      className={cn(
+        'transition-transform duration-200 ease-out hover:-translate-y-1 motion-reduce:transition-none motion-reduce:hover:translate-y-0',
+        className
+      )}
     >
       {children}
-    </motion.div>
+    </div>
   )
 }

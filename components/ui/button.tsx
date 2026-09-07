@@ -15,7 +15,7 @@ const buttonVariants = cva(
         ghost: 'text-foreground hover:bg-surface',
         outlineOnMedia:
           'border border-white/70 bg-white/10 text-white backdrop-blur-sm hover:bg-white/20',
-        link: 'text-primary underline underline-offset-4 hover:text-maroon-dark rounded-none',
+        link: 'text-primary-ink underline underline-offset-4 hover:text-maroon-dark rounded-none',
         danger: 'bg-red-700 text-white hover:bg-red-800',
       },
       size: {

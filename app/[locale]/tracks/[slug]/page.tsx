@@ -189,7 +189,7 @@ export default async function TrackPage({
                             </span>
                           </div>
                           <p className="text-muted mt-1.5 text-sm">
-                            <span className="text-primary font-semibold">{t('lab')}: </span>
+                            <span className="text-primary-ink font-semibold">{t('lab')}: </span>
                             {pick(locale, m.labEn, m.labAr)}
                           </p>
                         </li>

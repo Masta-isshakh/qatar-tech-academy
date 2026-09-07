@@ -34,7 +34,7 @@ export function PriceCard({
     <div className="border-border-subtle bg-background shadow-soft flex flex-col gap-4 rounded-2xl border p-6">
       <div>
         <p className="text-muted text-sm">{tc('price')}</p>
-        <p className="ltr-nums text-primary text-3xl font-extrabold">
+        <p className="ltr-nums text-primary-ink text-3xl font-extrabold">
           {formatPrice(priceQar)}{' '}
           <span className="text-foreground text-base font-bold">{tc('qar')}</span>
         </p>

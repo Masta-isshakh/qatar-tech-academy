@@ -1,7 +1,6 @@
 'use client'
 
 import { useEffect, useState } from 'react'
-import { getUrl } from 'aws-amplify/storage'
 import { hasStorage } from './amplify'
 
 /**
@@ -25,7 +24,10 @@ export function useStorageUrl(path: string | null | undefined, enabled = true) {
     let cancelled = false
     setState('loading')
 
-    getUrl({ path, options: { expiresIn: 3600 } })
+    // Dynamic import: the storage SDK is large and only needed once a video is
+    // actually requested.
+    import('aws-amplify/storage')
+      .then(({ getUrl }) => getUrl({ path, options: { expiresIn: 3600 } }))
       .then(({ url: signed }) => {
         if (cancelled) return
         setUrl(signed.toString())

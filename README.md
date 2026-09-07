@@ -194,7 +194,58 @@ are uploaded through **Admin → Media** to `public/videos/…` in S3.
 
 ---
 
-## 7. Conventions worth knowing
+## 7. Performance
+
+`npm run build && npm run start -- --port 3100`, then in another shell:
+
+```bash
+CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" npm run lighthouse
+```
+
+Reports land in `lighthouse/` (git-ignored) with a `summary.json`. Latest run on
+a Windows dev box, mobile preset, **with no image assets in `public/images/`**:
+
+| Page                | Perf  | A11y | Best practices | SEO | LCP       | CLS |
+| ------------------- | ----- | ---- | -------------- | --- | --------- | --- |
+| /ar                 | 63–76 | 100  | 96             | 100 | 4.2–4.4 s | 0   |
+| /en                 | 74–87 | 100  | 96             | 100 | 2.3–2.9 s | 0   |
+| /ar/tracks/robotics | 77–89 | 100  | 96             | 100 | 2.3–3.2 s | 0   |
+| /en/tracks/robotics | 84–92 | 100  | 96             | 100 | 2.2–3.2 s | 0   |
+
+Accessibility, SEO and CLS meet the targets. **Performance does not yet reach
+95**, and these are the two things standing in the way, both of which need the
+real assets:
+
+1. **No hero image exists.** Every `public/images/…` path 404s, so there is no
+   `priority` LCP image to preload — the largest paint is a text heading the
+   browser reaches late. The missing files are also the only thing keeping
+   best-practices at 96 (`errors-in-console` is the 404s).
+2. **Measured against `next start` on a laptop**, not Amplify Hosting's
+   CloudFront. Re-run after the first deploy before drawing conclusions.
+
+What was already fixed by measurement, and is worth not regressing:
+
+- The scroll reveal used to render every section at `opacity: 0` until framer
+  hydrated, which put **1.26 s of hydration inside LCP**. `FadeUp` now renders
+  visible and only hides elements that are still below the fold at mount, so
+  above-the-fold content paints immediately. `HoverLift` became CSS.
+- `aws-amplify` was in every public page's bundle via the global
+  `ConfigureAmplifyClientSide`. It is now mounted only in `/portal` and
+  `/admin`, and the storage SDK is imported on demand inside `useStorageUrl`.
+- Cairo at four weights was the measured cause of **CLS 0.184** on Arabic pages.
+  It now loads two weights with `display: 'optional'` and no preload.
+
+  _That is a deliberate trade-off_: on a cold, slow first visit Arabic text
+  paints in the system font instead of Cairo, and Cairo appears from cache on
+  every visit after. Cairo has no size-adjusted Arabic fallback, so `swap`
+  reflowed whole paragraphs. To go back, set `display: 'swap'` and
+  `preload: true` in `app/[locale]/layout.tsx` and expect CLS around 0.18 on
+  text-heavy pages until a metric-matched fallback face is added.
+
+- A broken image no longer calls `setState`; the placeholder is server-rendered
+  behind it, so a page of missing assets does not trigger a dozen re-renders.
+
+## 8. Conventions worth knowing
 
 - **No hard-coded strings.** Everything lives in `messages/{ar,en}.json`.
 - **Prices use Western digits** even in Arabic (`formatPrice`, `.ltr-nums`);

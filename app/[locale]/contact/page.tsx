@@ -49,7 +49,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               href={whatsappLink(t('whatsappMessage'))}
               target="_blank"
               rel="noopener noreferrer"
-              className="ltr-nums hover:text-primary font-semibold"
+              className="ltr-nums hover:text-primary-ink font-semibold"
             >
               +{site.whatsappNumber}
             </a>
@@ -58,14 +58,17 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <ContactRow icon={<Phone className="size-5" aria-hidden />} label={t('phoneTitle')}>
             <a
               href={`tel:${site.phone.replace(/\s/g, '')}`}
-              className="ltr-nums hover:text-primary font-semibold"
+              className="ltr-nums hover:text-primary-ink font-semibold"
             >
               {site.phone}
             </a>
           </ContactRow>
 
           <ContactRow icon={<Mail className="size-5" aria-hidden />} label={t('emailTitle')}>
-            <a href={`mailto:${site.email}`} className="ltr-nums hover:text-primary font-semibold">
+            <a
+              href={`mailto:${site.email}`}
+              className="ltr-nums hover:text-primary-ink font-semibold"
+            >
               {site.email}
             </a>
           </ContactRow>
@@ -117,7 +120,7 @@ function ContactRow({
 }) {
   return (
     <div className="border-border-subtle bg-background flex items-start gap-3 rounded-2xl border p-4">
-      <span className="text-primary mt-0.5">{icon}</span>
+      <span className="text-primary-ink mt-0.5">{icon}</span>
       <div>
         <p className="text-muted text-xs font-bold tracking-wider uppercase">{label}</p>
         {children}

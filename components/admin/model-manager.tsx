@@ -167,7 +167,7 @@ export function ModelManager({ spec, locale }: { spec: ModelSpec; locale: string
                       aria-label={`${tc('previous')} — ${index + 1}`}
                       onClick={() => move(index, index - 1)}
                       disabled={index === 0}
-                      className="text-muted hover:text-primary disabled:opacity-30"
+                      className="text-muted hover:text-primary-ink disabled:opacity-30"
                     >
                       <ChevronUp className="size-3.5" aria-hidden />
                     </button>
@@ -176,7 +176,7 @@ export function ModelManager({ spec, locale }: { spec: ModelSpec; locale: string
                       aria-label={`${tc('next')} — ${index + 1}`}
                       onClick={() => move(index, index + 1)}
                       disabled={index === rows.length - 1}
-                      className="text-muted hover:text-primary disabled:opacity-30"
+                      className="text-muted hover:text-primary-ink disabled:opacity-30"
                     >
                       <ChevronDown className="size-3.5" aria-hidden />
                     </button>
