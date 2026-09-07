@@ -36,7 +36,12 @@ export async function generateMetadata({
       canonical: `/${locale}/news/${slug}`,
       languages: { ar: `/ar/news/${slug}`, en: `/en/news/${slug}` },
     },
-    openGraph: { title, description, type: 'article', publishedTime: post.publishedAt ?? undefined },
+    openGraph: {
+      title,
+      description,
+      type: 'article',
+      publishedTime: post.publishedAt ?? undefined,
+    },
   }
 }
 
@@ -60,7 +65,7 @@ export default async function PostPage({
       <article className="mx-auto max-w-3xl">
         <Link
           href="/news"
-          className="mb-6 inline-flex items-center gap-1.5 text-sm font-semibold text-muted hover:text-primary"
+          className="text-muted hover:text-primary mb-6 inline-flex items-center gap-1.5 text-sm font-semibold"
         >
           <Arrow className="size-4" aria-hidden />
           {t('backToNews')}
@@ -68,7 +73,7 @@ export default async function PostPage({
 
         <h1 className="text-3xl md:text-4xl">{pick(locale, post.titleEn, post.titleAr)}</h1>
         {post.publishedAt ? (
-          <p className="mt-2 text-sm text-muted">
+          <p className="text-muted mt-2 text-sm">
             {t('publishedOn', { date: formatDate(post.publishedAt, locale) })}
           </p>
         ) : null}

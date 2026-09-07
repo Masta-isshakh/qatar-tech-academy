@@ -36,7 +36,7 @@ export function TrackCard({
     <HoverLift className="h-full">
       <Link
         href={track.isComingSoon ? '/tracks' : `/tracks/${track.slug}`}
-        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-background shadow-soft transition-shadow hover:shadow-lift"
+        className="group border-border-subtle bg-background shadow-soft hover:shadow-lift flex h-full flex-col overflow-hidden rounded-2xl border transition-shadow"
       >
         <div className="relative aspect-[16/10] overflow-hidden">
           <MediaImage
@@ -53,7 +53,7 @@ export function TrackCard({
               {labels.comingSoon}
             </Badge>
           ) : (
-            <Badge variant="onMedia" className="absolute start-3 top-3 ltr-nums">
+            <Badge variant="onMedia" className="ltr-nums absolute start-3 top-3">
               {formatPrice(track.priceQar)} {labels.qar}
             </Badge>
           )}
@@ -61,29 +61,29 @@ export function TrackCard({
 
         <div className="flex flex-1 flex-col gap-3 p-5">
           <div className="flex flex-col gap-1.5">
-            <h3 className="text-xl group-hover:text-primary">
+            <h3 className="group-hover:text-primary text-xl">
               {pick(locale, track.titleEn, track.titleAr)}
             </h3>
-            <p className="text-sm text-muted">{pick(locale, track.taglineEn, track.taglineAr)}</p>
+            <p className="text-muted text-sm">{pick(locale, track.taglineEn, track.taglineAr)}</p>
           </div>
 
           <div className="mt-auto flex flex-col gap-3 pt-2">
             {!track.isComingSoon ? (
-              <p className="flex items-center gap-2 text-xs text-muted">
+              <p className="text-muted flex items-center gap-2 text-xs">
                 <CalendarDays className="size-4 shrink-0" aria-hidden />
                 <span>
                   {labels.nextCohort}:{' '}
-                  <span className="font-semibold text-foreground">
+                  <span className="text-foreground font-semibold">
                     {cohort?.startDate ? formatDate(cohort.startDate, locale) : labels.cohortTbc}
                   </span>
                 </span>
               </p>
             ) : null}
 
-            <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary">
+            <span className="text-primary inline-flex items-center gap-1.5 text-sm font-semibold">
               {labels.learnMore}
               <Arrow
-                className="size-4 transition-transform group-hover:translate-x-0.5 rtl:group-hover:-translate-x-0.5 motion-reduce:transition-none"
+                className="size-4 transition-transform group-hover:translate-x-0.5 motion-reduce:transition-none rtl:group-hover:-translate-x-0.5"
                 aria-hidden
               />
             </span>

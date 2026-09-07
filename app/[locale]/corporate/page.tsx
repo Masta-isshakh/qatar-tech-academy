@@ -45,7 +45,7 @@ export default async function CorporatePage({ params }: { params: Promise<{ loca
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <FadeUp className="flex flex-col gap-5">
             <h1 className="text-4xl md:text-5xl">{t('title')}</h1>
-            <p className="text-xl text-muted">{t('subtitle')}</p>
+            <p className="text-muted text-xl">{t('subtitle')}</p>
           </FadeUp>
           <FadeUp delay={0.08}>
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
@@ -76,12 +76,12 @@ export default async function CorporatePage({ params }: { params: Promise<{ loca
         <ol className="grid gap-4 md:grid-cols-4">
           {weeks.map((w, i) => (
             <FadeUp as="li" key={w.weeks} delay={i * 0.05}>
-              <div className="flex h-full flex-col gap-2 rounded-2xl border border-border-subtle bg-background p-6">
-                <span className="ltr-nums text-xs font-bold uppercase tracking-wider text-primary">
+              <div className="border-border-subtle bg-background flex h-full flex-col gap-2 rounded-2xl border p-6">
+                <span className="ltr-nums text-primary text-xs font-bold tracking-wider uppercase">
                   {w.weeks}
                 </span>
                 <h3 className="text-lg">{w.title}</h3>
-                <p className="text-sm text-muted">{w.body}</p>
+                <p className="text-muted text-sm">{w.body}</p>
               </div>
             </FadeUp>
           ))}

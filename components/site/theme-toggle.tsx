@@ -20,7 +20,7 @@ export function ThemeToggle({ className }: { className?: string }) {
       aria-label={t('toggleTheme')}
       onClick={() => setTheme(resolvedTheme === 'dark' ? 'light' : 'dark')}
       className={cn(
-        'inline-grid size-10 place-items-center rounded-full border border-border-subtle transition-colors hover:bg-surface',
+        'border-border-subtle hover:bg-surface inline-grid size-10 place-items-center rounded-full border transition-colors',
         className
       )}
     >

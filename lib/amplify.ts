@@ -14,9 +14,7 @@ export const amplifyOutputs = outputs as Outputs
  * public pages read `data/seed-content.ts` and write paths are disabled rather
  * than throwing at request time.
  */
-export const isAmplifyConfigured = Boolean(
-  !amplifyOutputs._placeholder && amplifyOutputs.data?.url
-)
+export const isAmplifyConfigured = Boolean(!amplifyOutputs._placeholder && amplifyOutputs.data?.url)
 
 export const hasAuth = isAmplifyConfigured && Boolean(amplifyOutputs.auth?.user_pool_id)
 export const hasStorage = isAmplifyConfigured && Boolean(amplifyOutputs.storage?.bucket_name)

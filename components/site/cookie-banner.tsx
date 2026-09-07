@@ -12,16 +12,18 @@ export function CookieBanner() {
   if (consent !== 'unknown') return null
 
   return (
-    <div
-      role="dialog"
+    // A region, not a dialog: it does not trap focus, so role="dialog" would
+    // misdescribe it to screen readers (and collide with real modals).
+    <section
+      role="region"
       aria-live="polite"
       aria-label={t('title')}
-      className="fixed inset-x-3 bottom-3 z-50 mx-auto max-w-2xl rounded-2xl border border-border-subtle bg-background p-4 shadow-lift sm:inset-x-auto sm:start-5 sm:bottom-5"
+      className="border-border-subtle bg-background shadow-lift fixed inset-x-3 bottom-3 z-50 mx-auto max-w-2xl rounded-2xl border p-4 sm:inset-x-auto sm:start-5 sm:bottom-5"
     >
       <p className="font-bold">{t('title')}</p>
-      <p className="mt-1 text-sm text-muted">
+      <p className="text-muted mt-1 text-sm">
         {t('body')}{' '}
-        <Link href="/privacy" className="underline underline-offset-2 hover:text-primary">
+        <Link href="/privacy" className="hover:text-primary underline underline-offset-2">
           {t('policy')}
         </Link>
       </p>
@@ -33,6 +35,6 @@ export function CookieBanner() {
           {t('reject')}
         </Button>
       </div>
-    </div>
+    </section>
   )
 }

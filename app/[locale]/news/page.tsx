@@ -44,7 +44,7 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
             <FadeUp as="li" key={post.id} delay={Math.min(i, 3) * 0.05}>
               <Link
                 href={`/news/${post.slug}`}
-                className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-background"
+                className="group border-border-subtle bg-background flex h-full flex-col overflow-hidden rounded-2xl border"
               >
                 <div className="relative aspect-[16/9]">
                   <MediaImage
@@ -56,15 +56,17 @@ export default async function NewsPage({ params }: { params: Promise<{ locale: s
                   />
                 </div>
                 <div className="flex flex-1 flex-col gap-2 p-5">
-                  <p className="text-xs text-muted">
+                  <p className="text-muted text-xs">
                     {post.publishedAt
                       ? t('publishedOn', { date: formatDate(post.publishedAt, locale) })
                       : ''}
                   </p>
-                  <h2 className="text-lg group-hover:text-primary">
+                  <h2 className="group-hover:text-primary text-lg">
                     {pick(locale, post.titleEn, post.titleAr)}
                   </h2>
-                  <p className="text-sm text-muted">{pick(locale, post.excerptEn, post.excerptAr)}</p>
+                  <p className="text-muted text-sm">
+                    {pick(locale, post.excerptEn, post.excerptAr)}
+                  </p>
                 </div>
               </Link>
             </FadeUp>

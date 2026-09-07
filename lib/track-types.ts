@@ -125,7 +125,6 @@ export type PostView = {
   publishedAt: string | null
 }
 
-
 /** First open cohort for a track, used on the cards and the sticky price card. */
 export function nextCohort(track: TrackView): CohortView | null {
   const today = new Date().toISOString().slice(0, 10)

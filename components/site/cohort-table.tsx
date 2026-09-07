@@ -18,7 +18,7 @@ export function CohortTable({
   const tc = useTranslations('common')
 
   if (cohorts.length === 0) {
-    return <p className="text-sm text-muted">{t('noCohorts')}</p>
+    return <p className="text-muted text-sm">{t('noCohorts')}</p>
   }
 
   if (compact) {
@@ -37,7 +37,7 @@ export function CohortTable({
   }
 
   return (
-    <div className="overflow-x-auto rounded-2xl border border-border-subtle">
+    <div className="border-border-subtle overflow-x-auto rounded-2xl border">
       <table className="w-full min-w-[36rem] border-collapse text-sm">
         <thead className="bg-surface text-start">
           <tr>
@@ -51,8 +51,8 @@ export function CohortTable({
         </thead>
         <tbody>
           {cohorts.map((c) => (
-            <tr key={c.id} className="border-t border-border-subtle">
-              <Td className="font-semibold ltr-nums">{c.code}</Td>
+            <tr key={c.id} className="border-border-subtle border-t">
+              <Td className="ltr-nums font-semibold">{c.code}</Td>
               <Td>{formatDate(c.startDate, locale)}</Td>
               <Td>{formatDate(c.endDate, locale)}</Td>
               <Td>{pick(locale, c.scheduleEn, c.scheduleAr)}</Td>
@@ -73,7 +73,11 @@ export function CohortTable({
 }
 
 function Th({ children }: { children: React.ReactNode }) {
-  return <th scope="col" className="px-4 py-3 text-start font-bold">{children}</th>
+  return (
+    <th scope="col" className="px-4 py-3 text-start font-bold">
+      {children}
+    </th>
+  )
 }
 
 function Td({ children, className }: { children: React.ReactNode; className?: string }) {

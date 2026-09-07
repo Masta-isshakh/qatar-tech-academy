@@ -41,12 +41,15 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
 
       <div className="grid gap-10 lg:grid-cols-[22rem_1fr]">
         <div className="flex flex-col gap-4">
-          <ContactRow icon={<MessageCircle className="size-5" aria-hidden />} label={t('whatsappTitle')}>
+          <ContactRow
+            icon={<MessageCircle className="size-5" aria-hidden />}
+            label={t('whatsappTitle')}
+          >
             <a
               href={whatsappLink(t('whatsappMessage'))}
               target="_blank"
               rel="noopener noreferrer"
-              className="ltr-nums font-semibold hover:text-primary"
+              className="ltr-nums hover:text-primary font-semibold"
             >
               +{site.whatsappNumber}
             </a>
@@ -55,14 +58,14 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
           <ContactRow icon={<Phone className="size-5" aria-hidden />} label={t('phoneTitle')}>
             <a
               href={`tel:${site.phone.replace(/\s/g, '')}`}
-              className="ltr-nums font-semibold hover:text-primary"
+              className="ltr-nums hover:text-primary font-semibold"
             >
               {site.phone}
             </a>
           </ContactRow>
 
           <ContactRow icon={<Mail className="size-5" aria-hidden />} label={t('emailTitle')}>
-            <a href={`mailto:${site.email}`} className="ltr-nums font-semibold hover:text-primary">
+            <a href={`mailto:${site.email}`} className="ltr-nums hover:text-primary font-semibold">
               {site.email}
             </a>
           </ContactRow>
@@ -82,7 +85,7 @@ export default async function ContactPage({ params }: { params: Promise<{ locale
               src={mapsEmbedUrl(locale)}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="aspect-square w-full rounded-2xl border border-border-subtle"
+              className="border-border-subtle aspect-square w-full rounded-2xl border"
             />
           </div>
         </div>
@@ -113,10 +116,10 @@ function ContactRow({
   children: React.ReactNode
 }) {
   return (
-    <div className="flex items-start gap-3 rounded-2xl border border-border-subtle bg-background p-4">
-      <span className="mt-0.5 text-primary">{icon}</span>
+    <div className="border-border-subtle bg-background flex items-start gap-3 rounded-2xl border p-4">
+      <span className="text-primary mt-0.5">{icon}</span>
       <div>
-        <p className="text-xs font-bold uppercase tracking-wider text-muted">{label}</p>
+        <p className="text-muted text-xs font-bold tracking-wider uppercase">{label}</p>
         {children}
       </div>
     </div>

@@ -142,11 +142,23 @@
       "subtitle": "Six steps from the form to a certificate.",
       "steps": [
         { "title": "Register", "body": "On the website or in the app, in Arabic or English." },
-        { "title": "Entry test", "body": "A short aptitude test in our centre, on a slot you pick." },
+        {
+          "title": "Entry test",
+          "body": "A short aptitude test in our centre, on a slot you pick."
+        },
         { "title": "A cohort of 20", "body": "Small groups so everyone has their own equipment." },
-        { "title": "Hands-on training", "body": "Six to ten weeks of building, breaking and fixing." },
-        { "title": "Certification exam", "body": "You sit the international exam in our own test centre." },
-        { "title": "Certificate and next step", "body": "Employment support, or the advanced cohort." }
+        {
+          "title": "Hands-on training",
+          "body": "Six to ten weeks of building, breaking and fixing."
+        },
+        {
+          "title": "Certification exam",
+          "body": "You sit the international exam in our own test centre."
+        },
+        {
+          "title": "Certificate and next step",
+          "body": "Employment support, or the advanced cohort."
+        }
       ]
     },
     "examCentre": {

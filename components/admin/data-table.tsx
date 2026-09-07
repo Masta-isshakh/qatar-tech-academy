@@ -104,7 +104,7 @@ export function DataTable<T extends { id: string }>({
           className="max-w-xs"
         />
         {selectedIds.length > 0 ? (
-          <span className="text-sm text-muted">{t('selected', { count: selectedIds.length })}</span>
+          <span className="text-muted text-sm">{t('selected', { count: selectedIds.length })}</span>
         ) : null}
         <div className="ms-auto flex items-center gap-2">
           {toolbar?.(selectedIds)}
@@ -115,9 +115,9 @@ export function DataTable<T extends { id: string }>({
         </div>
       </div>
 
-      <p className="text-xs text-muted">{t('dataExportNote')}</p>
+      <p className="text-muted text-xs">{t('dataExportNote')}</p>
 
-      <div className="overflow-x-auto rounded-2xl border border-border-subtle">
+      <div className="border-border-subtle overflow-x-auto rounded-2xl border">
         <table className="w-full min-w-[48rem] border-collapse text-sm">
           <thead className="bg-surface">
             {table.getHeaderGroups().map((group) => (
@@ -131,7 +131,7 @@ export function DataTable<T extends { id: string }>({
                         <button
                           type="button"
                           onClick={header.column.getToggleSortingHandler()}
-                          className="inline-flex items-center gap-1 hover:text-primary"
+                          className="hover:text-primary inline-flex items-center gap-1"
                         >
                           {flexRender(header.column.columnDef.header, header.getContext())}
                           {dir === 'asc' ? (
@@ -152,7 +152,7 @@ export function DataTable<T extends { id: string }>({
           <tbody>
             {table.getRowModel().rows.length === 0 ? (
               <tr>
-                <td colSpan={columns.length} className="px-3 py-8 text-center text-muted">
+                <td colSpan={columns.length} className="text-muted px-3 py-8 text-center">
                   {emptyLabel ?? t('noRows')}
                 </td>
               </tr>
@@ -161,7 +161,7 @@ export function DataTable<T extends { id: string }>({
                 <tr
                   key={row.id}
                   className={cn(
-                    'border-t border-border-subtle align-middle',
+                    'border-border-subtle border-t align-middle',
                     row.getIsSelected() && 'bg-maroon-soft'
                   )}
                 >

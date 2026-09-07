@@ -42,7 +42,7 @@ export function AdminShell({ locale, email }: { locale: string; email?: string }
       <header className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl">{t('title')}</h1>
-          {email ? <p className="ltr-nums text-sm text-muted">{email}</p> : null}
+          {email ? <p className="ltr-nums text-muted text-sm">{email}</p> : null}
         </div>
         <Button variant="secondary" size="sm" onClick={signOut}>
           {tPortal('signOut')}

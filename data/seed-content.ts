@@ -241,8 +241,10 @@ export const seedTracks: SeedTrack[] = [
         name: 'Kenji Tanaka',
         titleEn: 'Lead robotics instructor',
         titleAr: 'المدرب الرئيسي للروبوتات',
-        bioEn: 'Fifteen years commissioning industrial cells in Japan and the Gulf; certified by three cobot manufacturers.',
-        bioAr: 'خمسة عشر عاماً في تشغيل الخلايا الصناعية في اليابان والخليج؛ معتمد من ثلاثة مصنّعين للأذرع التعاونية.',
+        bioEn:
+          'Fifteen years commissioning industrial cells in Japan and the Gulf; certified by three cobot manufacturers.',
+        bioAr:
+          'خمسة عشر عاماً في تشغيل الخلايا الصناعية في اليابان والخليج؛ معتمد من ثلاثة مصنّعين للأذرع التعاونية.',
         credentials: ['Doosan certified', 'JAKA certified', 'ROS 2'],
         photoKey: '/images/team/tanaka.jpg',
         country: 'Japan',
@@ -316,7 +318,8 @@ export const seedTracks: SeedTrack[] = [
         name: 'Rajesh Menon',
         titleEn: 'Network lab lead',
         titleAr: 'مسؤول معمل الشبكات',
-        bioEn: 'CCIE-track engineer who has run enterprise and data-centre networks across the GCC for a decade.',
+        bioEn:
+          'CCIE-track engineer who has run enterprise and data-centre networks across the GCC for a decade.',
         bioAr: 'مهندس شبكات على مسار CCIE، أدار شبكات مؤسسية ومراكز بيانات في الخليج لعشر سنوات.',
         credentials: ['CCNP Enterprise', 'HCIP-Datacom', 'Fortinet NSE 4'],
         photoKey: '/images/team/rajesh.jpg',
@@ -392,8 +395,10 @@ export const seedTracks: SeedTrack[] = [
         name: 'Layla Al-Kuwari',
         titleEn: 'Cyber range lead',
         titleAr: 'مسؤولة الميدان السيبراني',
-        bioEn: 'Offensive security specialist and blue-team lead; runs red-vs-blue exercises for regional enterprises.',
-        bioAr: 'متخصصة في الأمن الهجومي وقائدة فريق أزرق؛ تدير تمارين أحمر/أزرق لمؤسسات في المنطقة.',
+        bioEn:
+          'Offensive security specialist and blue-team lead; runs red-vs-blue exercises for regional enterprises.',
+        bioAr:
+          'متخصصة في الأمن الهجومي وقائدة فريق أزرق؛ تدير تمارين أحمر/أزرق لمؤسسات في المنطقة.',
         credentials: ['CEH', 'OSCP', 'CompTIA Security+'],
         photoKey: '/images/team/layla.jpg',
         country: 'Qatar',
@@ -544,7 +549,8 @@ export const seedTracks: SeedTrack[] = [
     titleEn: 'Coming soon',
     titleAr: 'قريباً',
     taglineEn: 'Cloud, IoT, 3D printing, game development… and many more.',
-    taglineAr: 'الحوسبة السحابية، إنترنت الأشياء، الطباعة ثلاثية الأبعاد، تطوير الألعاب… ووايد غيرها.',
+    taglineAr:
+      'الحوسبة السحابية، إنترنت الأشياء، الطباعة ثلاثية الأبعاد، تطوير الألعاب… ووايد غيرها.',
     descriptionEn: 'Tell us what you want to learn next.',
     descriptionAr: 'قول لنا شنو تبي تتعلم بعدين.',
     certifications: [],

@@ -36,7 +36,7 @@ export function SiteHeader() {
   return (
     <header
       className={cn(
-        'sticky top-0 z-50 border-b bg-background/85 backdrop-blur-md transition-colors',
+        'bg-background/85 sticky top-0 z-50 border-b backdrop-blur-md transition-colors',
         scrolled ? 'border-border-subtle' : 'border-transparent'
       )}
     >
@@ -54,7 +54,7 @@ export function SiteHeader() {
                 href={link.href}
                 aria-current={active ? 'page' : undefined}
                 className={cn(
-                  'rounded-full px-3.5 py-2 text-[0.95rem] font-semibold transition-colors hover:text-primary',
+                  'hover:text-primary rounded-full px-3.5 py-2 text-[0.95rem] font-semibold transition-colors',
                   active ? 'text-primary' : 'text-foreground'
                 )}
               >
@@ -70,12 +70,12 @@ export function SiteHeader() {
             target="_blank"
             rel="noopener noreferrer"
             aria-label={t('whatsapp')}
-            className="hidden size-10 place-items-center rounded-full border border-border-subtle transition-colors hover:bg-surface sm:grid"
+            className="border-border-subtle hover:bg-surface hidden size-10 place-items-center rounded-full border transition-colors sm:grid"
           >
             <MessageCircle className="size-4.5" aria-hidden />
           </a>
           <ThemeToggle className="hidden sm:inline-grid" />
-          <LocaleSwitcher className="hidden sm:inline-flex" />
+          <LocaleSwitcher />
           <Button asChild size="sm" className="hidden md:inline-flex">
             <Link href="/register">{t('register')}</Link>
           </Button>
@@ -86,7 +86,7 @@ export function SiteHeader() {
             aria-expanded={open}
             aria-controls="mobile-nav"
             aria-label={open ? t('closeMenu') : t('openMenu')}
-            className="grid size-10 place-items-center rounded-full border border-border-subtle lg:hidden"
+            className="border-border-subtle grid size-10 place-items-center rounded-full border lg:hidden"
           >
             {open ? <X className="size-5" aria-hidden /> : <Menu className="size-5" aria-hidden />}
           </button>
@@ -94,13 +94,13 @@ export function SiteHeader() {
       </div>
 
       {open ? (
-        <div id="mobile-nav" className="border-t border-border-subtle bg-background lg:hidden">
+        <div id="mobile-nav" className="border-border-subtle bg-background border-t lg:hidden">
           <nav aria-label="Primary mobile" className="container-site flex flex-col py-3">
             {NAV_LINKS.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className="border-b border-border-subtle py-3.5 text-base font-semibold last:border-b-0"
+                className="border-border-subtle border-b py-3.5 text-base font-semibold last:border-b-0"
               >
                 {t(link.key)}
               </Link>
@@ -110,7 +110,6 @@ export function SiteHeader() {
             </Link>
             <div className="flex items-center gap-2 py-4">
               <ThemeToggle />
-              <LocaleSwitcher />
               <Button asChild size="sm" className="flex-1">
                 <Link href="/register">{t('register')}</Link>
               </Button>

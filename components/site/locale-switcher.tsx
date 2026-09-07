@@ -32,7 +32,7 @@ export function LocaleSwitcher({ className }: { className?: string }) {
         })
       }
       className={cn(
-        'inline-flex h-10 items-center gap-1.5 rounded-full border border-border-subtle px-3 text-sm font-semibold transition-colors hover:bg-surface disabled:opacity-60',
+        'border-border-subtle hover:bg-surface inline-flex h-10 items-center gap-1.5 rounded-full border px-3 text-sm font-semibold transition-colors disabled:opacity-60',
         className
       )}
     >

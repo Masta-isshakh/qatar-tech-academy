@@ -31,7 +31,8 @@ export function ModelManager({ spec, locale }: { spec: ModelSpec; locale: string
   const [editing, setEditing] = useState<Row | 'new' | null>(null)
   const [busy, setBusy] = useState(false)
 
-  const label = (f: { labelEn: string; labelAr: string }) => (locale === 'ar' ? f.labelAr : f.labelEn)
+  const label = (f: { labelEn: string; labelAr: string }) =>
+    locale === 'ar' ? f.labelAr : f.labelEn
   const tableFields = useMemo(() => spec.fields.filter((f) => f.inTable), [spec.fields])
 
   const load = useCallback(async () => {
@@ -153,13 +154,13 @@ export function ModelManager({ spec, locale }: { spec: ModelSpec; locale: string
                 if (!Number.isNaN(from)) move(from, index)
               }}
               className={cn(
-                'flex items-center gap-3 rounded-xl border border-border-subtle bg-background px-3 py-2.5',
+                'border-border-subtle bg-background flex items-center gap-3 rounded-xl border px-3 py-2.5',
                 spec.orderField && 'cursor-grab'
               )}
             >
               {spec.orderField ? (
                 <>
-                  <GripVertical className="size-4 shrink-0 text-muted" aria-hidden />
+                  <GripVertical className="text-muted size-4 shrink-0" aria-hidden />
                   <span className="flex flex-col">
                     <button
                       type="button"
@@ -193,7 +194,12 @@ export function ModelManager({ spec, locale }: { spec: ModelSpec; locale: string
               </div>
 
               <div className="flex shrink-0 gap-1">
-                <Button size="icon" variant="ghost" aria-label={tc('edit')} onClick={() => setEditing(row)}>
+                <Button
+                  size="icon"
+                  variant="ghost"
+                  aria-label={tc('edit')}
+                  onClick={() => setEditing(row)}
+                >
                   <Pencil className="size-4" aria-hidden />
                 </Button>
                 <Button
@@ -251,7 +257,8 @@ function RecordDialog({
 }) {
   const tc = useTranslations('common')
   const [values, setValues] = useState<Record<string, any>>(() => ({ ...initial }))
-  const label = (f: { labelEn: string; labelAr: string }) => (locale === 'ar' ? f.labelAr : f.labelEn)
+  const label = (f: { labelEn: string; labelAr: string }) =>
+    locale === 'ar' ? f.labelAr : f.labelEn
 
   function set(name: string, value: unknown) {
     setValues((v) => ({ ...v, [name]: value }))
@@ -259,7 +266,7 @@ function RecordDialog({
 
   function submit(e: React.FormEvent) {
     e.preventDefault()
-    const payload: Record<string, any> = { }
+    const payload: Record<string, any> = {}
     if (initial.id) payload.id = initial.id
     for (const f of spec.fields) {
       const raw = values[f.name]
@@ -285,7 +292,10 @@ function RecordDialog({
 
   return (
     <Dialog open onOpenChange={(open) => !open && onClose()}>
-      <DialogContent closeLabel={tc('close')} className="max-h-[85vh] w-[min(48rem,calc(100vw-2rem))] overflow-y-auto p-6">
+      <DialogContent
+        closeLabel={tc('close')}
+        className="max-h-[85vh] w-[min(48rem,calc(100vw-2rem))] overflow-y-auto p-6"
+      >
         <DialogTitle className="mb-4 text-xl font-bold">
           {initial.id ? tc('edit') : tc('create')} — {label(spec)}
         </DialogTitle>

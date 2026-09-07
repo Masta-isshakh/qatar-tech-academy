@@ -126,11 +126,12 @@ export async function submitRegistration(
       return { ok: true, data: { registrationId: registration.id, booked: false } }
     }
 
-    const { data: booking, errors: bookingErrors } = await publicServerClient.mutations.bookTestSlot({
-      registrationId: registration.id,
-      slotId: data.slotId,
-      locale: data.locale,
-    })
+    const { data: booking, errors: bookingErrors } =
+      await publicServerClient.mutations.bookTestSlot({
+        registrationId: registration.id,
+        slotId: data.slotId,
+        locale: data.locale,
+      })
 
     if (bookingErrors?.length) {
       console.error('[submitRegistration] bookTestSlot failed', bookingErrors)

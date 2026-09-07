@@ -56,7 +56,7 @@ export function MediaUploader() {
   return (
     <div className="flex max-w-xl flex-col gap-3">
       <h3 className="text-lg font-bold">{t('uploadTitle')}</h3>
-      <p className="text-sm text-muted">{t('uploadHint')}</p>
+      <p className="text-muted text-sm">{t('uploadHint')}</p>
 
       <Field label="S3 prefix" htmlFor="upload-prefix">
         <Input
@@ -78,10 +78,13 @@ export function MediaUploader() {
 
       {percent !== null ? (
         <div aria-live="polite">
-          <div className="h-2 w-full overflow-hidden rounded-full bg-surface">
-            <div className="h-full bg-primary transition-[width]" style={{ width: `${percent}%` }} />
+          <div className="bg-surface h-2 w-full overflow-hidden rounded-full">
+            <div
+              className="bg-primary h-full transition-[width]"
+              style={{ width: `${percent}%` }}
+            />
           </div>
-          <p className="ltr-nums mt-1 text-xs text-muted">{t('uploading', { percent })}</p>
+          <p className="ltr-nums text-muted mt-1 text-xs">{t('uploading', { percent })}</p>
         </div>
       ) : null}
 
@@ -93,7 +96,7 @@ export function MediaUploader() {
       {uploaded.length > 0 ? (
         <ul className="mt-2 flex flex-col gap-1 text-sm">
           {uploaded.map((u) => (
-            <li key={u.path} className="ltr-nums truncate rounded-lg bg-surface px-3 py-2">
+            <li key={u.path} className="ltr-nums bg-surface truncate rounded-lg px-3 py-2">
               {u.path}
             </li>
           ))}

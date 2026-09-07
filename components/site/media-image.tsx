@@ -21,7 +21,7 @@ export function ImagePlaceholder({
   return (
     <div
       aria-hidden
-      className={cn('relative overflow-hidden bg-sand-light dark:bg-charcoal-soft', className)}
+      className={cn('bg-sand-light dark:bg-charcoal-soft relative overflow-hidden', className)}
       style={{
         backgroundImage: `radial-gradient(120% 90% at 15% 10%, ${accent}22 0%, transparent 60%), repeating-linear-gradient(135deg, ${accent}0f 0 12px, transparent 12px 24px)`,
       }}
@@ -31,7 +31,7 @@ export function ImagePlaceholder({
         style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}
       />
       {label ? (
-        <span className="absolute inset-0 flex items-center justify-center px-6 text-center text-xs font-semibold tracking-wide text-muted uppercase">
+        <span className="text-muted absolute inset-0 flex items-center justify-center px-6 text-center text-xs font-semibold tracking-wide uppercase">
           {label}
         </span>
       ) : null}
@@ -64,12 +64,5 @@ export function MediaImage({
     )
   }
 
-  return (
-    <Image
-      alt={alt}
-      className={className}
-      onError={() => setFailed(true)}
-      {...props}
-    />
-  )
+  return <Image alt={alt} className={className} onError={() => setFailed(true)} {...props} />
 }

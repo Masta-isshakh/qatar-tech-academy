@@ -55,7 +55,14 @@ export function PortalDashboard({ locale, email }: { locale: string; email?: str
   const [data, setData] = useState<PortalData | null>(null)
   const [state, setState] = useState<'loading' | 'ready' | 'error'>('loading')
   const [announcements, setAnnouncements] = useState<
-    { id: string; titleEn: string; titleAr: string; bodyEn: string; bodyAr: string; publishedAt: string | null }[]
+    {
+      id: string
+      titleEn: string
+      titleAr: string
+      bodyEn: string
+      bodyAr: string
+      publishedAt: string | null
+    }[]
   >([])
 
   const load = useCallback(async () => {
@@ -109,7 +116,7 @@ export function PortalDashboard({ locale, email }: { locale: string; email?: str
       <header className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-3xl">{t('title')}</h1>
-          <p className="ltr-nums text-sm text-muted">
+          <p className="ltr-nums text-muted text-sm">
             {t('welcome')}
             {email ? ` · ${email}` : ''}
           </p>
@@ -150,8 +157,8 @@ export function PortalDashboard({ locale, email }: { locale: string; email?: str
                         aria-hidden
                         className={
                           reached
-                            ? 'size-3 shrink-0 rounded-full bg-primary'
-                            : 'size-3 shrink-0 rounded-full border border-border-subtle'
+                            ? 'bg-primary size-3 shrink-0 rounded-full'
+                            : 'border-border-subtle size-3 shrink-0 rounded-full border'
                         }
                       />
                       <span className={reached ? 'font-semibold' : 'text-muted'}>
@@ -190,11 +197,11 @@ export function PortalDashboard({ locale, email }: { locale: string; email?: str
             ) : data?.appointment?.slotStart ? (
               <div className="flex flex-col gap-2">
                 <p className="flex items-center gap-2">
-                  <CalendarCheck className="size-4 shrink-0 text-primary" aria-hidden />
+                  <CalendarCheck className="text-primary size-4 shrink-0" aria-hidden />
                   {formatDateTime(data.appointment.slotStart, locale)}
                 </p>
                 {data.appointment.room ? (
-                  <p className="flex items-center gap-2 text-sm text-muted">
+                  <p className="text-muted flex items-center gap-2 text-sm">
                     <MapPin className="size-4 shrink-0" aria-hidden />
                     {data.appointment.room}
                   </p>
@@ -221,7 +228,9 @@ export function PortalDashboard({ locale, email }: { locale: string; email?: str
               <ul className="flex flex-col gap-3">
                 {data.enrollments.map((e) => (
                   <li key={e.id} className="flex items-center justify-between gap-3">
-                    <span className="ltr-nums text-sm font-semibold">{e.cohortId ?? e.trackId}</span>
+                    <span className="ltr-nums text-sm font-semibold">
+                      {e.cohortId ?? e.trackId}
+                    </span>
                     <Badge variant="neutral">{e.status ?? ''}</Badge>
                   </li>
                 ))}
@@ -276,12 +285,12 @@ export function PortalDashboard({ locale, email }: { locale: string; email?: str
         ) : (
           <ul className="flex flex-col gap-3">
             {announcements.map((a) => (
-              <li key={a.id} className="rounded-2xl border border-border-subtle bg-background p-5">
+              <li key={a.id} className="border-border-subtle bg-background rounded-2xl border p-5">
                 <div className="flex flex-wrap items-baseline justify-between gap-2">
                   <h3 className="font-bold">{pick(locale, a.titleEn, a.titleAr)}</h3>
-                  <span className="text-xs text-muted">{formatDate(a.publishedAt, locale)}</span>
+                  <span className="text-muted text-xs">{formatDate(a.publishedAt, locale)}</span>
                 </div>
-                <p className="mt-1 text-sm text-muted">{pick(locale, a.bodyEn, a.bodyAr)}</p>
+                <p className="text-muted mt-1 text-sm">{pick(locale, a.bodyEn, a.bodyAr)}</p>
               </li>
             ))}
           </ul>
@@ -336,7 +345,7 @@ function CertificateList({
       {keys.map((key) => (
         <li key={key} className="flex items-center justify-between gap-3">
           <span className="flex items-center gap-2 text-sm">
-            <FileBadge className="size-4 shrink-0 text-primary" aria-hidden />
+            <FileBadge className="text-primary size-4 shrink-0" aria-hidden />
             <span className="ltr-nums truncate">{key.split('/').pop()}</span>
           </span>
           <Button asChild size="sm" variant="secondary" disabled={!urls[key]}>

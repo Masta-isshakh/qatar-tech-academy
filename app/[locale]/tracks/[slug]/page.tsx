@@ -107,7 +107,7 @@ export default async function TrackPage({
       />
 
       {/* Hero */}
-      <section className="relative isolate overflow-hidden bg-charcoal">
+      <section className="bg-charcoal relative isolate overflow-hidden">
         <div className="relative aspect-[4/3] w-full sm:aspect-[16/9] lg:aspect-[21/9] lg:max-h-[34rem]">
           {track.videoKey ? (
             <VideoPlayer
@@ -132,7 +132,7 @@ export default async function TrackPage({
           )}
           <div
             aria-hidden
-            className="pointer-events-none absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/65 to-charcoal/15"
+            className="from-charcoal via-charcoal/65 to-charcoal/15 pointer-events-none absolute inset-0 bg-gradient-to-t"
           />
           <div className="container-site pointer-events-none relative flex h-full flex-col justify-end pb-10">
             <div className="max-w-3xl text-white">
@@ -159,7 +159,7 @@ export default async function TrackPage({
         <div className="flex flex-col gap-14">
           {description ? (
             <FadeUp>
-              <p className="text-lg leading-relaxed text-muted">{description}</p>
+              <p className="text-muted text-lg leading-relaxed">{description}</p>
             </FadeUp>
           ) : null}
 
@@ -172,7 +172,7 @@ export default async function TrackPage({
                   <div key={course.id}>
                     <div className="mb-3 flex flex-wrap items-baseline gap-3">
                       <h3 className="text-xl">{pick(locale, course.titleEn, course.titleAr)}</h3>
-                      <span className="ltr-nums text-sm text-muted">
+                      <span className="ltr-nums text-muted text-sm">
                         {course.hours} {tc('hours')}
                       </span>
                     </div>
@@ -180,16 +180,16 @@ export default async function TrackPage({
                       {course.modules.map((m) => (
                         <li
                           key={m.id}
-                          className="rounded-2xl border border-border-subtle bg-background p-5"
+                          className="border-border-subtle bg-background rounded-2xl border p-5"
                         >
                           <div className="flex flex-wrap items-baseline justify-between gap-2">
                             <h4 className="font-bold">{pick(locale, m.titleEn, m.titleAr)}</h4>
-                            <span className="ltr-nums text-xs text-muted">
+                            <span className="ltr-nums text-muted text-xs">
                               {m.hours} {tc('hours')}
                             </span>
                           </div>
-                          <p className="mt-1.5 text-sm text-muted">
-                            <span className="font-semibold text-primary">{t('lab')}: </span>
+                          <p className="text-muted mt-1.5 text-sm">
+                            <span className="text-primary font-semibold">{t('lab')}: </span>
                             {pick(locale, m.labEn, m.labAr)}
                           </p>
                         </li>

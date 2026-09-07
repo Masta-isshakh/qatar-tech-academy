@@ -15,17 +15,18 @@ export const Label = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <LabelPrimitive.Root
     ref={ref}
-    className={cn('text-sm font-semibold text-foreground', className)}
+    className={cn('text-foreground text-sm font-semibold', className)}
     {...props}
   />
 ))
 Label.displayName = 'Label'
 
-export const Input = React.forwardRef<HTMLInputElement, React.InputHTMLAttributes<HTMLInputElement>>(
-  ({ className, ...props }, ref) => (
-    <input ref={ref} className={cn(controlClasses, className)} {...props} />
-  )
-)
+export const Input = React.forwardRef<
+  HTMLInputElement,
+  React.InputHTMLAttributes<HTMLInputElement>
+>(({ className, ...props }, ref) => (
+  <input ref={ref} className={cn(controlClasses, className)} {...props} />
+))
 Input.displayName = 'Input'
 
 export const Textarea = React.forwardRef<
@@ -51,7 +52,7 @@ export const Checkbox = React.forwardRef<
   <CheckboxPrimitive.Root
     ref={ref}
     className={cn(
-      'peer size-5 shrink-0 rounded-md border border-border-subtle bg-background data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground',
+      'peer border-border-subtle bg-background data-[state=checked]:border-primary data-[state=checked]:bg-primary data-[state=checked]:text-primary-foreground size-5 shrink-0 rounded-md border',
       className
     )}
     {...props}
@@ -91,12 +92,16 @@ export function Field({
         {required ? <span className="text-primary"> *</span> : null}
       </Label>
       {hint ? (
-        <p id={hintId} className="text-xs text-muted">
+        <p id={hintId} className="text-muted text-xs">
           {hint}
         </p>
       ) : null}
       {children}
-      <p id={errorId} role="alert" className="min-h-4 text-xs font-medium text-red-700 dark:text-red-400">
+      <p
+        id={errorId}
+        role="alert"
+        className="min-h-4 text-xs font-medium text-red-700 dark:text-red-400"
+      >
         {error ?? ''}
       </p>
     </div>
@@ -109,7 +114,7 @@ export function Field({
  */
 export function Honeypot({ name = 'website', label }: { name?: string; label: string }) {
   return (
-    <div aria-hidden className="absolute left-[-9999px] top-auto h-px w-px overflow-hidden">
+    <div aria-hidden className="absolute top-auto left-[-9999px] h-px w-px overflow-hidden">
       <label htmlFor={`hp-${name}`}>{label}</label>
       <input id={`hp-${name}`} name={name} type="text" tabIndex={-1} autoComplete="off" />
     </div>

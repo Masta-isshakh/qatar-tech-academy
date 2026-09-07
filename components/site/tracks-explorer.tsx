@@ -77,7 +77,7 @@ export function TracksExplorer({
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as Sort)}
-            className="rounded-xl border border-border-subtle bg-background px-3 py-2 text-sm font-semibold"
+            className="border-border-subtle bg-background rounded-xl border px-3 py-2 text-sm font-semibold"
           >
             <option value="order">{t('sortOrder')}</option>
             <option value="cohort">{t('sortCohort')}</option>

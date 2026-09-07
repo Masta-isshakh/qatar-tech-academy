@@ -14,7 +14,9 @@ export async function sendEmail(subject: string, lines: string[]): Promise<Notif
     new SendEmailCommand({
       FromEmailAddress: from,
       Destination: { ToAddresses: to.split(',').map((s) => s.trim()) },
-      Content: { Simple: { Subject: { Data: subject }, Body: { Text: { Data: lines.join('\n') } } } },
+      Content: {
+        Simple: { Subject: { Data: subject }, Body: { Text: { Data: lines.join('\n') } } },
+      },
     })
   )
   return { email: 'sent' }

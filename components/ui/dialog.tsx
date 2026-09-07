@@ -16,18 +16,18 @@ export const DialogContent = React.forwardRef<
   React.ComponentPropsWithoutRef<typeof DialogPrimitive.Content> & { closeLabel: string }
 >(({ className, children, closeLabel, ...props }, ref) => (
   <DialogPrimitive.Portal>
-    <DialogPrimitive.Overlay className="fixed inset-0 z-50 bg-charcoal/70 backdrop-blur-sm" />
+    <DialogPrimitive.Overlay className="bg-charcoal/70 fixed inset-0 z-50 backdrop-blur-sm" />
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'fixed left-1/2 top-1/2 z-50 w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 rounded-2xl bg-background p-4 shadow-lift',
+        'bg-background shadow-lift fixed top-1/2 left-1/2 z-50 w-[min(64rem,calc(100vw-2rem))] -translate-x-1/2 -translate-y-1/2 rounded-2xl p-4',
         className
       )}
       {...props}
     >
       {children}
       <DialogPrimitive.Close
-        className="absolute end-3 top-3 rounded-full bg-background/90 p-2 text-muted hover:text-foreground"
+        className="bg-background/90 text-muted hover:text-foreground absolute end-3 top-3 rounded-full p-2"
         aria-label={closeLabel}
       >
         <X className="size-5" />

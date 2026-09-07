@@ -29,11 +29,11 @@ export async function SiteFooter() {
   ] as const
 
   return (
-    <footer className="border-t border-border-subtle bg-surface">
+    <footer className="border-border-subtle bg-surface border-t">
       <div className="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-4">
           <Logo />
-          <p className="max-w-xs text-sm text-muted">{t('about')}</p>
+          <p className="text-muted max-w-xs text-sm">{t('about')}</p>
           <div className="flex items-center gap-2">
             <SocialLink href={site.social.instagram} label="Instagram">
               <Instagram className="size-4" aria-hidden />
@@ -51,26 +51,29 @@ export async function SiteFooter() {
         <FooterColumn title={t('company')} links={company} />
 
         <div className="flex flex-col gap-3">
-          <h2 className="text-sm font-bold uppercase tracking-wider text-muted">{t('contact')}</h2>
+          <h2 className="text-muted text-sm font-bold tracking-wider uppercase">{t('contact')}</h2>
           <a
             href={`tel:${site.phone.replace(/\s/g, '')}`}
-            className="flex items-center gap-2 text-sm hover:text-primary"
+            className="hover:text-primary flex items-center gap-2 text-sm"
           >
             <Phone className="size-4 shrink-0" aria-hidden />
             <span className="ltr-nums">{site.phone}</span>
           </a>
-          <a href={`mailto:${site.email}`} className="flex items-center gap-2 text-sm hover:text-primary">
+          <a
+            href={`mailto:${site.email}`}
+            className="hover:text-primary flex items-center gap-2 text-sm"
+          >
             <Mail className="size-4 shrink-0" aria-hidden />
             <span className="ltr-nums">{site.email}</span>
           </a>
-          <p className="flex items-start gap-2 text-sm text-muted">
+          <p className="text-muted flex items-start gap-2 text-sm">
             <MapPin className="mt-0.5 size-4 shrink-0" aria-hidden />
             {locale === 'ar' ? site.addressAr : site.addressEn}
           </p>
           <ul className="mt-2 flex flex-col gap-2">
             {legal.map((l) => (
               <li key={l.href}>
-                <Link href={l.href} className="text-sm text-muted hover:text-primary">
+                <Link href={l.href} className="text-muted hover:text-primary text-sm">
                   {l.label}
                 </Link>
               </li>
@@ -79,8 +82,8 @@ export async function SiteFooter() {
         </div>
       </div>
 
-      <div className="border-t border-border-subtle">
-        <div className="container-site flex flex-col gap-2 py-6 text-xs text-muted sm:flex-row sm:items-center sm:justify-between">
+      <div className="border-border-subtle border-t">
+        <div className="container-site text-muted flex flex-col gap-2 py-6 text-xs sm:flex-row sm:items-center sm:justify-between">
           <p>{t('rights', { year: new Date().getFullYear() })}</p>
           <p>
             {t('licence', {
@@ -102,11 +105,11 @@ function FooterColumn({
 }) {
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="text-sm font-bold uppercase tracking-wider text-muted">{title}</h2>
+      <h2 className="text-muted text-sm font-bold tracking-wider uppercase">{title}</h2>
       <ul className="flex flex-col gap-2">
         {links.map((l) => (
           <li key={l.href}>
-            <Link href={l.href} className="text-sm hover:text-primary">
+            <Link href={l.href} className="hover:text-primary text-sm">
               {l.label}
             </Link>
           </li>
@@ -131,7 +134,7 @@ function SocialLink({
       target="_blank"
       rel="noopener noreferrer"
       aria-label={label}
-      className="grid size-9 place-items-center rounded-full border border-border-subtle transition-colors hover:bg-background"
+      className="border-border-subtle hover:bg-background grid size-9 place-items-center rounded-full border transition-colors"
     >
       {children}
     </a>

@@ -5,10 +5,14 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs))
 }
 
-/** Picks the English or Arabic variant of a bilingual field. */
+/**
+ * Picks the English or Arabic variant of a bilingual field, falling back to the
+ * other language. An empty string counts as missing: the admin saves untouched
+ * fields as '', and a blank heading is worse than one in the wrong language.
+ */
 export function pick(locale: string, en?: string | null, ar?: string | null) {
-  const value = locale === 'ar' ? (ar ?? en) : (en ?? ar)
-  return value ?? ''
+  const [preferred, fallback] = locale === 'ar' ? [ar, en] : [en, ar]
+  return preferred?.trim() ? preferred : (fallback ?? '')
 }
 
 /**

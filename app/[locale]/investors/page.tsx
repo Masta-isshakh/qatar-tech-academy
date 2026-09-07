@@ -40,7 +40,7 @@ export default async function InvestorsPage({ params }: { params: Promise<{ loca
       <Section>
         <FadeUp className="flex max-w-3xl flex-col gap-4">
           <h1 className="text-4xl md:text-5xl">{t('title')}</h1>
-          <p className="text-xl text-muted">{t('subtitle')}</p>
+          <p className="text-muted text-xl">{t('subtitle')}</p>
         </FadeUp>
       </Section>
 

@@ -74,12 +74,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {tracks.map((track, i) => (
             <FadeUp as="li" key={track.id} delay={Math.min(i, 3) * 0.05} className="h-full">
-              <TrackCard
-                track={track}
-                locale={locale}
-                labels={cardLabels}
-                priority={i < 3}
-              />
+              <TrackCard track={track} locale={locale} labels={cardLabels} priority={i < 3} />
             </FadeUp>
           ))}
         </ul>
@@ -144,13 +139,13 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <FadeUp className="flex flex-col gap-5">
             <h2 className="text-3xl md:text-4xl">{t('app.title')}</h2>
-            <p className="text-lg text-muted">{t('app.body')}</p>
+            <p className="text-muted text-lg">{t('app.body')}</p>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="inline-flex items-center gap-2 rounded-xl border border-dashed border-border-subtle px-4 py-3 text-sm text-muted">
+              <span className="border-border-subtle text-muted inline-flex items-center gap-2 rounded-xl border border-dashed px-4 py-3 text-sm">
                 <Smartphone className="size-4" aria-hidden />
                 {t('app.comingSoonBadge')}
               </span>
-              <span className="inline-flex items-center gap-2 rounded-xl border border-border-subtle px-4 py-3 text-sm text-muted">
+              <span className="border-border-subtle text-muted inline-flex items-center gap-2 rounded-xl border px-4 py-3 text-sm">
                 <QrCode className="size-4" aria-hidden />
                 {t('app.qrCaption')}
               </span>
@@ -242,7 +237,7 @@ function Teaser({
 }) {
   return (
     <FadeUp className="h-full">
-      <article className="flex h-full flex-col overflow-hidden rounded-2xl border border-border-subtle bg-background">
+      <article className="border-border-subtle bg-background flex h-full flex-col overflow-hidden rounded-2xl border">
         <div className="relative aspect-[16/9]">
           <MediaImage
             src={image}

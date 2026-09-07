@@ -4,6 +4,10 @@ import { routing } from './i18n/routing'
 export default createMiddleware(routing)
 
 export const config = {
-  // Everything except API routes, Next internals and files with an extension.
-  matcher: ['/', '/(ar|en)/:path*', '/((?!api|_next|_vercel|.*\..*).*)'],
+  /*
+   * A single negative lookahead, which is what Next actually compiles reliably:
+   * skip API routes, Next internals, and anything with a file extension
+   * (robots.txt, sitemap.xml, /images/*). Everything else gets locale handling.
+   */
+  matcher: '/((?!api|_next|_vercel|.*\..*).*)',
 }

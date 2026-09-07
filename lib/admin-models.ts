@@ -5,7 +5,8 @@
  * step, instead of nine near-identical bespoke screens.
  */
 
-export type FieldKind = 'text' | 'longtext' | 'number' | 'boolean' | 'date' | 'datetime' | 'enum' | 'list'
+export type FieldKind =
+  'text' | 'longtext' | 'number' | 'boolean' | 'date' | 'datetime' | 'enum' | 'list'
 
 export type FieldSpec = {
   name: string
@@ -43,18 +44,48 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelAr: 'المسارات',
     orderField: 'order',
     fields: [
-      { name: 'slug', labelEn: 'Slug', labelAr: 'المعرّف', kind: 'text', required: true, inTable: true },
+      {
+        name: 'slug',
+        labelEn: 'Slug',
+        labelAr: 'المعرّف',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       ...bilingual('title', 'Title', 'العنوان'),
       ...bilingual('tagline', 'Tagline', 'الوصف المختصر'),
       ...bilingual('description', 'Description', 'الوصف', 'longtext'),
-      { name: 'priceQar', labelEn: 'Price (QAR)', labelAr: 'السعر (ريال)', kind: 'number', inTable: true },
-      { name: 'durationWeeks', labelEn: 'Weeks', labelAr: 'الأسابيع', kind: 'number', inTable: true },
+      {
+        name: 'priceQar',
+        labelEn: 'Price (QAR)',
+        labelAr: 'السعر (ريال)',
+        kind: 'number',
+        inTable: true,
+      },
+      {
+        name: 'durationWeeks',
+        labelEn: 'Weeks',
+        labelAr: 'الأسابيع',
+        kind: 'number',
+        inTable: true,
+      },
       { name: 'accentColor', labelEn: 'Accent colour', labelAr: 'اللون', kind: 'text' },
       { name: 'heroImageKey', labelEn: 'Hero image', labelAr: 'صورة الغلاف', kind: 'text' },
       { name: 'videoKey', labelEn: 'Video key', labelAr: 'مفتاح الفيديو', kind: 'text' },
-      { name: 'examVoucherIncluded', labelEn: 'Voucher included', labelAr: 'قسيمة الاختبار مشمولة', kind: 'boolean' },
+      {
+        name: 'examVoucherIncluded',
+        labelEn: 'Voucher included',
+        labelAr: 'قسيمة الاختبار مشمولة',
+        kind: 'boolean',
+      },
       { name: 'isComingSoon', labelEn: 'Coming soon', labelAr: 'قريباً', kind: 'boolean' },
-      { name: 'isPublished', labelEn: 'Published', labelAr: 'منشور', kind: 'boolean', inTable: true },
+      {
+        name: 'isPublished',
+        labelEn: 'Published',
+        labelAr: 'منشور',
+        kind: 'boolean',
+        inTable: true,
+      },
       { name: 'order', labelEn: 'Order', labelAr: 'الترتيب', kind: 'number' },
     ],
   },
@@ -65,7 +96,13 @@ export const MODEL_SPECS: ModelSpec[] = [
     orderField: 'order',
     parentField: 'trackId',
     fields: [
-      { name: 'trackId', labelEn: 'Track ID', labelAr: 'معرّف المسار', kind: 'text', required: true },
+      {
+        name: 'trackId',
+        labelEn: 'Track ID',
+        labelAr: 'معرّف المسار',
+        kind: 'text',
+        required: true,
+      },
       ...bilingual('title', 'Title', 'العنوان'),
       { name: 'hours', labelEn: 'Hours', labelAr: 'الساعات', kind: 'number', inTable: true },
       {
@@ -86,7 +123,13 @@ export const MODEL_SPECS: ModelSpec[] = [
     orderField: 'order',
     parentField: 'courseId',
     fields: [
-      { name: 'courseId', labelEn: 'Course ID', labelAr: 'معرّف المقرر', kind: 'text', required: true },
+      {
+        name: 'courseId',
+        labelEn: 'Course ID',
+        labelAr: 'معرّف المقرر',
+        kind: 'text',
+        required: true,
+      },
       ...bilingual('title', 'Title', 'العنوان'),
       ...bilingual('lab', 'Lab', 'المعمل', 'longtext'),
       { name: 'hours', labelEn: 'Hours', labelAr: 'الساعات', kind: 'number', inTable: true },
@@ -110,7 +153,12 @@ export const MODEL_SPECS: ModelSpec[] = [
         kind: 'text',
         hint: 'protected/lessons/… for cohort-only video',
       },
-      { name: 'durationSeconds', labelEn: 'Duration (s)', labelAr: 'المدة (ثانية)', kind: 'number' },
+      {
+        name: 'durationSeconds',
+        labelEn: 'Duration (s)',
+        labelAr: 'المدة (ثانية)',
+        kind: 'number',
+      },
       { name: 'isPublic', labelEn: 'Public', labelAr: 'عام', kind: 'boolean', inTable: true },
       { name: 'order', labelEn: 'Order', labelAr: 'الترتيب', kind: 'number' },
     ],
@@ -121,13 +169,32 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelAr: 'الدفعات',
     parentField: 'trackId',
     fields: [
-      { name: 'trackId', labelEn: 'Track ID', labelAr: 'معرّف المسار', kind: 'text', required: true },
-      { name: 'code', labelEn: 'Code', labelAr: 'الرمز', kind: 'text', required: true, inTable: true },
+      {
+        name: 'trackId',
+        labelEn: 'Track ID',
+        labelAr: 'معرّف المسار',
+        kind: 'text',
+        required: true,
+      },
+      {
+        name: 'code',
+        labelEn: 'Code',
+        labelAr: 'الرمز',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       { name: 'startDate', labelEn: 'Start', labelAr: 'البداية', kind: 'date', inTable: true },
       { name: 'endDate', labelEn: 'End', labelAr: 'النهاية', kind: 'date' },
       ...bilingual('schedule', 'Schedule', 'المواعيد'),
       { name: 'seats', labelEn: 'Seats', labelAr: 'المقاعد', kind: 'number', inTable: true },
-      { name: 'seatsLeft', labelEn: 'Seats left', labelAr: 'المتبقي', kind: 'number', inTable: true },
+      {
+        name: 'seatsLeft',
+        labelEn: 'Seats left',
+        labelAr: 'المتبقي',
+        kind: 'number',
+        inTable: true,
+      },
       { name: 'priceQar', labelEn: 'Price (QAR)', labelAr: 'السعر', kind: 'number' },
       {
         name: 'status',
@@ -144,7 +211,14 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelEn: 'Test slots',
     labelAr: 'مواعيد الاختبار',
     fields: [
-      { name: 'start', labelEn: 'Start', labelAr: 'البداية', kind: 'datetime', required: true, inTable: true },
+      {
+        name: 'start',
+        labelEn: 'Start',
+        labelAr: 'البداية',
+        kind: 'datetime',
+        required: true,
+        inTable: true,
+      },
       { name: 'end', labelEn: 'End', labelAr: 'النهاية', kind: 'datetime' },
       { name: 'room', labelEn: 'Room', labelAr: 'القاعة', kind: 'text', inTable: true },
       { name: 'capacity', labelEn: 'Capacity', labelAr: 'السعة', kind: 'number', inTable: true },
@@ -159,7 +233,14 @@ export const MODEL_SPECS: ModelSpec[] = [
     parentField: 'trackId',
     fields: [
       { name: 'trackId', labelEn: 'Track ID', labelAr: 'معرّف المسار', kind: 'text' },
-      { name: 'name', labelEn: 'Name', labelAr: 'الاسم', kind: 'text', required: true, inTable: true },
+      {
+        name: 'name',
+        labelEn: 'Name',
+        labelAr: 'الاسم',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       ...bilingual('title', 'Title', 'المسمى'),
       ...bilingual('bio', 'Bio', 'نبذة', 'longtext'),
       { name: 'credentials', labelEn: 'Credentials', labelAr: 'الشهادات', kind: 'list' },
@@ -173,12 +254,37 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelAr: 'الشهادات',
     parentField: 'trackId',
     fields: [
-      { name: 'trackId', labelEn: 'Track ID', labelAr: 'معرّف المسار', kind: 'text', required: true },
-      { name: 'name', labelEn: 'Name', labelAr: 'الاسم', kind: 'text', required: true, inTable: true },
+      {
+        name: 'trackId',
+        labelEn: 'Track ID',
+        labelAr: 'معرّف المسار',
+        kind: 'text',
+        required: true,
+      },
+      {
+        name: 'name',
+        labelEn: 'Name',
+        labelAr: 'الاسم',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       { name: 'body', labelEn: 'Body', labelAr: 'الجهة', kind: 'text', inTable: true },
-      { name: 'examPriceUsd', labelEn: 'Exam price (USD)', labelAr: 'سعر الاختبار', kind: 'number', inTable: true },
+      {
+        name: 'examPriceUsd',
+        labelEn: 'Exam price (USD)',
+        labelAr: 'سعر الاختبار',
+        kind: 'number',
+        inTable: true,
+      },
       { name: 'url', labelEn: 'URL', labelAr: 'الرابط', kind: 'text' },
-      { name: 'examOnSite', labelEn: 'On site', labelAr: 'في مقرنا', kind: 'boolean', inTable: true },
+      {
+        name: 'examOnSite',
+        labelEn: 'On site',
+        labelAr: 'في مقرنا',
+        kind: 'boolean',
+        inTable: true,
+      },
     ],
   },
   {
@@ -186,11 +292,24 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelEn: 'Testimonials',
     labelAr: 'الشهادات الشخصية',
     fields: [
-      { name: 'name', labelEn: 'Name', labelAr: 'الاسم', kind: 'text', required: true, inTable: true },
+      {
+        name: 'name',
+        labelEn: 'Name',
+        labelAr: 'الاسم',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       ...bilingual('role', 'Role', 'الصفة'),
       ...bilingual('quote', 'Quote', 'الاقتباس', 'longtext'),
       { name: 'photoKey', labelEn: 'Photo', labelAr: 'الصورة', kind: 'text' },
-      { name: 'isPublished', labelEn: 'Published', labelAr: 'منشور', kind: 'boolean', inTable: true },
+      {
+        name: 'isPublished',
+        labelEn: 'Published',
+        labelAr: 'منشور',
+        kind: 'boolean',
+        inTable: true,
+      },
     ],
   },
   {
@@ -198,7 +317,14 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelEn: 'Partners',
     labelAr: 'الشركاء',
     fields: [
-      { name: 'name', labelEn: 'Name', labelAr: 'الاسم', kind: 'text', required: true, inTable: true },
+      {
+        name: 'name',
+        labelEn: 'Name',
+        labelAr: 'الاسم',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       { name: 'logoKey', labelEn: 'Logo', labelAr: 'الشعار', kind: 'text' },
       {
         name: 'kind',
@@ -224,13 +350,32 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelEn: 'News posts',
     labelAr: 'الأخبار',
     fields: [
-      { name: 'slug', labelEn: 'Slug', labelAr: 'المعرّف', kind: 'text', required: true, inTable: true },
+      {
+        name: 'slug',
+        labelEn: 'Slug',
+        labelAr: 'المعرّف',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       ...bilingual('title', 'Title', 'العنوان'),
       ...bilingual('excerpt', 'Excerpt', 'المقتطف', 'longtext'),
       ...bilingual('body', 'Body (Markdown)', 'النص (ماركداون)', 'longtext'),
       { name: 'coverKey', labelEn: 'Cover image', labelAr: 'صورة الغلاف', kind: 'text' },
-      { name: 'publishedAt', labelEn: 'Published at', labelAr: 'تاريخ النشر', kind: 'datetime', inTable: true },
-      { name: 'isPublished', labelEn: 'Published', labelAr: 'منشور', kind: 'boolean', inTable: true },
+      {
+        name: 'publishedAt',
+        labelEn: 'Published at',
+        labelAr: 'تاريخ النشر',
+        kind: 'datetime',
+        inTable: true,
+      },
+      {
+        name: 'isPublished',
+        labelEn: 'Published',
+        labelAr: 'منشور',
+        kind: 'boolean',
+        inTable: true,
+      },
     ],
   },
   {
@@ -240,8 +385,20 @@ export const MODEL_SPECS: ModelSpec[] = [
     fields: [
       ...bilingual('title', 'Title', 'العنوان'),
       ...bilingual('body', 'Body', 'النص', 'longtext'),
-      { name: 'publishedAt', labelEn: 'Published at', labelAr: 'تاريخ النشر', kind: 'datetime', inTable: true },
-      { name: 'isPublished', labelEn: 'Published', labelAr: 'منشور', kind: 'boolean', inTable: true },
+      {
+        name: 'publishedAt',
+        labelEn: 'Published at',
+        labelAr: 'تاريخ النشر',
+        kind: 'datetime',
+        inTable: true,
+      },
+      {
+        name: 'isPublished',
+        labelEn: 'Published',
+        labelAr: 'منشور',
+        kind: 'boolean',
+        inTable: true,
+      },
     ],
   },
   {
@@ -249,8 +406,22 @@ export const MODEL_SPECS: ModelSpec[] = [
     labelEn: 'Video assets',
     labelAr: 'ملفات الفيديو',
     fields: [
-      { name: 'title', labelEn: 'Title', labelAr: 'العنوان', kind: 'text', required: true, inTable: true },
-      { name: 's3Key', labelEn: 'S3 key', labelAr: 'مفتاح S3', kind: 'text', required: true, inTable: true },
+      {
+        name: 'title',
+        labelEn: 'Title',
+        labelAr: 'العنوان',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
+      {
+        name: 's3Key',
+        labelEn: 'S3 key',
+        labelAr: 'مفتاح S3',
+        kind: 'text',
+        required: true,
+        inTable: true,
+      },
       {
         name: 'purpose',
         labelEn: 'Purpose',

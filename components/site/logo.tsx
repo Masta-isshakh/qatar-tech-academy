@@ -11,7 +11,7 @@ export function Logo({ className, onDark = false }: { className?: string; onDark
         aria-hidden
         className={cn(
           'grid size-9 shrink-0 place-items-center rounded-xl font-black',
-          onDark ? 'bg-white text-maroon' : 'bg-primary text-primary-foreground'
+          onDark ? 'text-maroon bg-white' : 'bg-primary text-primary-foreground'
         )}
         style={{ fontFamily: 'var(--font-inter)' }}
       >
@@ -20,7 +20,10 @@ export function Logo({ className, onDark = false }: { className?: string; onDark
       <span className="flex flex-col leading-none">
         <span className="text-[0.95rem] font-extrabold tracking-tight">أكاديمية قطر للتقنية</span>
         <span
-          className={cn('text-[0.65rem] font-semibold tracking-[0.14em] uppercase', onDark ? 'text-white/70' : 'text-muted')}
+          className={cn(
+            'text-[0.65rem] font-semibold tracking-[0.14em] uppercase',
+            onDark ? 'text-white/70' : 'text-muted'
+          )}
           style={{ fontFamily: 'var(--font-inter)' }}
         >
           Qatar Tech Education

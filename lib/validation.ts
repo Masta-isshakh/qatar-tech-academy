@@ -70,6 +70,27 @@ export const corporateSchema = z.object({
 })
 export type CorporateInput = z.infer<typeof corporateSchema>
 
+/**
+ * Per-step schemas for the registration wizard.
+ *
+ * The wizard decides whether a step may advance by parsing the current values
+ * against these, rather than relying on react-hook-form's `trigger()` return
+ * value — which reports on the whole resolver run and left the user stuck on
+ * step 1 once any later field was still empty.
+ */
+export const registrationStepSchemas = [
+  registrationSchema.pick({ trackSlug: true }),
+  registrationSchema.pick({
+    name: true,
+    phone: true,
+    email: true,
+    qid: true,
+    occupation: true,
+  }),
+  z.object({}),
+  registrationSchema.pick({ consent: true }),
+] as const
+
 export type ActionResult<T = undefined> =
   | { ok: true; data?: T }
   | { ok: false; error: 'validation' | 'backend' | 'slot_full' | 'unavailable'; field?: string }

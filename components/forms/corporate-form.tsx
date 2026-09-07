@@ -92,7 +92,7 @@ export function CorporateForm({
         <div
           role="status"
           aria-live="polite"
-          className="flex flex-col items-center gap-3 rounded-2xl border border-border-subtle bg-background p-8 text-center"
+          className="border-border-subtle bg-background flex flex-col items-center gap-3 rounded-2xl border p-8 text-center"
         >
           <CheckCircle2 className="size-10 text-emerald-600" aria-hidden />
           <p className="font-bold">{t('success')}</p>
@@ -101,7 +101,7 @@ export function CorporateForm({
         <form
           onSubmit={onSubmit}
           noValidate
-          className="relative flex flex-col gap-1 rounded-2xl border border-border-subtle bg-background p-6"
+          className="border-border-subtle bg-background relative flex flex-col gap-1 rounded-2xl border p-6"
         >
           <Honeypot label={tf('leaveBlank')} />
 
@@ -203,7 +203,7 @@ export function CorporateForm({
           </Field>
 
           <Turnstile onToken={setTurnstileToken} />
-          <p className="mb-3 text-xs text-muted">{tf('privacyNote')}</p>
+          <p className="text-muted mb-3 text-xs">{tf('privacyNote')}</p>
 
           <Button
             type="submit"
@@ -224,7 +224,7 @@ export function CorporateForm({
 
       <aside
         aria-live="polite"
-        className="flex h-fit flex-col gap-3 rounded-2xl border border-border-subtle bg-surface p-6 lg:sticky lg:top-24"
+        className="border-border-subtle bg-surface flex h-fit flex-col gap-3 rounded-2xl border p-6 lg:sticky lg:top-24"
       >
         <h3 className="text-lg font-bold">{t('calculator.title')}</h3>
         <Line label={t('calculator.seats')} value={String(seats)} />
@@ -233,14 +233,17 @@ export function CorporateForm({
           value={`${formatPrice(quote.listPerSeat)} ${tc('qar')}`}
         />
         <Line label={t('calculator.discount')} value={`${Math.round(quote.discount * 100)}%`} />
-        <Line label={t('calculator.perSeat')} value={`${formatPrice(quote.perSeat)} ${tc('qar')}`} />
-        <div className="border-t border-border-subtle pt-3">
-          <p className="text-sm text-muted">{t('calculator.total')}</p>
-          <p className="ltr-nums text-2xl font-extrabold text-primary">
+        <Line
+          label={t('calculator.perSeat')}
+          value={`${formatPrice(quote.perSeat)} ${tc('qar')}`}
+        />
+        <div className="border-border-subtle border-t pt-3">
+          <p className="text-muted text-sm">{t('calculator.total')}</p>
+          <p className="ltr-nums text-primary text-2xl font-extrabold">
             {formatPrice(quote.total)} <span className="text-base">{tc('qar')}</span>
           </p>
         </div>
-        <p className="text-xs text-muted">{t('calculator.note')}</p>
+        <p className="text-muted text-xs">{t('calculator.note')}</p>
       </aside>
     </div>
   )

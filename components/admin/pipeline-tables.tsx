@@ -67,8 +67,16 @@ export function LeadsTable({ locale }: { locale: string }) {
     () => [
       selectionColumn<Lead>(),
       { accessorKey: 'name', header: 'Name' },
-      { accessorKey: 'phone', header: 'Phone', cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '')}</span> },
-      { accessorKey: 'email', header: 'Email', cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '—')}</span> },
+      {
+        accessorKey: 'phone',
+        header: 'Phone',
+        cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '')}</span>,
+      },
+      {
+        accessorKey: 'email',
+        header: 'Email',
+        cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '—')}</span>,
+      },
       { accessorKey: 'trackSlug', header: 'Track' },
       { accessorKey: 'source', header: 'Source' },
       {
@@ -105,7 +113,18 @@ export function LeadsTable({ locale }: { locale: string }) {
       data={rows}
       columns={columns}
       csvName="leads"
-      csvColumns={['id', 'name', 'phone', 'email', 'organisation', 'trackSlug', 'source', 'status', 'message', 'createdAt']}
+      csvColumns={[
+        'id',
+        'name',
+        'phone',
+        'email',
+        'organisation',
+        'trackSlug',
+        'source',
+        'status',
+        'message',
+        'createdAt',
+      ]}
       onSelectionChange={setSelected}
       toolbar={() => (
         <Select
@@ -165,8 +184,16 @@ export function RegistrationsTable({ locale }: { locale: string }) {
     () => [
       selectionColumn<Registration>(),
       { accessorKey: 'name', header: 'Name' },
-      { accessorKey: 'phone', header: 'Phone', cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '')}</span> },
-      { accessorKey: 'email', header: 'Email', cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '')}</span> },
+      {
+        accessorKey: 'phone',
+        header: 'Phone',
+        cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '')}</span>,
+      },
+      {
+        accessorKey: 'email',
+        header: 'Email',
+        cell: (c) => <span className="ltr-nums">{String(c.getValue() ?? '')}</span>,
+      },
       { accessorKey: 'trackSlug', header: 'Track' },
       { accessorKey: 'occupation', header: 'Occupation' },
       {
@@ -302,7 +329,7 @@ export function AppointmentsCalendar({ locale }: { locale: string }) {
         <section key={day}>
           <h3 className="mb-2 flex items-baseline gap-3 text-lg font-bold">
             {formatDate(day, locale)}
-            <span className="ltr-nums text-sm font-normal text-muted">
+            <span className="ltr-nums text-muted text-sm font-normal">
               {items.length} · {t('occupancy')}
             </span>
           </h3>
@@ -310,7 +337,7 @@ export function AppointmentsCalendar({ locale }: { locale: string }) {
             {items.map((a) => (
               <li
                 key={a.id}
-                className="flex items-center justify-between gap-3 rounded-xl border border-border-subtle bg-background px-4 py-3 text-sm"
+                className="border-border-subtle bg-background flex items-center justify-between gap-3 rounded-xl border px-4 py-3 text-sm"
               >
                 <span>{formatDateTime(a.slotStart, locale)}</span>
                 <span className="flex items-center gap-2">
@@ -384,7 +411,7 @@ export function DashboardTiles({ locale }: { locale: string }) {
         label={t('nextTestDay')}
         value={nextDay ? `${formatDate(nextDay, locale)} · ${nextDayCount}` : '—'}
       />
-      <div className="rounded-2xl border border-border-subtle bg-background p-6 sm:col-span-2 lg:col-span-3">
+      <div className="border-border-subtle bg-background rounded-2xl border p-6 sm:col-span-2 lg:col-span-3">
         <p className="mb-3 text-sm font-bold">{t('registrationsTotal')}</p>
         <ul className="flex flex-col gap-2">
           {Object.entries(byTrack)
@@ -393,7 +420,7 @@ export function DashboardTiles({ locale }: { locale: string }) {
               <li key={track} className="flex items-center gap-3 text-sm">
                 <span className="w-32 shrink-0 truncate">{track}</span>
                 <span
-                  className="h-2 rounded-full bg-primary"
+                  className="bg-primary h-2 rounded-full"
                   style={{
                     width: `${Math.max(4, (count / Math.max(1, registrations.length)) * 100)}%`,
                   }}
@@ -410,9 +437,9 @@ export function DashboardTiles({ locale }: { locale: string }) {
 
 function Tile({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-2xl border border-border-subtle bg-background p-6">
-      <p className="text-sm text-muted">{label}</p>
-      <p className="ltr-nums mt-1 text-3xl font-extrabold text-primary">{value}</p>
+    <div className="border-border-subtle bg-background rounded-2xl border p-6">
+      <p className="text-muted text-sm">{label}</p>
+      <p className="ltr-nums text-primary mt-1 text-3xl font-extrabold">{value}</p>
     </div>
   )
 }

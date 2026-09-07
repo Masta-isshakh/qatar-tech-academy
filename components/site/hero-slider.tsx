@@ -58,7 +58,10 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
   const [videoOpen, setVideoOpen] = useState(false)
   const timer = useRef<ReturnType<typeof setInterval> | null>(null)
 
-  const goTo = useCallback((next: number) => setIndex(((next % SLIDES.length) + SLIDES.length) % SLIDES.length), [])
+  const goTo = useCallback(
+    (next: number) => setIndex(((next % SLIDES.length) + SLIDES.length) % SLIDES.length),
+    []
+  )
 
   useEffect(() => {
     // Autoplay is a convenience, not the only way through — arrows, dots and
@@ -104,7 +107,7 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
     <section
       aria-roledescription="carousel"
       aria-label={text.title}
-      className="relative isolate overflow-hidden bg-charcoal"
+      className="bg-charcoal relative isolate overflow-hidden"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
       onFocusCapture={() => setPaused(true)}
@@ -118,7 +121,7 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
         <AnimatePresence initial={false} mode="sync">
           <motion.div
             key={index}
-            className="absolute inset-0"
+            className="pointer-events-none absolute inset-0"
             initial={reduced ? false : { opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -139,10 +142,10 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
 
         <div
           aria-hidden
-          className="absolute inset-0 bg-gradient-to-t from-charcoal via-charcoal/70 to-charcoal/20"
+          className="from-charcoal via-charcoal/70 to-charcoal/20 pointer-events-none absolute inset-0 bg-gradient-to-t"
         />
 
-        <div className="container-site relative flex h-full flex-col justify-end pb-14 md:justify-center md:pb-0">
+        <div className="container-site relative z-10 flex h-full flex-col justify-end pb-14 md:justify-center md:pb-0">
           <div aria-live="polite" aria-atomic className="max-w-2xl text-white">
             <h1 className="text-3xl font-extrabold sm:text-4xl lg:text-5xl">{text.title}</h1>
             <p className="mt-4 text-base text-white/85 sm:text-lg">{text.subtitle}</p>
@@ -153,7 +156,7 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
           </div>
         </div>
 
-        <div className="absolute bottom-4 start-0 w-full">
+        <div className="absolute start-0 bottom-4 z-10 w-full">
           <div className="container-site flex items-center gap-3">
             <button
               type="button"
@@ -161,7 +164,11 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
               aria-label={paused ? t('playAutoplay') : t('pauseAutoplay')}
               className="grid size-8 place-items-center rounded-full bg-white/15 text-white backdrop-blur-sm hover:bg-white/25"
             >
-              {paused ? <Play className="size-4" aria-hidden /> : <Pause className="size-4" aria-hidden />}
+              {paused ? (
+                <Play className="size-4" aria-hidden />
+              ) : (
+                <Pause className="size-4" aria-hidden />
+              )}
             </button>
             <div className="flex gap-2">
               {SLIDES.map((_, i) => (

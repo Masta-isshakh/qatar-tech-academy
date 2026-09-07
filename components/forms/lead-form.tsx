@@ -77,7 +77,7 @@ export function LeadForm({
       <div
         role="status"
         aria-live="polite"
-        className="flex flex-col items-center gap-3 rounded-2xl border border-border-subtle bg-background p-8 text-center"
+        className="border-border-subtle bg-background flex flex-col items-center gap-3 rounded-2xl border p-8 text-center"
       >
         <CheckCircle2 className="size-10 text-emerald-600" aria-hidden />
         <p className="font-bold">{t('success')}</p>
@@ -92,7 +92,7 @@ export function LeadForm({
     <form
       onSubmit={onSubmit}
       noValidate
-      className="relative flex flex-col gap-1 rounded-2xl border border-border-subtle bg-background p-6"
+      className="border-border-subtle bg-background relative flex flex-col gap-1 rounded-2xl border p-6"
     >
       <Honeypot label={t('leaveBlank')} />
 
@@ -170,7 +170,7 @@ export function LeadForm({
 
       <Turnstile onToken={setTurnstileToken} />
 
-      <p className="mb-3 text-xs text-muted">{t('privacyNote')}</p>
+      <p className="text-muted mb-3 text-xs">{t('privacyNote')}</p>
 
       <Button type="submit" disabled={formState.isSubmitting} className="self-start">
         {formState.isSubmitting ? (

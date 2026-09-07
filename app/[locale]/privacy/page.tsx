@@ -112,7 +112,7 @@ export default async function PrivacyPage({ params }: { params: Promise<{ locale
     <Section>
       <article className="prose-qte mx-auto">
         <h1 className="text-3xl md:text-4xl">{t('privacyTitle')}</h1>
-        <p className="mt-2 text-sm text-muted">
+        <p className="text-muted mt-2 text-sm">
           {t('lastUpdated', { date: formatDate(new Date(), locale) })} · {site.email}
         </p>
         <p className="mt-4 rounded-xl bg-amber-50 p-4 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">

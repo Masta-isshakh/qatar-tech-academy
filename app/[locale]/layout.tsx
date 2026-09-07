@@ -102,7 +102,7 @@ export default async function LocaleLayout({
               <ConfigureAmplifyClientSide />
               <a
                 href="#main"
-                className="sr-only bg-primary text-primary-foreground focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-100 focus:rounded-lg focus:px-4 focus:py-2"
+                className="bg-primary text-primary-foreground sr-only focus:not-sr-only focus:fixed focus:start-4 focus:top-4 focus:z-100 focus:rounded-lg focus:px-4 focus:py-2"
               >
                 {t('skipToContent')}
               </a>

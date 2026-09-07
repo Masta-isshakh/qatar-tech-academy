@@ -45,7 +45,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="grid items-center gap-10 lg:grid-cols-2">
           <FadeUp className="flex flex-col gap-5">
             <h1 className="text-4xl md:text-5xl">{t('title')}</h1>
-            <p className="text-xl text-muted">{t('subtitle')}</p>
+            <p className="text-muted text-xl">{t('subtitle')}</p>
           </FadeUp>
           <FadeUp delay={0.08}>
             <div className="relative aspect-[16/10] overflow-hidden rounded-2xl">
@@ -66,11 +66,11 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="grid gap-10 lg:grid-cols-2">
           <FadeUp className="flex flex-col gap-4">
             <h2 className="text-2xl md:text-3xl">{t('storyTitle')}</h2>
-            <p className="leading-relaxed text-muted">{t('story')}</p>
+            <p className="text-muted leading-relaxed">{t('story')}</p>
           </FadeUp>
           <FadeUp delay={0.06} className="flex flex-col gap-4">
             <h2 className="text-2xl md:text-3xl">{t('methodTitle')}</h2>
-            <p className="leading-relaxed text-muted">{t('method')}</p>
+            <p className="text-muted leading-relaxed">{t('method')}</p>
           </FadeUp>
         </div>
       </Section>
@@ -107,7 +107,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
         <div className="grid gap-6 md:grid-cols-2">
           {phases.map((phase, i) => (
             <FadeUp key={phase.name} delay={i * 0.06}>
-              <div className="flex h-full flex-col gap-3 rounded-2xl border border-border-subtle bg-background p-7">
+              <div className="border-border-subtle bg-background flex h-full flex-col gap-3 rounded-2xl border p-7">
                 <div className="flex flex-wrap items-center gap-3">
                   <h3 className="text-xl">{phase.name}</h3>
                   <Badge variant="brand">{phase.duration}</Badge>
@@ -117,7 +117,7 @@ export default async function AboutPage({ params }: { params: Promise<{ locale: 
             </FadeUp>
           ))}
         </div>
-        <p className="mt-8 rounded-2xl border border-border-subtle bg-surface p-5 text-sm">
+        <p className="border-border-subtle bg-surface mt-8 rounded-2xl border p-5 text-sm">
           <span className="font-bold">{t('licenceLabel')}: </span>
           <span className="ltr-nums">{site.licenceNumber || t('licencePending')}</span>
         </p>

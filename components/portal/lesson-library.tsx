@@ -95,7 +95,11 @@ export function LessonLibrary({ locale, emptyLabel }: { locale: string; emptyLab
             completed: completed || existing.completed,
           })
         } else {
-          const { data } = await client.models.LessonProgress.create({ lessonId, seconds, completed })
+          const { data } = await client.models.LessonProgress.create({
+            lessonId,
+            seconds,
+            completed,
+          })
           if (data) {
             setProgress((p) => ({
               ...p,
@@ -141,7 +145,7 @@ export function LessonLibrary({ locale, emptyLabel }: { locale: string; emptyLab
         )}
       </div>
 
-      <ul className="flex max-h-[28rem] flex-col gap-1 overflow-y-auto rounded-2xl border border-border-subtle p-2">
+      <ul className="border-border-subtle flex max-h-[28rem] flex-col gap-1 overflow-y-auto rounded-2xl border p-2">
         {lessons.map((lesson) => {
           const p = progress[lesson.id]
           return (
@@ -158,11 +162,13 @@ export function LessonLibrary({ locale, emptyLabel }: { locale: string; emptyLab
                 {p?.completed ? (
                   <CircleCheck className="size-4 shrink-0 text-emerald-600" aria-hidden />
                 ) : (
-                  <CirclePlay className="size-4 shrink-0 text-muted" aria-hidden />
+                  <CirclePlay className="text-muted size-4 shrink-0" aria-hidden />
                 )}
-                <span className="flex-1 truncate">{pick(locale, lesson.titleEn, lesson.titleAr)}</span>
+                <span className="flex-1 truncate">
+                  {pick(locale, lesson.titleEn, lesson.titleAr)}
+                </span>
                 {p && !p.completed && p.seconds > 0 ? (
-                  <span className="ltr-nums shrink-0 text-xs text-muted">{t('resume')}</span>
+                  <span className="ltr-nums text-muted shrink-0 text-xs">{t('resume')}</span>
                 ) : null}
               </button>
             </li>
@@ -191,7 +197,7 @@ function LessonPlayer({
 
   return (
     <figure className="flex flex-col gap-3">
-      <div className="relative aspect-video overflow-hidden rounded-2xl bg-charcoal">
+      <div className="bg-charcoal relative aspect-video overflow-hidden rounded-2xl">
         {url ? (
           <video
             ref={videoRef}

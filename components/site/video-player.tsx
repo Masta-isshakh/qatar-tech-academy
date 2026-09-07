@@ -59,7 +59,10 @@ export function VideoPlayer({
   const unavailable = !source && (state === 'error' || (!storageKey && !src))
 
   return (
-    <div ref={containerRef} className={cn('relative overflow-hidden rounded-2xl bg-charcoal', className)}>
+    <div
+      ref={containerRef}
+      className={cn('bg-charcoal relative overflow-hidden rounded-2xl', className)}
+    >
       {source ? (
         <video
           ref={videoRef}
@@ -85,7 +88,7 @@ export function VideoPlayer({
               accent={accent}
             />
           ) : null}
-          <div className="absolute inset-0 grid place-items-center bg-charcoal/40 text-white">
+          <div className="bg-charcoal/40 absolute inset-0 grid place-items-center text-white">
             {unavailable ? (
               <p className="px-6 text-center text-sm">{t('videoUnavailable')}</p>
             ) : (
@@ -103,10 +106,14 @@ export function VideoPlayer({
             setStarted(true)
             void videoRef.current?.play()
           }}
-          className="absolute bottom-3 end-3 grid size-10 place-items-center rounded-full bg-black/55 text-white backdrop-blur-sm"
+          className="absolute end-3 bottom-3 grid size-10 place-items-center rounded-full bg-black/55 text-white backdrop-blur-sm"
           aria-label={muted ? 'Unmute video' : 'Mute video'}
         >
-          {muted ? <VolumeX className="size-5" aria-hidden /> : <Volume2 className="size-5" aria-hidden />}
+          {muted ? (
+            <VolumeX className="size-5" aria-hidden />
+          ) : (
+            <Volume2 className="size-5" aria-hidden />
+          )}
         </button>
       ) : null}
     </div>

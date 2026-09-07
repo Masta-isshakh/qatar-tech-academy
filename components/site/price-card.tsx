@@ -31,16 +31,16 @@ export function PriceCard({
   const tc = useTranslations('common')
 
   return (
-    <div className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-background p-6 shadow-soft">
+    <div className="border-border-subtle bg-background shadow-soft flex flex-col gap-4 rounded-2xl border p-6">
       <div>
-        <p className="text-sm text-muted">{tc('price')}</p>
-        <p className="ltr-nums text-3xl font-extrabold text-primary">
+        <p className="text-muted text-sm">{tc('price')}</p>
+        <p className="ltr-nums text-primary text-3xl font-extrabold">
           {formatPrice(priceQar)}{' '}
-          <span className="text-base font-bold text-foreground">{tc('qar')}</span>
+          <span className="text-foreground text-base font-bold">{tc('qar')}</span>
         </p>
       </div>
 
-      <p className="flex items-center gap-2 text-sm text-muted">
+      <p className="text-muted flex items-center gap-2 text-sm">
         <Clock className="size-4 shrink-0" aria-hidden />
         <span className="ltr-nums">{durationWeeks}</span> {tc('weeks')}
       </p>
@@ -49,12 +49,12 @@ export function PriceCard({
         {examVoucherIncluded ? (
           <CheckCircle2 className="mt-0.5 size-4 shrink-0 text-emerald-600" aria-hidden />
         ) : (
-          <XCircle className="mt-0.5 size-4 shrink-0 text-muted" aria-hidden />
+          <XCircle className="text-muted mt-0.5 size-4 shrink-0" aria-hidden />
         )}
         {examVoucherIncluded ? t('voucherIncluded') : t('voucherNotIncluded')}
       </p>
 
-      <div className="border-t border-border-subtle pt-4">
+      <div className="border-border-subtle border-t pt-4">
         <h3 className="mb-2 text-sm font-bold">{t('cohorts')}</h3>
         <CohortTable cohorts={cohorts} locale={locale} compact />
       </div>

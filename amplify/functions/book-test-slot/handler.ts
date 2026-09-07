@@ -43,7 +43,14 @@ async function claimSeat(slotId: string) {
       })
     )
     return res.Attributes as
-      | { id: string; start?: string; end?: string; room?: string; booked: number; capacity: number }
+      | {
+          id: string
+          start?: string
+          end?: string
+          room?: string
+          booked: number
+          capacity: number
+        }
       | undefined
   } catch (err) {
     if (err instanceof Error && err.name === 'ConditionalCheckFailedException') {
@@ -104,7 +111,9 @@ export const handler: Schema['bookTestSlot']['functionHandler'] = async (event) 
 
     await client.models.Registration.update({ id: registrationId, status: 'TEST_SCHEDULED' })
 
-    const when = slot?.start ? new Date(slot.start).toISOString().replace('T', ' ').slice(0, 16) : '-'
+    const when = slot?.start
+      ? new Date(slot.start).toISOString().replace('T', ' ').slice(0, 16)
+      : '-'
 
     const results = await runNotifiers({
       email: () =>

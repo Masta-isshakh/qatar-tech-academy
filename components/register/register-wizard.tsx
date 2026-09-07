@@ -13,7 +13,12 @@ import { Checkbox, Field, Honeypot, Input, Select, Textarea } from '@/components
 import { EmptyState } from '@/components/ui/states'
 import { cn, formatDateTime, formatPrice, pick } from '@/lib/utils'
 import { site } from '@/lib/site'
-import { OCCUPATIONS, registrationSchema, type RegistrationInput } from '@/lib/validation'
+import {
+  OCCUPATIONS,
+  registrationSchema,
+  registrationStepSchemas,
+  type RegistrationInput,
+} from '@/lib/validation'
 import { submitRegistration, type RegistrationResult } from '@/app/actions/forms'
 import { trackEvent } from '@/components/providers/analytics'
 import { Turnstile } from '@/components/site/turnstile'
@@ -85,7 +90,7 @@ export function RegisterWizard({
     },
   })
 
-  const { register, handleSubmit, watch, setValue, trigger, formState } = form
+  const { register, handleSubmit, watch, setValue, trigger, getValues, formState } = form
   const values = watch()
 
   /* ------------------------------------------------------------- draft */
@@ -130,12 +135,17 @@ export function RegisterWizard({
   }
 
   const next = useCallback(async () => {
-    const valid = await trigger(fieldsForStep[step] ?? [])
-    if (!valid) return
+    const fields = fieldsForStep[step] ?? []
+    // `trigger` paints the inline errors; the step schema decides whether we may
+    // move on, because trigger()'s return value also reflects fields the user
+    // has not reached yet.
+    await trigger(fields)
+    if (!registrationStepSchemas[step]?.safeParse(getValues()).success) return
+
     setStep((s) => Math.min(s + 1, STEPS - 1))
     window.scrollTo({ top: 0, behavior: 'smooth' })
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [step, trigger])
+  }, [step, trigger, getValues])
 
   const onSubmit = handleSubmit(async (data) => {
     const response = await submitRegistration({ ...data, turnstileToken })
@@ -166,22 +176,22 @@ export function RegisterWizard({
         <div
           role="status"
           aria-live="polite"
-          className="flex flex-col gap-4 rounded-2xl border border-border-subtle bg-background p-8 text-center"
+          className="border-border-subtle bg-background flex flex-col gap-4 rounded-2xl border p-8 text-center"
         >
           <CheckCircle2 className="mx-auto size-12 text-emerald-600" aria-hidden />
           <h2 className="text-2xl">{t('successTitle')}</h2>
           <p className="text-muted">{result.booked ? t('successBody') : t('successNoSlot')}</p>
 
           {result.booked && result.slotStart ? (
-            <div className="rounded-2xl bg-surface p-5 text-start">
+            <div className="bg-surface rounded-2xl p-5 text-start">
               <p className="mb-2 text-sm font-bold">{t('yourSlot')}</p>
               <p className="flex items-center gap-2 text-sm">
-                <CalendarCheck className="size-4 shrink-0 text-primary" aria-hidden />
+                <CalendarCheck className="text-primary size-4 shrink-0" aria-hidden />
                 {formatDateTime(result.slotStart, locale)}
               </p>
               {result.room ? (
                 <p className="mt-1 flex items-center gap-2 text-sm">
-                  <MapPin className="size-4 shrink-0 text-primary" aria-hidden />
+                  <MapPin className="text-primary size-4 shrink-0" aria-hidden />
                   {result.room}
                 </p>
               ) : null}
@@ -239,7 +249,7 @@ export function RegisterWizard({
       {step === 0 ? (
         <fieldset className="flex flex-col gap-4">
           <legend className="mb-2 text-xl font-bold">{t('chooseTrack')}</legend>
-          <p className="-mt-2 text-sm text-muted">{t('chooseTrackHint')}</p>
+          <p className="text-muted -mt-2 text-sm">{t('chooseTrackHint')}</p>
           <div className="grid gap-3 sm:grid-cols-2">
             {tracks
               .filter((tr) => !tr.isComingSoon)
@@ -262,21 +272,20 @@ export function RegisterWizard({
                       {...register('trackSlug')}
                     />
                     <span className="font-bold">{pick(locale, tr.titleEn, tr.titleAr)}</span>
-                    <span className="text-sm text-muted">
+                    <span className="text-muted text-sm">
                       {pick(locale, tr.taglineEn, tr.taglineAr)}
                     </span>
-                    <span className="ltr-nums mt-1 text-sm font-semibold text-primary">
+                    <span className="ltr-nums text-primary mt-1 text-sm font-semibold">
                       {formatPrice(tr.priceQar)} {tc('qar')}
                     </span>
                   </label>
                 )
               })}
           </div>
-          {formState.errors.trackSlug ? (
-            <p role="alert" className="text-xs font-medium text-red-700">
-              {tf('selectOne')}
-            </p>
-          ) : null}
+          {/* Always rendered, so clearing the error does not shift the buttons. */}
+          <p role="alert" className="min-h-4 text-xs font-medium text-red-700 dark:text-red-400">
+            {formState.errors.trackSlug ? tf('selectOne') : ''}
+          </p>
         </fieldset>
       ) : null}
 
@@ -380,7 +389,7 @@ export function RegisterWizard({
       {step === 2 ? (
         <fieldset className="flex flex-col gap-4">
           <legend className="mb-2 text-xl font-bold">{t('chooseSlot')}</legend>
-          <p className="-mt-2 text-sm text-muted">{t('chooseSlotHint')}</p>
+          <p className="text-muted -mt-2 text-sm">{t('chooseSlotHint')}</p>
 
           {openSlots.length === 0 ? (
             <EmptyState title={t('noSlots')} />
@@ -400,11 +409,16 @@ export function RegisterWizard({
                           : 'border-border-subtle hover:bg-surface'
                       )}
                     >
-                      <input type="radio" value={slot.id} className="sr-only" {...register('slotId')} />
+                      <input
+                        type="radio"
+                        value={slot.id}
+                        className="sr-only"
+                        {...register('slotId')}
+                      />
                       <span className="text-sm font-semibold">
                         {formatDateTime(slot.start, locale)}
                       </span>
-                      <span className="ltr-nums shrink-0 text-xs text-muted">
+                      <span className="ltr-nums text-muted shrink-0 text-xs">
                         {left} {tc('seatsLeft')}
                       </span>
                     </label>
@@ -414,7 +428,7 @@ export function RegisterWizard({
               <button
                 type="button"
                 onClick={() => setValue('slotId', '')}
-                className="self-start text-sm text-muted underline underline-offset-4 hover:text-primary"
+                className="text-muted hover:text-primary self-start text-sm underline underline-offset-4"
               >
                 {t('skipSlot')}
               </button>
@@ -428,8 +442,13 @@ export function RegisterWizard({
         <fieldset className="flex flex-col gap-4">
           <legend className="mb-2 text-xl font-bold">{t('review')}</legend>
 
-          <dl className="divide-y divide-border-subtle rounded-2xl border border-border-subtle">
-            <Row label={stepLabels[0] ?? ''} value={selectedTrack ? pick(locale, selectedTrack.titleEn, selectedTrack.titleAr) : '—'} />
+          <dl className="divide-border-subtle border-border-subtle divide-y rounded-2xl border">
+            <Row
+              label={stepLabels[0] ?? ''}
+              value={
+                selectedTrack ? pick(locale, selectedTrack.titleEn, selectedTrack.titleAr) : '—'
+              }
+            />
             <Row label={t('fields.name')} value={values.name} />
             <Row label={t('fields.phone')} value={values.phone} ltr />
             <Row label={t('fields.email')} value={values.email} ltr />
@@ -440,7 +459,7 @@ export function RegisterWizard({
             />
           </dl>
 
-          <label className="flex items-start gap-3 rounded-2xl bg-surface p-4 text-sm">
+          <label className="bg-surface flex items-start gap-3 rounded-2xl p-4 text-sm">
             <Checkbox
               id="consent"
               checked={values.consent === true}
@@ -452,16 +471,14 @@ export function RegisterWizard({
             />
             <span>
               {t('consentLabel')}{' '}
-              <Link href="/privacy" className="underline underline-offset-2 hover:text-primary">
+              <Link href="/privacy" className="hover:text-primary underline underline-offset-2">
                 {tf('privacyNote')}
               </Link>
             </span>
           </label>
-          {formState.errors.consent ? (
-            <p role="alert" className="text-xs font-medium text-red-700">
-              {t('consentRequired')}
-            </p>
-          ) : null}
+          <p role="alert" className="min-h-4 text-xs font-medium text-red-700 dark:text-red-400">
+            {formState.errors.consent ? t('consentRequired') : ''}
+          </p>
 
           <Turnstile onToken={setTurnstileToken} />
 
@@ -507,7 +524,7 @@ export function RegisterWizard({
 function Row({ label, value, ltr }: { label: string; value?: string; ltr?: boolean }) {
   return (
     <div className="flex items-baseline justify-between gap-4 px-4 py-3">
-      <dt className="text-sm text-muted">{label}</dt>
+      <dt className="text-muted text-sm">{label}</dt>
       <dd className={cn('text-sm font-semibold', ltr && 'ltr-nums')}>{value || '—'}</dd>
     </div>
   )

@@ -29,11 +29,7 @@ export async function generateMetadata({
   }
 }
 
-export default async function ExamCentrePage({
-  params,
-}: {
-  params: Promise<{ locale: string }>
-}) {
+export default async function ExamCentrePage({ params }: { params: Promise<{ locale: string }> }) {
   const { locale } = await params
   setRequestLocale(locale)
 
@@ -54,7 +50,7 @@ export default async function ExamCentrePage({
               Pearson VUE · EC-Council
             </Badge>
             <h1 className="text-4xl md:text-5xl">{t('title')}</h1>
-            <p className="text-xl text-muted">{t('subtitle')}</p>
+            <p className="text-muted text-xl">{t('subtitle')}</p>
             <p className="text-lg leading-relaxed">{t('intro')}</p>
             <p className="flex items-start gap-2 rounded-2xl bg-amber-50 p-4 text-sm text-amber-900 dark:bg-amber-950/40 dark:text-amber-200">
               <AlertTriangle className="mt-0.5 size-4 shrink-0" aria-hidden />
@@ -82,7 +78,7 @@ export default async function ExamCentrePage({
           {exams.map((exam) => (
             <li
               key={exam.name}
-              className="flex items-start justify-between gap-3 rounded-2xl border border-border-subtle bg-background p-5"
+              className="border-border-subtle bg-background flex items-start justify-between gap-3 rounded-2xl border p-5"
             >
               <span className="font-bold">{exam.name}</span>
               <Badge variant="neutral">{exam.body}</Badge>
@@ -97,11 +93,8 @@ export default async function ExamCentrePage({
             <h2 className="mb-5 text-2xl md:text-3xl">{t('rulesTitle')}</h2>
             <ul className="flex flex-col gap-3">
               {rules.map((rule) => (
-                <li key={rule} className="flex items-start gap-3 text-muted">
-                  <span
-                    aria-hidden
-                    className="mt-2 size-1.5 shrink-0 rounded-full bg-primary"
-                  />
+                <li key={rule} className="text-muted flex items-start gap-3">
+                  <span aria-hidden className="bg-primary mt-2 size-1.5 shrink-0 rounded-full" />
                   {rule}
                 </li>
               ))}
@@ -142,7 +135,7 @@ export default async function ExamCentrePage({
               src={mapsEmbedUrl(locale)}
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-              className="aspect-[4/3] w-full rounded-2xl border border-border-subtle"
+              className="border-border-subtle aspect-[4/3] w-full rounded-2xl border"
             />
           </div>
         </div>

@@ -54,10 +54,10 @@ export function SectionHeader({
     >
       <div className={cn('flex flex-col gap-3', align === 'center' && 'items-center')}>
         {eyebrow ? (
-          <p className="text-xs font-bold uppercase tracking-[0.18em] text-primary">{eyebrow}</p>
+          <p className="text-primary text-xs font-bold tracking-[0.18em] uppercase">{eyebrow}</p>
         ) : null}
         <h2 className="max-w-3xl text-3xl md:text-4xl">{title}</h2>
-        {subtitle ? <p className="max-w-2xl text-lg text-muted">{subtitle}</p> : null}
+        {subtitle ? <p className="text-muted max-w-2xl text-lg">{subtitle}</p> : null}
       </div>
       {action}
     </FadeUp>
