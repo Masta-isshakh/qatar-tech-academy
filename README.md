@@ -104,13 +104,20 @@ AppSync, so two simultaneous registrations cannot oversell a slot. If the
 appointment or registration update then fails, the seat is released. The physical
 table name is injected in `amplify/backend.ts`.
 
-**Add an admin.** In the Cognito console, or:
+**Add an admin (also what the seed runs as).** Content models are public-read
+but Admins-write, so `npm run seed` signs in as an Admin. Create one — the pool
+id is `auth.user_pool_id` in `amplify_outputs.json`:
 
 ```bash
-aws cognito-idp admin-add-user-to-group \
-  --user-pool-id <from amplify_outputs.json> \
-  --username <email> --group-name Admins
+POOL=<user pool id>; EMAIL=<you@example.com>; PASS=<a strong password>
+aws cognito-idp admin-create-user --user-pool-id $POOL --username $EMAIL   --user-attributes Name=email,Value=$EMAIL Name=email_verified,Value=true --message-action SUPPRESS
+aws cognito-idp admin-set-user-password --user-pool-id $POOL --username $EMAIL --password "$PASS" --permanent
+aws cognito-idp admin-add-user-to-group --user-pool-id $POOL --username $EMAIL --group-name Admins
 ```
+
+Then put `SEED_ADMIN_EMAIL` and `SEED_ADMIN_PASSWORD` in `.env.local` (git-ignored)
+and run `npm run seed`. The same account signs in at `/admin`. The sandbox and
+the Hosting branch have **separate** user pools, so do this once per pool.
 
 ---
 
@@ -134,11 +141,12 @@ variables_ (and in `.env.local` for development). See `.env.example`.
 
 ### Server only
 
-| Variable                                       | Purpose                                                 |
-| ---------------------------------------------- | ------------------------------------------------------- |
-| `TURNSTILE_SECRET_KEY`                         | Enables server-side Turnstile verification              |
-| `WHATSAPP_SECRET_ENABLED`                      | `1` once the `WHATSAPP_TOKEN` secret exists (see below) |
-| `WHATSAPP_VERIFY_TOKEN`, `WHATSAPP_APP_SECRET` | `/api/whatsapp` webhook                                 |
+| Variable                                       | Purpose                                                           |
+| ---------------------------------------------- | ----------------------------------------------------------------- |
+| `TURNSTILE_SECRET_KEY`                         | Enables server-side Turnstile verification                        |
+| `SEED_ADMIN_EMAIL`, `SEED_ADMIN_PASSWORD`      | Admins-group user the seed script signs in as (`.env.local` only) |
+| `WHATSAPP_SECRET_ENABLED`                      | `1` once the `WHATSAPP_TOKEN` secret exists (see below)           |
+| `WHATSAPP_VERIFY_TOKEN`, `WHATSAPP_APP_SECRET` | `/api/whatsapp` webhook                                           |
 
 ### Backend functions (build-time, read in `amplify/functions/*/resource.ts`)
 

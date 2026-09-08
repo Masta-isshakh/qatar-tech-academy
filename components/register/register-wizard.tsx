@@ -147,7 +147,7 @@ export function RegisterWizard({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step, trigger, getValues])
 
-  const onSubmit = handleSubmit(async (data) => {
+  const submitReview = handleSubmit(async (data) => {
     const response = await submitRegistration({ ...data, turnstileToken })
 
     if (!response.ok) {
@@ -221,7 +221,18 @@ export function RegisterWizard({
   /* ------------------------------------------------------------- form */
 
   return (
-    <form onSubmit={onSubmit} noValidate className="mx-auto max-w-2xl">
+    <form
+      onSubmit={(e) => {
+        // Belt and braces: only the review step may submit, whatever fired it.
+        if (step !== STEPS - 1) {
+          e.preventDefault()
+          return
+        }
+        void submitReview(e)
+      }}
+      noValidate
+      className="mx-auto max-w-2xl"
+    >
       <Honeypot label={tf('leaveBlank')} />
 
       <ol className="mb-8 flex gap-2" aria-label={t('stepOf', { current: step + 1, total: STEPS })}>
@@ -500,12 +511,18 @@ export function RegisterWizard({
           {tc('back')}
         </Button>
 
+        {/*
+          Distinct keys so React never reuses the Next button's DOM node for the
+          Submit button. Without them, a click on Next re-rendered the same
+          <button> as type="submit" before the browser applied the click's
+          default action, and the form submitted itself on arrival at step 4.
+        */}
         {step < STEPS - 1 ? (
-          <Button type="button" onClick={next}>
+          <Button key="next" type="button" onClick={next}>
             {tc('next')}
           </Button>
         ) : (
-          <Button type="submit" disabled={formState.isSubmitting || !backendReady}>
+          <Button key="submit" type="submit" disabled={formState.isSubmitting || !backendReady}>
             {formState.isSubmitting ? (
               <>
                 <Loader2 className="size-4 animate-spin" aria-hidden />
