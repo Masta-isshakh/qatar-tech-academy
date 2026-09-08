@@ -1,5 +1,6 @@
 import 'server-only'
 
+import { unstable_cache } from 'next/cache'
 import { isAmplifyConfigured } from './amplify'
 import { publicServerClient } from './amplify-server'
 import { seedTracks, seedTestimonials, seedPartners, seedTestSlots } from '@/data/seed-content'
@@ -73,18 +74,41 @@ function seedTrackViews(): TrackView[] {
 const str = (v: unknown, fallback = '') => (typeof v === 'string' ? v : fallback)
 const num = (v: unknown, fallback = 0) => (typeof v === 'number' ? v : fallback)
 
+/** How long a public content read is cached before AppSync is asked again. */
+export const CONTENT_REVALIDATE_SECONDS = 300
+
 /**
  * Every reader below degrades to seed content instead of throwing: a transient
  * AppSync error must not take the marketing site down.
+ *
+ * Reads go through `unstable_cache`: the Amplify client fetches with
+ * `cache: 'no-store'`, which in Next 15 opts the *whole route* out of static
+ * rendering — every public page had silently become a per-request Lambda
+ * render (CloudFront `no-store`, always a miss). Caching the result here keeps
+ * the pages static/ISR; `revalidateTag('content')` can flush it on demand.
  */
-async function safely<T>(label: string, run: () => Promise<T>, fallback: T): Promise<T> {
+async function safely<T>(
+  label: string,
+  run: () => Promise<T>,
+  fallback: T,
+  { cache = true }: { cache?: boolean } = {}
+): Promise<T> {
   if (!isAmplifyConfigured) return fallback
-  try {
-    return await run()
-  } catch (error) {
-    console.error(`[content] ${label} failed, using seed content`, error)
-    return fallback
+
+  const attempt = async () => {
+    try {
+      return await run()
+    } catch (error) {
+      console.error(`[content] ${label} failed, using seed content`, error)
+      return fallback
+    }
   }
+
+  if (!cache) return attempt()
+  return unstable_cache(attempt, ['content', label], {
+    revalidate: CONTENT_REVALIDATE_SECONDS,
+    tags: ['content'],
+  })()
 }
 
 /* -------------------------------------------------------------------- tracks */
@@ -369,7 +393,8 @@ export async function getTestSlots(): Promise<TestSlotView[]> {
         .sort((a, b) => a.start.localeCompare(b.start))
         .slice(0, 20)
     },
-    fallback
+    fallback,
+    { cache: false }
   ).then((slots) => slots.filter((s) => new Date(s.start).getTime() > now))
 }
 
