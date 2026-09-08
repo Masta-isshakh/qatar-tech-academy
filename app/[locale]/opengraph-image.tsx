@@ -1,7 +1,7 @@
 import { ImageResponse } from 'next/og'
 import { getTranslations } from 'next-intl/server'
 
-export const alt = 'Qatar Tech Education'
+export const alt = 'Qatar Tech Academy'
 export const size = { width: 1200, height: 630 }
 export const contentType = 'image/png'
 
@@ -45,7 +45,7 @@ export default async function OpengraphImage({ params }: { params: Promise<{ loc
           Q
         </div>
         <div style={{ display: 'flex', flexDirection: 'column' }}>
-          <span style={{ fontSize: 30, fontWeight: 700 }}>Qatar Tech Education</span>
+          <span style={{ fontSize: 30, fontWeight: 700 }}>Qatar Tech Academy</span>
           <span style={{ fontSize: 24, opacity: 0.8 }}>أكاديمية قطر للتقنية</span>
         </div>
       </div>

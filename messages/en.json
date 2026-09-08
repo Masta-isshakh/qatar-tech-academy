@@ -1,6 +1,6 @@
 {
   "meta": {
-    "siteName": "Qatar Tech Education",
+    "siteName": "Qatar Tech Academy",
     "tagline": "We teach technology by building it.",
     "defaultDescription": "A practice-first technology academy in Doha. Robotics, drones, networking, cybersecurity, AI, marketing and software — on real equipment, with international certifications you sit on site."
   },
@@ -284,7 +284,7 @@
     "skipSlot": "None of these suit me — call me",
     "slotFull": "Full",
     "review": "Review and confirm",
-    "consentLabel": "I agree that Qatar Tech Education may store and process my data to handle my registration, in line with Qatar's Personal Data Privacy Protection Law (Law No. 13 of 2016) and the privacy notice.",
+    "consentLabel": "I agree that Qatar Tech Academy may store and process my data to handle my registration, in line with Qatar's Personal Data Privacy Protection Law (Law No. 13 of 2016) and the privacy notice.",
     "consentRequired": "Please accept the privacy notice to continue.",
     "submit": "Submit registration",
     "draftRestored": "We restored your unfinished registration.",
@@ -409,7 +409,7 @@
     "title": "About the academy",
     "subtitle": "A practice-first technology academy in Doha.",
     "storyTitle": "Our story",
-    "story": "Qatar does not lack talented people or ambitious programmes. What it lacks is a place where somebody can put their hands on an industrial robot, a real network rack or a live cyber range, and be taught by the people who build those things for a living. Qatar Tech Education was founded to be that place — and to make the international certificate that follows a matter of walking into the next room, not flying abroad.",
+    "story": "Qatar does not lack talented people or ambitious programmes. What it lacks is a place where somebody can put their hands on an industrial robot, a real network rack or a live cyber range, and be taught by the people who build those things for a living. Qatar Tech Academy was founded to be that place — and to make the international certificate that follows a matter of walking into the next room, not flying abroad.",
     "methodTitle": "The method: practice first",
     "method": "Every module starts with something to build and ends with something that works. Theory is delivered in short briefings at the bench, never as a lecture series. Learners are assessed on what they produced, and every track finishes with an international certification exam.",
     "cascadeTitle": "The cascade",
@@ -453,7 +453,7 @@
   },
   "investors": {
     "title": "For investors and partners",
-    "subtitle": "Qatar Tech Education — practice-first technology training and an on-site certification centre in Doha.",
+    "subtitle": "Qatar Tech Academy — practice-first technology training and an on-site certification centre in Doha.",
     "pitchTitle": "The pitch",
     "planTitle": "The plan",
     "numbersTitle": "Key numbers",
@@ -488,7 +488,7 @@
     "mapTitle": "Find us",
     "mapLabel": "Map showing the academy location in Doha",
     "formTitle": "Send us a message",
-    "whatsappMessage": "Hello, I have a question about Qatar Tech Education."
+    "whatsappMessage": "Hello, I have a question about Qatar Tech Academy."
   },
   "portal": {
     "title": "My portal",
@@ -586,7 +586,7 @@
     "company": "The academy",
     "legal": "Legal",
     "contact": "Contact",
-    "rights": "© {year} Qatar Tech Education. All rights reserved.",
+    "rights": "© {year} Qatar Tech Academy. All rights reserved.",
     "licence": "MoEHE licence: {value}",
     "social": "Follow us"
   }

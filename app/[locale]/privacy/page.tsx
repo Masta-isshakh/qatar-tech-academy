@@ -64,7 +64,7 @@ const AR = `
 
 const EN = `
 ## Who we are
-Qatar Tech Education ("the academy", "we") is a technology training institution in Doha, State of Qatar. This notice explains how we collect, use and protect your personal data under Law No. 13 of 2016 on the Protection of Personal Data Privacy.
+Qatar Tech Academy ("the academy", "we") is a technology training institution in Doha, State of Qatar. This notice explains how we collect, use and protect your personal data under Law No. 13 of 2016 on the Protection of Personal Data Privacy.
 
 ## What we collect
 - **Registration data**: name, mobile number, e-mail, occupation, university or employer, and your Qatar ID if you choose to give it.

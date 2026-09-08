@@ -13,7 +13,7 @@ export const site = {
   /** Canonical origin, no trailing slash. */
   url: (process.env.NEXT_PUBLIC_SITE_URL ?? 'https://app.qatartech.education').replace(/\/$/, ''), // TODO
 
-  nameEn: 'Qatar Tech Education',
+  nameEn: 'Qatar Tech Academy',
   nameAr: 'أكاديمية قطر للتقنية',
 
   whatsappNumber: WHATSAPP_NUMBER,

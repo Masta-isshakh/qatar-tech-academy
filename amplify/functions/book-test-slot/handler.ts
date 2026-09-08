@@ -73,7 +73,7 @@ async function releaseSeat(slotId: string) {
         ExpressionAttributeValues: { ':one': 1, ':zero': 0 },
       })
     )
-    .catch((err) => console.error('releaseSeat failed', err))
+    .catch((err: unknown) => console.error('releaseSeat failed', err))
 }
 
 export const handler: Schema['bookTestSlot']['functionHandler'] = async (event) => {

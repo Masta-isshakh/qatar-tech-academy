@@ -47,7 +47,7 @@ async function upsert<T extends { id: string }>(
 }
 
 async function main() {
-  console.log('Seeding Qatar Tech Education…')
+  console.log('Seeding Qatar Tech Academy…')
 
   /* ---------------------------------------------------------------- tracks */
   const { data: existingTracks } = await client.models.Track.list({ limit: 200 })

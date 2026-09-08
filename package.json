@@ -1,5 +1,5 @@
 {
-  "name": "qatar-tech-education",
+  "name": "qatar-tech-academy",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -52,6 +52,9 @@
   "devDependencies": {
     "@aws-amplify/backend": "^1.13.0",
     "@aws-amplify/backend-cli": "^1.4.8",
+    "@aws-sdk/client-dynamodb": "^3.1128.0",
+    "@aws-sdk/client-sesv2": "^3.1128.0",
+    "@aws-sdk/lib-dynamodb": "^3.1128.0",
     "@playwright/test": "^1.49.1",
     "@tailwindcss/postcss": "^4.0.0",
     "@types/node": "^22.10.5",

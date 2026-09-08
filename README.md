@@ -1,4 +1,4 @@
-# Qatar Tech Education — أكاديمية قطر للتقنية
+# Qatar Tech Academy — أكاديمية قطر للتقنية
 
 The academy's website: Next.js 15 (App Router) on AWS Amplify Gen 2, Arabic-first
 and bilingual, with a learner portal and an admin back office.
@@ -134,10 +134,11 @@ variables_ (and in `.env.local` for development). See `.env.example`.
 
 ### Server only
 
-| Variable                                       | Purpose                                    |
-| ---------------------------------------------- | ------------------------------------------ |
-| `TURNSTILE_SECRET_KEY`                         | Enables server-side Turnstile verification |
-| `WHATSAPP_VERIFY_TOKEN`, `WHATSAPP_APP_SECRET` | `/api/whatsapp` webhook                    |
+| Variable                                       | Purpose                                                 |
+| ---------------------------------------------- | ------------------------------------------------------- |
+| `TURNSTILE_SECRET_KEY`                         | Enables server-side Turnstile verification              |
+| `WHATSAPP_SECRET_ENABLED`                      | `1` once the `WHATSAPP_TOKEN` secret exists (see below) |
+| `WHATSAPP_VERIFY_TOKEN`, `WHATSAPP_APP_SECRET` | `/api/whatsapp` webhook                                 |
 
 ### Backend functions (build-time, read in `amplify/functions/*/resource.ts`)
 
@@ -150,10 +151,15 @@ variables_ (and in `.env.local` for development). See `.env.example`.
 | `WHATSAPP_TEMPLATE_LEAD` | Approved template, 4 body params                        |
 | `WHATSAPP_TEMPLATE_TEST` | Approved template, 3 body params                        |
 
-Plus one secret:
+Plus one secret, which is **opt-in**: `secret()` aborts the whole backend
+deploy if the secret does not exist yet, so the functions only reference it when
+the build environment variable `WHATSAPP_SECRET_ENABLED=1` is set. Create the
+secret first, then set that variable, then redeploy:
 
 ```bash
-npx ampx sandbox secret set WHATSAPP_TOKEN
+npx ampx sandbox secret set WHATSAPP_TOKEN      # sandbox
+# Hosting: Amplify console → Hosting → Secrets → WHATSAPP_TOKEN,
+#          then Environment variables → WHATSAPP_SECRET_ENABLED = 1
 ```
 
 Every notifier **skips silently** when its variables are unset, so an incomplete
