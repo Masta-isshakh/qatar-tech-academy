@@ -9,11 +9,8 @@ export const auth = defineAuth({
   loginWith: {
     email: true,
   },
-  userAttributes: {
-    email: { required: true, mutable: true },
-    preferredUsername: { required: false, mutable: true },
-    phoneNumber: { required: false, mutable: true },
-    locale: { required: false, mutable: true },
-  },
+  // No custom userAttributes: Cognito cannot change a pool's schema after it is
+  // created, and the Hosting branch reuses the pool from the very first deploy.
+  // Nothing in the app reads attributes beyond the sign-in e-mail.
   groups: ['Admins'],
 })
