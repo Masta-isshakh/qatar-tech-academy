@@ -9,6 +9,9 @@ const nextConfig = {
   images: {
     formats: ['image/avif', 'image/webp'],
     remotePatterns: [{ protocol: 'https', hostname: '**.amazonaws.com' }],
+    // Sources are pre-shrunk by scripts/optimize-images.mjs; each generated
+    // variant is then cached for 30 days so the optimiser runs once per size.
+    minimumCacheTTL: 60 * 60 * 24 * 30,
   },
   eslint: { dirs: ['app', 'components', 'lib', 'i18n', 'scripts'] },
   async headers() {

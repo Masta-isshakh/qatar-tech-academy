@@ -15,7 +15,6 @@ const AUTOPLAY_MS = 6000
 
 type Slide = {
   image: string
-  imageAr: string
   accent: string
   primary: { kind: 'link'; href: string } | { kind: 'video' }
   secondary: { kind: 'link'; href: string } | { kind: 'video' }
@@ -24,21 +23,18 @@ type Slide = {
 const SLIDES: Slide[] = [
   {
     image: '/images/hero/hero-1.jpg',
-    imageAr: '/images/hero/hero-1-ar.jpg',
     accent: '#8A1538',
     primary: { kind: 'link', href: '/register' },
     secondary: { kind: 'video' },
   },
   {
     image: '/images/hero/hero-2.jpg',
-    imageAr: '/images/hero/hero-2-ar.jpg',
     accent: '#1FA2FF',
     primary: { kind: 'link', href: '/tracks/robotics' },
     secondary: { kind: 'link', href: '/tracks' },
   },
   {
     image: '/images/hero/hero-3.jpg',
-    imageAr: '/images/hero/hero-3-ar.jpg',
     accent: '#222222',
     primary: { kind: 'link', href: '/tracks/cybersecurity' },
     secondary: { kind: 'link', href: '/tracks' },
@@ -75,7 +71,6 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
 
   const slide = SLIDES[index]
   const text = copy[index] ?? copy[0]
-  const image = locale === 'ar' ? slide.imageAr : slide.image
 
   function renderCta(
     action: Slide['primary'],
@@ -128,7 +123,7 @@ export function HeroSlider({ heroVideoKey }: { heroVideoKey?: string }) {
             transition={{ duration: reduced ? 0 : 0.8, ease: 'easeInOut' }}
           >
             <MediaImage
-              src={image}
+              src={slide.image}
               alt=""
               fill
               priority={index === 0}

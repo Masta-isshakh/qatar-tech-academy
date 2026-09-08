@@ -3,6 +3,9 @@
 import { useEffect, useRef, type ReactNode } from 'react'
 import { cn } from '@/lib/utils'
 
+/** If the observer has not fired by then, show the content regardless. */
+const REVEAL_FALLBACK_MS = 2500
+
 /**
  * Fade-and-rise on first scroll into view, once.
  *
@@ -11,6 +14,10 @@ import { cn } from '@/lib/utils'
  * that starts from `opacity: 0` in the server HTML makes the browser's largest
  * contentful paint wait for hydration — that cost us 1.26s of LCP — and hides
  * content outright when JS is slow or blocked.
+ *
+ * Two safety nets: a timer reveals anything the IntersectionObserver never
+ * reports (full-page captures, print, exotic embeds), and `@media print` in
+ * globals.css forces everything visible.
  */
 export function FadeUp({
   children,
@@ -29,6 +36,7 @@ export function FadeUp({
     const el = ref.current
     if (!el) return
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return
+    if (typeof IntersectionObserver === 'undefined') return
 
     // Already on screen: leave it painted, no animation, no LCP delay.
     if (el.getBoundingClientRect().top < window.innerHeight) return
@@ -36,17 +44,25 @@ export function FadeUp({
     el.classList.add('qte-fade')
     el.style.transitionDelay = `${delay}s`
 
+    const reveal = () => {
+      el.classList.add('qte-fade-in')
+      observer.disconnect()
+      window.clearTimeout(timer)
+    }
+
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (!entry?.isIntersecting) return
-        el.classList.add('qte-fade-in')
-        observer.disconnect()
+        if (entry?.isIntersecting) reveal()
       },
       { rootMargin: '0px 0px -80px 0px' }
     )
+    const timer = window.setTimeout(reveal, REVEAL_FALLBACK_MS)
 
     observer.observe(el)
-    return () => observer.disconnect()
+    return () => {
+      observer.disconnect()
+      window.clearTimeout(timer)
+    }
   }, [delay])
 
   // The union of tags is narrow and each accepts an element ref.

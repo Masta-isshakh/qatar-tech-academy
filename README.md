@@ -28,6 +28,12 @@ npm run dev
 
 `ampx sandbox` needs valid AWS credentials (`aws configure` or `aws sso login`).
 
+> **The outputs file must come from this repo's backend.** An
+> `amplify_outputs.json` copied from another Amplify app (the Todo starter, for
+> instance) has a data endpoint but none of these models. `lib/amplify.ts`
+> fingerprints the file and treats a mismatch like a missing file — seed
+> content, forms disabled — and `npm run build` prints which models it found.
+
 ### Scripts
 
 | Command             | What it does                                        |
@@ -177,20 +183,48 @@ messaging setup never fails a visitor's submission.
 upserts it (matched on slug, code or name, so re-running never duplicates rows).
 After launch, edit content in `/admin` — the seed stays as the offline fallback.
 
-Images go in `public/images/…` with the exact names in `MediaImage` callers:
+### Images
 
-```text
-logo.svg  logo-white.svg  favicon.ico  og.jpg
-hero/hero-{1,2,3}.jpg          2560×1097, plus -ar mirrored variants
-tracks/{robotics,networking,cybersecurity,ai,marketing,coming-soon}.jpg
-sections/{exam-centre,certifications,app,corporate,university,cascade,
-          health-robotics,workshop,doha-sunrise}.jpg
-team/{tanaka,layla,rajesh}.jpg
+Raw photography lives in `source-images/` (git-ignored — 35 MB of PNGs) and is
+turned into what the site serves by:
+
+```bash
+npm run images
 ```
 
-Until a file exists, `MediaImage` falls back to a maroon-on-sand placeholder, so
-a missing asset degrades to a branded panel rather than a broken image. Videos
-are uploaded through **Admin → Media** to `public/videos/…` in S3.
+That script (`scripts/optimize-images.mjs`) resizes each file to the largest
+width the layout ever renders, writes progressive JPEGs (~100–200 KB each,
+2.8 MB in total), derives the light-theme logo, favicon and touch icon, and
+records a 20 px blur placeholder per image in `data/image-manifest.json`.
+`MediaImage` inlines that blur so every frame is painted with the photo's
+colours on the first paint; next/image then serves per-breakpoint AVIF/WebP,
+cached for 30 days. The hero slide and the header logo are `priority`, so they
+are in the preload set.
+
+Why not S3: Amplify Hosting already serves `public/` through CloudFront with no
+lambda in the way. Objects in the Amplify storage bucket need a signed URL from
+the Cognito guest role — an extra round-trip before the download can start,
+and no preload. S3 is the right place for videos and admin uploads.
+
+A `/images/…` path that is not in the manifest is treated as missing: the
+branded placeholder renders and no request is made. Add the source file, add a
+line to `PHOTOS` in the script, re-run it, commit the outputs.
+
+Slot map (source → served):
+
+```text
+hero-1..3          hero1 (3|2|1).png     robotics trainer / caged drone / the SOC
+tracks/*           image (2..7).png      robotics, networking, cyber, ai, marketing, coming-soon
+sections/*         image (1,8..13).png, image (1|2).jpeg
+team/*             not supplied — placeholders until portraits arrive
+logo.png           derived: charcoal wordmark for light surfaces
+logo-white.png     the supplied file, for dark surfaces
+app/icon.png       the emblem, cropped square
+```
+
+The `-ar` mirrored hero variants from the brief are deliberately not produced:
+flipping photographs mirrors screens and hands. Both locales share one image.
+Videos are uploaded through **Admin → Media** to `public/videos/…` in S3.
 
 ---
 

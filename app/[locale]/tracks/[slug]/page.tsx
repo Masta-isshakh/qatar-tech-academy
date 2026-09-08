@@ -116,6 +116,7 @@ export default async function TrackPage({
               posterAlt=""
               accent={track.accentColor}
               autoPlayMuted
+              priority
               className="absolute inset-0 h-full w-full rounded-none"
             />
           ) : (

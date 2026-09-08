@@ -16,7 +16,8 @@
     "sandbox": "ampx sandbox",
     "prebuild": "node scripts/ensure-outputs.mjs",
     "predev": "node scripts/ensure-outputs.mjs",
-    "lighthouse": "node scripts/lighthouse.mjs"
+    "lighthouse": "node scripts/lighthouse.mjs",
+    "images": "node scripts/optimize-images.mjs"
   },
   "dependencies": {
     "@aws-amplify/adapter-nextjs": "^1.2.28",

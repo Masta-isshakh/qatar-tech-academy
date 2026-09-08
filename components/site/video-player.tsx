@@ -20,6 +20,7 @@ export function VideoPlayer({
   autoPlayMuted = false,
   className,
   eager = false,
+  priority = false,
 }: {
   storageKey?: string
   src?: string
@@ -29,6 +30,8 @@ export function VideoPlayer({
   autoPlayMuted?: boolean
   className?: string
   eager?: boolean
+  /** Preload the poster: set on the track hero, where the poster is the LCP. */
+  priority?: boolean
 }) {
   const t = useTranslations('home.hero')
   const containerRef = useRef<HTMLDivElement>(null)
@@ -83,6 +86,7 @@ export function VideoPlayer({
               src={poster}
               alt={posterAlt}
               fill
+              priority={priority}
               sizes="(max-width: 768px) 100vw, 60vw"
               className="object-cover"
               accent={accent}

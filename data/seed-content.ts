@@ -661,6 +661,6 @@ export const LAB_GALLERY = [
   { src: '/images/tracks/networking.jpg', span: 'normal' },
   { src: '/images/tracks/cybersecurity.jpg', span: 'normal' },
   { src: '/images/tracks/ai.jpg', span: 'tall' },
-  { src: '/images/sections/health-robotics.jpg', span: 'normal' },
+  { src: '/images/sections/maker-lab.jpg', span: 'normal' },
   { src: '/images/sections/exam-centre.jpg', span: 'wide' },
 ] as const

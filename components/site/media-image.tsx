@@ -3,6 +3,10 @@
 import Image, { type ImageProps } from 'next/image'
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
+import manifest from '@/data/image-manifest.json'
+
+type ManifestEntry = { width: number; height: number; blurDataURL: string }
+const MANIFEST = manifest as Record<string, ManifestEntry>
 
 /**
  * A maroon-on-sand placeholder used until the real photography is uploaded to
@@ -46,6 +50,16 @@ type MediaImageProps = Omit<ImageProps, 'onError' | 'alt'> & {
   wrapperClassName?: string
 }
 
+/**
+ * next/image plus two things it does not do on its own:
+ *
+ * 1. Every file produced by `npm run images` has a 20px blur in
+ *    `data/image-manifest.json`. It is inlined as `blurDataURL`, so the frame is
+ *    painted with the photo's colours on the first frame — before a single byte
+ *    of the real image has arrived — and the real image fades in over it.
+ * 2. A branded placeholder is rendered on the server behind `fill` images, so
+ *    a path that does not exist yet still shows something designed, not a hole.
+ */
 export function MediaImage({
   alt,
   accent,
@@ -55,34 +69,42 @@ export function MediaImage({
   ...props
 }: MediaImageProps) {
   const [failed, setFailed] = useState(false)
+  const src = typeof props.src === 'string' ? props.src : undefined
+  const meta = src ? MANIFEST[src] : undefined
+  const blur = meta ? { placeholder: 'blur' as const, blurDataURL: meta.blurDataURL } : {}
+  // `public/images/…` paths are produced by `npm run images`, so one that is not
+  // in the manifest does not exist. Skip the request rather than 400 the
+  // optimiser and log a console error on every page view. Remote and storage
+  // URLs (admin uploads) are always attempted.
+  const knownMissing = Boolean(src && src.startsWith('/images/') && !meta)
 
-  // With `fill`, the caller already provides a positioned box, so the
-  // placeholder can sit behind the image and be painted on the server. That
-  // gives the page a real LCP candidate on first paint instead of waiting for
-  // hydration to swap in a fallback, and removes the flash of empty box.
   if (props.fill) {
     return (
       <>
-        <ImagePlaceholder
-          className={cn('absolute inset-0', wrapperClassName)}
-          label={placeholderLabel}
-          accent={accent}
-        />
-        <Image
-          alt={alt}
-          className={className}
-          // Direct DOM write rather than setState: the placeholder behind is
-          // already painted, so there is nothing to re-render.
-          onError={(e) => {
-            e.currentTarget.style.display = 'none'
-          }}
-          {...props}
-        />
+        {meta ? null : (
+          <ImagePlaceholder
+            className={cn('absolute inset-0', wrapperClassName)}
+            label={placeholderLabel}
+            accent={accent}
+          />
+        )}
+        {knownMissing ? null : (
+          <Image
+            alt={alt}
+            className={className}
+            {...blur}
+            // Direct DOM write rather than setState: there is nothing to re-render.
+            onError={(e) => {
+              e.currentTarget.style.display = 'none'
+            }}
+            {...props}
+          />
+        )}
       </>
     )
   }
 
-  if (failed) {
+  if (failed || knownMissing) {
     return (
       <ImagePlaceholder
         className={cn(wrapperClassName, className)}
@@ -92,5 +114,15 @@ export function MediaImage({
     )
   }
 
-  return <Image alt={alt} className={className} onError={() => setFailed(true)} {...props} />
+  return (
+    <Image
+      alt={alt}
+      className={className}
+      width={props.width ?? meta?.width}
+      height={props.height ?? meta?.height}
+      {...blur}
+      onError={() => setFailed(true)}
+      {...props}
+    />
+  )
 }

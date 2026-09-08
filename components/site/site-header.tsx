@@ -13,6 +13,7 @@ import { ThemeToggle } from './theme-toggle'
 
 export function SiteHeader() {
   const t = useTranslations('nav')
+  const tMeta = useTranslations('meta')
   const pathname = usePathname()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
@@ -41,9 +42,9 @@ export function SiteHeader() {
       )}
     >
       <div className="container-site flex h-18 items-center justify-between gap-4">
-        {/* No aria-label: the wordmark inside is the accessible name. */}
-        <Link href="/" className="shrink-0">
-          <Logo />
+        {/* The logo images are decorative; the link itself is named. */}
+        <Link href="/" aria-label={tMeta('siteName')} className="shrink-0">
+          <Logo priority />
         </Link>
 
         <nav aria-label="Primary" className="hidden items-center gap-1 lg:flex">

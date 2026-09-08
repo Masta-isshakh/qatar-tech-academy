@@ -33,6 +33,7 @@ export async function SiteFooter() {
       <div className="container-site grid gap-10 py-14 md:grid-cols-2 lg:grid-cols-4">
         <div className="flex flex-col gap-4">
           <Logo />
+          <span className="sr-only">{locale === 'ar' ? site.nameAr : site.nameEn}</span>
           <p className="text-muted max-w-xs text-sm">{t('about')}</p>
           <div className="flex items-center gap-2">
             <SocialLink href={site.social.instagram} label="Instagram">

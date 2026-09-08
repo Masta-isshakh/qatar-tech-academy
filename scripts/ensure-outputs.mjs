@@ -9,7 +9,7 @@
  *
  * The real file is never overwritten.
  */
-import { existsSync, writeFileSync } from 'node:fs'
+import { existsSync, readFileSync, writeFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
@@ -17,6 +17,24 @@ const root = join(dirname(fileURLToPath(import.meta.url)), '..')
 const target = join(root, 'amplify_outputs.json')
 
 if (existsSync(target)) {
+  // A real file — but is it this project's backend? The Todo starter's file
+  // has the same shape and would fail every query at request time.
+  try {
+    const outputs = JSON.parse(readFileSync(target, 'utf8'))
+    const models = Object.keys(outputs?.data?.model_introspection?.models ?? {})
+    if (!outputs._placeholder && outputs?.data?.url && !models.includes('Track')) {
+      console.warn(
+        [
+          '[qte] amplify_outputs.json describes a different backend',
+          `      (models: ${models.join(', ') || 'none'}; expected Track, Registration, …).`,
+          '      The site renders from seed content and forms stay disabled until this',
+          "      repo's amplify/ folder is deployed: `npx ampx sandbox` or Amplify Hosting.",
+        ].join('\n')
+      )
+    }
+  } catch {
+    /* unreadable file — let the build surface it */
+  }
   process.exit(0)
 }
 
