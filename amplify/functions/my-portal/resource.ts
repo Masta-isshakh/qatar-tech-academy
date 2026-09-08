@@ -11,5 +11,8 @@ import { defineFunction } from '@aws-amplify/backend'
 export const myPortal = defineFunction({
   name: 'my-portal',
   entry: './handler.ts',
+  // Data handlers that also call the data API must live in the data stack;
+  // in their own stack CloudFormation reports a circular dependency.
+  resourceGroupName: 'data',
   timeoutSeconds: 20,
 })

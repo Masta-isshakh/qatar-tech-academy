@@ -12,6 +12,9 @@ const whatsappToken: Record<string, ReturnType<typeof secret>> = process.env
 export const bookTestSlot = defineFunction({
   name: 'book-test-slot',
   entry: './handler.ts',
+  // Data handlers that also call the data API must live in the data stack;
+  // in their own stack CloudFormation reports a circular dependency.
+  resourceGroupName: 'data',
   timeoutSeconds: 25,
   environment: {
     NOTIFY_EMAIL_TO: process.env.NOTIFY_EMAIL_TO ?? '',
