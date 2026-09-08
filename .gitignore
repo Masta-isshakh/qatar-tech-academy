@@ -46,3 +46,6 @@ amplifyconfiguration*
 
 # raw photography — run `npm run images` to regenerate public/images
 /source-images/
+
+# throwaway browser scripts
+*.tmp.mjs
