@@ -35,7 +35,9 @@ async function claimSeat(slotId: string) {
         // DynamoDB rejects it with a ValidationException. A missing `booked`
         // attribute means zero bookings, which is what the OR expresses.
         ConditionExpression:
-          'attribute_exists(id) AND (attribute_not_exists(booked) OR booked < capacity) AND (attribute_not_exists(isOpen) OR isOpen = :true)',
+          'attribute_exists(id) AND (attribute_not_exists(booked) OR booked < #cap) AND (attribute_not_exists(isOpen) OR isOpen = :true)',
+        // `capacity` is a DynamoDB reserved word and must be aliased.
+        ExpressionAttributeNames: { '#cap': 'capacity' },
         ExpressionAttributeValues: {
           ':zero': 0,
           ':one': 1,
