@@ -4,14 +4,20 @@
  *   npx ampx sandbox        # generates amplify_outputs.json
  *   npm run seed            # this script
  *
+ * Content models are public-read but Admins-write, so the seed signs in as an
+ * Admin user rather than using the API key. Provide the credentials through
+ * SEED_ADMIN_EMAIL / SEED_ADMIN_PASSWORD (`.env.local` is read automatically).
+ * See README §3 for creating that user.
+ *
  * Idempotent: every record is matched on a natural key (track slug, cohort
  * code, partner name…) and updated rather than duplicated, so it is safe to run
  * again after editing the seed content.
  */
-import { readFileSync } from 'node:fs'
+import { existsSync, readFileSync } from 'node:fs'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 import { Amplify } from 'aws-amplify'
+import { signIn, signOut } from 'aws-amplify/auth'
 import { generateClient } from 'aws-amplify/data'
 import type { Schema } from '../amplify/data/resource'
 import { seedPartners, seedTestSlots, seedTestimonials, seedTracks } from '../data/seed-content'
@@ -26,8 +32,26 @@ if (outputs._placeholder || !outputs.data?.url) {
   process.exit(1)
 }
 
+// Minimal .env.local loader so the credentials never have to be typed inline.
+const envFile = join(root, '.env.local')
+if (existsSync(envFile)) {
+  for (const line of readFileSync(envFile, 'utf8').split(/\r?\n/)) {
+    const m = /^\s*([A-Z0-9_]+)\s*=\s*(.*?)\s*$/.exec(line)
+    if (m && process.env[m[1]!] === undefined) process.env[m[1]!] = m[2]!.replace(/^"|"$/g, '')
+  }
+}
+
+const ADMIN_EMAIL = process.env.SEED_ADMIN_EMAIL
+const ADMIN_PASSWORD = process.env.SEED_ADMIN_PASSWORD
+if (!ADMIN_EMAIL || !ADMIN_PASSWORD) {
+  console.error(
+    'Set SEED_ADMIN_EMAIL and SEED_ADMIN_PASSWORD (an Admins-group user). See README §3.'
+  )
+  process.exit(1)
+}
+
 Amplify.configure(outputs)
-const client = generateClient<Schema>({ authMode: 'apiKey' })
+const client = generateClient<Schema>({ authMode: 'userPool' })
 
 function must<T>(label: string, result: { data: T | null; errors?: unknown[] }): T {
   if (result.errors?.length || !result.data) {
@@ -47,7 +71,12 @@ async function upsert<T extends { id: string }>(
 }
 
 async function main() {
-  console.log('Seeding Qatar Tech Academy…')
+  await signOut().catch(() => {})
+  const { isSignedIn } = await signIn({ username: ADMIN_EMAIL!, password: ADMIN_PASSWORD! })
+  if (!isSignedIn) {
+    throw new Error('Sign-in did not complete (is the user confirmed and in the Admins group?)')
+  }
+  console.log(`Seeding Qatar Tech Academy as ${ADMIN_EMAIL}…`)
 
   /* ---------------------------------------------------------------- tracks */
   const { data: existingTracks } = await client.models.Track.list({ limit: 200 })
@@ -246,6 +275,7 @@ async function main() {
   console.log('  10 test slots')
 
   console.log('Done.')
+  await signOut()
 }
 
 main().catch((err) => {

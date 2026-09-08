@@ -1,3 +1,7 @@
+import 'server-only'
+
+import { Amplify } from 'aws-amplify'
+import { generateClient } from 'aws-amplify/data'
 import { createServerRunner } from '@aws-amplify/adapter-nextjs'
 import { generateServerClientUsingCookies } from '@aws-amplify/adapter-nextjs/data'
 import { cookies } from 'next/headers'
@@ -9,17 +13,28 @@ export const { runWithAmplifyServerContext } = createServerRunner({
   config: amplifyOutputs,
 })
 
-/**
- * Server client for public content. Uses the API key, so it works for
- * anonymous visitors and stays cacheable for ISR.
- */
-export const publicServerClient = generateServerClientUsingCookies<Schema>({
-  config: amplifyOutputs,
-  cookies,
-  authMode: 'apiKey',
-})
+// Configured once per server process so the public client below works outside
+// a request (ISR, generateStaticParams, sitemap).
+if (isAmplifyConfigured) {
+  Amplify.configure(amplifyOutputs, { ssr: true })
+}
 
-/** Server client that runs as the signed-in user (portal and admin reads). */
+/**
+ * Server client for public content, authenticated with the API key.
+ *
+ * Deliberately NOT the cookie-based client: that one may only be used inside a
+ * request scope, and calling it during static/ISR rendering throws ("`cookies`
+ * was called outside a request scope"), which silently sent every public page
+ * back to the seed content. The API key needs no request context, so this
+ * client is safe in `generateStaticParams`, ISR revalidation, `sitemap.ts` and
+ * Server Actions alike.
+ */
+export const publicServerClient = generateClient<Schema>({ authMode: 'apiKey' })
+
+/**
+ * Server client that runs as the signed-in user (portal and admin reads).
+ * Cookie-based, so only valid inside a request — never in static rendering.
+ */
 export const userServerClient = generateServerClientUsingCookies<Schema>({
   config: amplifyOutputs,
   cookies,
