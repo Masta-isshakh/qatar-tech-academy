@@ -236,26 +236,26 @@ Videos are uploaded through **Admin → Media** to `public/videos/…` in S3.
 CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" npm run lighthouse
 ```
 
-Reports land in `lighthouse/` (git-ignored) with a `summary.json`. Latest run on
-a Windows dev box, mobile preset, **with no image assets in `public/images/`**:
+Reports land in `lighthouse/` (git-ignored) with a `summary.json`. Latest clean
+run on a Windows dev box against `next start`, mobile preset, real images:
 
-| Page                | Perf  | A11y | Best practices | SEO | LCP       | CLS |
-| ------------------- | ----- | ---- | -------------- | --- | --------- | --- |
-| /ar                 | 63–76 | 100  | 96             | 100 | 4.2–4.4 s | 0   |
-| /en                 | 74–87 | 100  | 96             | 100 | 2.3–2.9 s | 0   |
-| /ar/tracks/robotics | 77–89 | 100  | 96             | 100 | 2.3–3.2 s | 0   |
-| /en/tracks/robotics | 84–92 | 100  | 96             | 100 | 2.2–3.2 s | 0   |
+| Page                | Perf | A11y | Best practices | SEO | FCP   | LCP   | CLS |
+| ------------------- | ---- | ---- | -------------- | --- | ----- | ----- | --- |
+| /ar                 | 79   | 100  | 100            | 100 | 1.8 s | 3.8 s | 0   |
+| /en                 | 77   | 100  | 100            | 100 | 1.7 s | 4.1 s | 0   |
+| /ar/tracks/robotics | 90   | 100  | 100            | 100 | 1.8 s | 3.4 s | 0   |
+| /en/tracks/robotics | 91   | 100  | 100            | 100 | 1.7 s | 3.4 s | 0   |
 
-Accessibility, SEO and CLS meet the targets. **Performance does not yet reach
-95**, and these are the two things standing in the way, both of which need the
-real assets:
+Accessibility, best practices, SEO and CLS all meet their targets. Performance
+does not yet reach 95: the LCP is the hero photo under Lighthouse's simulated
+slow-4G, served by `next start` on a laptop. Two notes before reading too much
+into it:
 
-1. **No hero image exists.** Every `public/images/…` path 404s, so there is no
-   `priority` LCP image to preload — the largest paint is a text heading the
-   browser reaches late. The missing files are also the only thing keeping
-   best-practices at 96 (`errors-in-console` is the 404s).
-2. **Measured against `next start` on a laptop**, not Amplify Hosting's
-   CloudFront. Re-run after the first deploy before drawing conclusions.
+1. Scores on this machine swing by 10–15 points between runs (a run taken while
+   the Playwright suite was executing scored 51 on /ar with 5 s of blocking
+   time; the clean re-run scored 79 with 390 ms). Always measure alone.
+2. Measure again after the first Amplify Hosting deploy — CloudFront in front
+   of the optimiser, HTTP/2 and Brotli change the picture materially.
 
 What was already fixed by measurement, and is worth not regressing:
 
