@@ -31,8 +31,11 @@ async function claimSeat(slotId: string) {
         TableName: table,
         Key: { id: slotId },
         UpdateExpression: 'SET booked = if_not_exists(booked, :zero) + :one, updatedAt = :now',
+        // `if_not_exists` is only legal in the update expression, not here —
+        // DynamoDB rejects it with a ValidationException. A missing `booked`
+        // attribute means zero bookings, which is what the OR expresses.
         ConditionExpression:
-          'attribute_exists(id) AND if_not_exists(booked, :zero) < capacity AND (attribute_not_exists(isOpen) OR isOpen = :true)',
+          'attribute_exists(id) AND (attribute_not_exists(booked) OR booked < capacity) AND (attribute_not_exists(isOpen) OR isOpen = :true)',
         ExpressionAttributeValues: {
           ':zero': 0,
           ':one': 1,
