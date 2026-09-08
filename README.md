@@ -300,6 +300,16 @@ What was already fixed by measurement, and is worth not regressing:
 
 - A broken image no longer calls `setState`; the placeholder is server-rendered
   behind it, so a page of missing assets does not trigger a dozen re-renders.
+- **Content reads are cached with `unstable_cache`** (5 min, tag `content`).
+  The Amplify data client fetches with `cache: 'no-store'`, which in Next 15
+  opts the whole route out of static rendering — with a live backend every
+  public page had quietly become a per-request Lambda render, and CloudFront
+  answered `no-store` and missed on every hit. With the cache in place the
+  route table shows `Revalidate 5m` again and responses carry `s-maxage=300`.
+  If you edit content in `/admin` and want it live before the 5 minutes are
+  up, call `revalidateTag('content')` (a small admin route is the natural
+  home for that). Test slots are deliberately not cached: `/register` is
+  dynamic and must show live availability.
 
 ## 8. Conventions worth knowing
 
