@@ -188,6 +188,14 @@ messaging setup never fails a visitor's submission.
    _Hosting → Custom domains_, then update `NEXT_PUBLIC_SITE_URL` to match and
    redeploy so canonicals, hreflang and the sitemap use the live origin.
 6. Point the Meta webhook at `https://<domain>/api/whatsapp`.
+7. **Seed the branch backend.** It has its own user pool and empty tables.
+   Fetch its outputs without overwriting the sandbox's, create an Admin in
+   _that_ pool (§3), then seed against it:
+
+   ```bash
+   npx ampx generate outputs --app-id <app id> --branch main --out-dir .amplify/branch
+   AMPLIFY_OUTPUTS=.amplify/branch/amplify_outputs.json npm run seed
+   ```
 
 ---
 

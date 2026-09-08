@@ -23,7 +23,12 @@ import type { Schema } from '../amplify/data/resource'
 import { seedPartners, seedTestSlots, seedTestimonials, seedTracks } from '../data/seed-content'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const outputs = JSON.parse(readFileSync(join(root, 'amplify_outputs.json'), 'utf8'))
+// AMPLIFY_OUTPUTS points the script at another backend's outputs file — the
+// Hosting branch's, for example — without touching the sandbox's copy.
+const outputsPath = process.env.AMPLIFY_OUTPUTS
+  ? join(process.cwd(), process.env.AMPLIFY_OUTPUTS)
+  : join(root, 'amplify_outputs.json')
+const outputs = JSON.parse(readFileSync(outputsPath, 'utf8'))
 
 if (outputs._placeholder || !outputs.data?.url) {
   console.error(
@@ -76,7 +81,7 @@ async function main() {
   if (!isSignedIn) {
     throw new Error('Sign-in did not complete (is the user confirmed and in the Admins group?)')
   }
-  console.log(`Seeding Qatar Tech Academy as ${ADMIN_EMAIL}…`)
+  console.log(`Seeding ${outputs.data.url} as ${ADMIN_EMAIL}…`)
 
   /* ---------------------------------------------------------------- tracks */
   const { data: existingTracks } = await client.models.Track.list({ limit: 200 })

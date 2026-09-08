@@ -14,7 +14,12 @@ import { generateClient } from 'aws-amplify/data'
 import type { Schema } from '../amplify/data/resource'
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const outputs = JSON.parse(readFileSync(join(root, 'amplify_outputs.json'), 'utf8'))
+// AMPLIFY_OUTPUTS points the script at another backend's outputs file — the
+// Hosting branch's, for example — without touching the sandbox's copy.
+const outputsPath = process.env.AMPLIFY_OUTPUTS
+  ? join(process.cwd(), process.env.AMPLIFY_OUTPUTS)
+  : join(root, 'amplify_outputs.json')
+const outputs = JSON.parse(readFileSync(outputsPath, 'utf8'))
 const envFile = join(root, '.env.local')
 if (existsSync(envFile)) {
   for (const line of readFileSync(envFile, 'utf8').split(/\r?\n/)) {
