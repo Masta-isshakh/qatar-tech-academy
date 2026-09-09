@@ -3,6 +3,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { FileDown } from 'lucide-react'
 
 import { HERO_VIDEO_KEY, PLAN_VIDEO_KEY } from '@/data/seed-content'
+import { getVideoKeys } from '@/lib/content'
 import { site } from '@/lib/site'
 import { Section, SectionHeader } from '@/components/site/section'
 import { VideoPlayer } from '@/components/site/video-player'
@@ -33,6 +34,7 @@ export default async function InvestorsPage({ params }: { params: Promise<{ loca
   setRequestLocale(locale)
 
   const t = await getTranslations('investors')
+  const videoKeys = await getVideoKeys()
   const numbers = t.raw('numbers') as { value: string; label: string }[]
 
   return (
@@ -49,7 +51,7 @@ export default async function InvestorsPage({ params }: { params: Promise<{ loca
           <div className="flex flex-col gap-3">
             <h2 className="text-2xl">{t('pitchTitle')}</h2>
             <VideoPlayer
-              storageKey={HERO_VIDEO_KEY}
+              storageKey={videoKeys.has(HERO_VIDEO_KEY) ? HERO_VIDEO_KEY : undefined}
               poster="/images/sections/workshop.jpg"
               posterAlt={t('pitchTitle')}
               className="aspect-video w-full"
@@ -58,7 +60,7 @@ export default async function InvestorsPage({ params }: { params: Promise<{ loca
           <div className="flex flex-col gap-3">
             <h2 className="text-2xl">{t('planTitle')}</h2>
             <VideoPlayer
-              storageKey={PLAN_VIDEO_KEY}
+              storageKey={videoKeys.has(PLAN_VIDEO_KEY) ? PLAN_VIDEO_KEY : undefined}
               poster="/images/sections/cascade.jpg"
               posterAlt={t('planTitle')}
               className="aspect-video w-full"

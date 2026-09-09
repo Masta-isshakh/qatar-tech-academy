@@ -258,26 +258,29 @@ Videos are uploaded through **Admin → Media** to `public/videos/…` in S3.
 CHROME_PATH="C:\Program Files\Google\Chrome\Application\chrome.exe" npm run lighthouse
 ```
 
-Reports land in `lighthouse/` (git-ignored) with a `summary.json`. Latest clean
-run on a Windows dev box against `next start`, mobile preset, real images:
+Reports land in `lighthouse/` (git-ignored) with a `summary.json`.
+
+**Production** (`main.d14zqnxzzndm2w.amplifyapp.com`, CloudFront-warmed,
+measured from Doha against the Mumbai region, mobile preset):
 
 | Page                | Perf | A11y | Best practices | SEO | FCP   | LCP   | CLS |
 | ------------------- | ---- | ---- | -------------- | --- | ----- | ----- | --- |
-| /ar                 | 79   | 100  | 100            | 100 | 1.8 s | 3.8 s | 0   |
-| /en                 | 77   | 100  | 100            | 100 | 1.7 s | 4.1 s | 0   |
-| /ar/tracks/robotics | 90   | 100  | 100            | 100 | 1.8 s | 3.4 s | 0   |
-| /en/tracks/robotics | 91   | 100  | 100            | 100 | 1.7 s | 3.4 s | 0   |
+| /ar                 | 79   | 100  | 100            | 100 | 1.6 s | 3.5 s | 0   |
+| /en                 | 63   | 100  | 100            | 100 | 2.7 s | 6.7 s | 0   |
+| /ar/tracks/robotics | 82   | 100  | 100            | 100 | 1.1 s | 3.3 s | 0   |
+| /en/tracks/robotics | 97   | 100  | 100            | 100 | 1.3 s | 2.4 s | 0   |
 
-Accessibility, best practices, SEO and CLS all meet their targets. Performance
-does not yet reach 95: the LCP is the hero photo under Lighthouse's simulated
-slow-4G, served by `next start` on a laptop. Two notes before reading too much
-into it:
+Run it yourself with `LH_BASE_URL=https://<domain> npm run lighthouse`.
 
-1. Scores on this machine swing by 10–15 points between runs (a run taken while
-   the Playwright suite was executing scored 51 on /ar with 5 s of blocking
-   time; the clean re-run scored 79 with 390 ms). Always measure alone.
-2. Measure again after the first Amplify Hosting deploy — CloudFront in front
-   of the optimiser, HTTP/2 and Brotli change the picture materially.
+Accessibility, best practices, SEO and CLS meet their targets everywhere; the
+track page reaches 97 performance. The home page does not: its LCP is the
+hero photo inside a client-rendered slider, and the breakdown attributes almost
+all of the delay to _element render delay_ (hydration under 4× CPU throttling),
+not to bytes — the AVIF variant is 28 KB and CloudFront serves it as a hit.
+Scores also swing ±10 between runs on the same machine. The remaining lever is
+to render the first slide as plain server HTML and hydrate the slider around
+it; that is the next performance task if the home-page number matters more
+than the slider's crossfade.
 
 What was already fixed by measurement, and is worth not regressing:
 

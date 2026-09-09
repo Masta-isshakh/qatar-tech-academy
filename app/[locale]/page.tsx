@@ -2,7 +2,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { ArrowLeft, ArrowRight, MessageCircle, QrCode, Smartphone } from 'lucide-react'
 
 import { Link } from '@/i18n/routing'
-import { getPartners, getTestimonials, getTracks } from '@/lib/content'
+import { getPartners, getTestimonials, getTracks, getVideoKeys } from '@/lib/content'
 import { pick } from '@/lib/utils'
 import { whatsappLink } from '@/lib/site'
 import { HERO_VIDEO_KEY, LAB_GALLERY } from '@/data/seed-content'
@@ -32,10 +32,11 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
 
   const t = await getTranslations('home')
   const tc = await getTranslations('common')
-  const [tracks, testimonials, partners] = await Promise.all([
+  const [tracks, testimonials, partners, videoKeys] = await Promise.all([
     getTracks(),
     getTestimonials(),
     getPartners(),
+    getVideoKeys(),
   ])
 
   const faqItems = t.raw('faq.items') as FaqItem[]
@@ -58,7 +59,7 @@ export default async function HomePage({ params }: { params: Promise<{ locale: s
       <JsonLd data={organizationJsonLd(locale)} />
       <JsonLd data={faqJsonLd(faqItems)} />
 
-      <HeroSlider heroVideoKey={HERO_VIDEO_KEY} />
+      <HeroSlider heroVideoKey={videoKeys.has(HERO_VIDEO_KEY) ? HERO_VIDEO_KEY : undefined} />
 
       {/* 2 — the question, and the six tracks */}
       <Section id="tracks">

@@ -466,3 +466,20 @@ export async function getAnnouncements() {
     []
   )
 }
+
+/**
+ * S3 keys of videos the admin has registered (Admin → Content → Video assets).
+ * Pages only mount a player for a registered key, so nothing probes S3 for a
+ * video that has not been uploaded — no signed-URL round-trip, no 404.
+ */
+export async function getVideoKeys(): Promise<Set<string>> {
+  const keys = await safely(
+    'getVideoKeys',
+    async () => {
+      const { data } = await publicServerClient.models.VideoAsset.list({ limit: 200 })
+      return (data ?? []).map((v) => str(v.s3Key)).filter(Boolean)
+    },
+    [] as string[]
+  )
+  return new Set(keys)
+}

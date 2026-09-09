@@ -53,8 +53,10 @@ export function useStorageUrl(path: string | null | undefined, enabled = true) {
         setUrl(signed.toString())
         setState('ready')
       })
-      .catch((error) => {
-        console.error('[storage] getUrl failed', path, error)
+      .catch((error: unknown) => {
+        // A not-yet-uploaded video is an expected state, not an error.
+        const name = error instanceof Error ? error.name : ''
+        if (name !== 'NotFound') console.error('[storage] getUrl failed', path, error)
         if (!cancelled) setState('error')
       })
 

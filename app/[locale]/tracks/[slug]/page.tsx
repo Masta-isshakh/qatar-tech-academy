@@ -4,7 +4,7 @@ import { getTranslations, setRequestLocale } from 'next-intl/server'
 import { Clock, GraduationCap } from 'lucide-react'
 
 import { routing } from '@/i18n/routing'
-import { getTrack, getTracks, totalHours } from '@/lib/content'
+import { getTrack, getTracks, getVideoKeys, totalHours } from '@/lib/content'
 import { pick } from '@/lib/utils'
 import { LAB_GALLERY } from '@/data/seed-content'
 
@@ -69,7 +69,8 @@ export default async function TrackPage({
   const th = await getTranslations('home.tracks')
   const thome = await getTranslations('home')
 
-  const allTracks = await getTracks()
+  const [allTracks, videoKeys] = await Promise.all([getTracks(), getVideoKeys()])
+  const trackVideo = track.videoKey && videoKeys.has(track.videoKey) ? track.videoKey : ''
   const related = allTracks.filter((x) => x.slug !== slug && !x.isComingSoon).slice(0, 3)
   const title = pick(locale, track.titleEn, track.titleAr)
   const tagline = pick(locale, track.taglineEn, track.taglineAr)
@@ -109,9 +110,9 @@ export default async function TrackPage({
       {/* Hero */}
       <section className="bg-charcoal relative isolate overflow-hidden">
         <div className="relative aspect-[4/3] w-full sm:aspect-[16/9] lg:aspect-[21/9] lg:max-h-[34rem]">
-          {track.videoKey ? (
+          {trackVideo ? (
             <VideoPlayer
-              storageKey={track.videoKey}
+              storageKey={trackVideo}
               poster={track.heroImageKey}
               posterAlt=""
               accent={track.accentColor}
